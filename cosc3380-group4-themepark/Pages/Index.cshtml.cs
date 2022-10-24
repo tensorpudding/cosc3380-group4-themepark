@@ -23,7 +23,7 @@ public class IndexModel : PageModel
     {
         try
         {
-            using (SqlConnection connection = new SqlConnection(Credentials.buildConnectionString()))
+            using (SqlConnection connection = new SqlConnection(Credentials.getConnectionString()))
             {
                 Console.WriteLine("Passed connection string is {0}", connection.ConnectionString);
                 Console.WriteLine("Passed values {0}, {1}, {2}, {3}, {4}", ticket.ticketID*10, ticket.datetime, ticket.ticketClass, ticket.price*2, ticket.reservation);

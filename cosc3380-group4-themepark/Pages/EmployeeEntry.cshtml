@@ -1,0 +1,39 @@
+@page
+@model EmployeeEntryModel
+@{
+    ViewData["Title"] = "Employee Entry Form";
+}
+
+<!doctype html>
+<form method="post">
+    <div class="form-row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="First Name" name="fname" />
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Last Name" name="lname" />
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="SSN" name="ssn" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <select class="form-control">
+                <option>F</option>
+                <option>M</option>
+            </select>
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Address" name="address" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+
+        </div>
+    </div>
+        <input type="submit" value="Submit" asp-page-handler="Submit" />
+    </div>
+</form>
+</html>

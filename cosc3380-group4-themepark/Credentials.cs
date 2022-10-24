@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using System.Text.Json;
 using Microsoft.Data.SqlClient;
 
@@ -15,7 +13,7 @@ namespace cosc3380_group4_themepark
             public String password { get; set; }
         }
 
-        public static String buildConnectionString()
+        public static String getConnectionString()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
