@@ -9,3 +9,16 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
+<form method="post">
+    <label>TicketID</label>
+    <input type="text" name="ticketID" />
+    <label>Date</label>
+    <input type="text" name="datetime" />
+    <label>Class</label>
+    <input type="text" name="ticketClass" />
+    <label>Price</label>
+    <input type="text" name="price" />
+    <label>Reservation ID</label>
+    <input type="text" name="reservation" />
+    <input type="submit" value="Submit" asp-page-handler="Submit" />
+</form>
