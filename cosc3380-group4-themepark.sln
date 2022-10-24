@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1703.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cosc3380-group4-themepark", "cosc3380-group4-themepark\cosc3380-group4-themepark.csproj", "{9FFC45B6-C007-468B-B4C5-9744BF386564}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FFC45B6-C007-468B-B4C5-9744BF386564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FFC45B6-C007-468B-B4C5-9744BF386564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FFC45B6-C007-468B-B4C5-9744BF386564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FFC45B6-C007-468B-B4C5-9744BF386564}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D08148F5-773F-4070-95A4-2B3CCC71BEBC}
+	EndGlobalSection
+EndGlobal
