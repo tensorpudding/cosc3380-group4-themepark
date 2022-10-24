@@ -25,24 +25,19 @@ public class IndexModel : PageModel
         {
             using (SqlConnection connection = new SqlConnection(Credentials.buildConnectionString()))
             {
-                Console.WriteLine("Passed values {0}, {1}, {2}, {3}, {4}", ticket.ticketID, ticket.datetime, ticket.ticketClass, ticket.price, ticket.reservation);
+                Console.WriteLine("Passed connection string is {0}", connection.ConnectionString);
+                Console.WriteLine("Passed values {0}, {1}, {2}, {3}, {4}", ticket.ticketID*10, ticket.datetime, ticket.ticketClass, ticket.price*2, ticket.reservation);
                 connection.Open();
                 Console.WriteLine("Creating SQL query...");
-                String sql = @"INSERT INTO [Theme_Park].[Ticket] VALUES ('@ticketID', GETDATE(), '@ticketClass', '@price', NULL );";
+                String sql = @"INSERT INTO [Theme_Park].[Ticket] ([Ticket_ID], [Date], [Ticket_Class], [Price], [Reservation]) VALUES (@ticketID, GETDATE(), @ticketClass, @price, NULL );";
 
-                SqlParameter paramID = new SqlParameter("@ticketID", SqlDbType.Int);
-                paramID.Value = ticket.ticketID;
-                //SqlParameter paramDatetime = new SqlParameter("@datetime", ticket.datetime);
-                SqlParameter paramTicketClass = new SqlParameter("@ticketClass", ticket.ticketClass);
-                SqlParameter paramPrice = new SqlParameter("@price", ticket.price);
-                //SqlParameter paramReservation = new SqlParameter("@reservation", null);
-
-                SqlParameter[] parameters = new SqlParameter[3] { paramID, paramTicketClass, paramPrice };
-                //SqlParameter[] parameters = new SqlParameter[5] { paramID, paramDatetime, paramTicketClass, paramPrice, paramReservation };
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
+
                     command.CommandType = CommandType.Text;
-                    command.Parameters.AddRange(parameters);
+                    command.Parameters.Add(new SqlParameter("@ticketID", ticket.ticketID));
+                    command.Parameters.Add(new SqlParameter("@ticketClass", ticket.ticketClass));
+                    command.Parameters.Add(new SqlParameter("@price", ticket.price));
                     command.ExecuteNonQuery();
                 }
             }

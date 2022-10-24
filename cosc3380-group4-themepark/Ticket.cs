@@ -6,7 +6,7 @@ namespace cosc3380_group4_themepark.Models;
 public class Ticket
 {
     [BindProperty]
-    public UInt32 ticketID { get; set; }
+    public Int32 ticketID { get; set; }
 
     [BindProperty]
     public DateTime datetime { get; set; }
@@ -18,7 +18,7 @@ public class Ticket
     public decimal price { get; set; }
 
     [BindProperty]
-    public UInt32 reservation { get; set; }
+    public Int32 reservation { get; set; }
 
     public Ticket()
     {
