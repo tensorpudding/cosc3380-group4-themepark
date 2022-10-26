@@ -1,0 +1,25 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<h1>
+    Login form:
+</h1>
+
+<form method="post" asp-page-handler="Login">
+    <div class="form-row">
+        <input type="text" name="username" placeholder="Username" />
+    </div>
+    <div class="form-row">
+        <input type="text" name="password" placeholder="Password" />
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+</form>
+
