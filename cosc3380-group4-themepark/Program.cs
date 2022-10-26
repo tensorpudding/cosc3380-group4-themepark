@@ -1,7 +1,27 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.AspNetCore.Authentication;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication()
+        .AddCookie(options =>
+        {
+            options.LoginPath = "/Login/";
+            options.AccessDeniedPath = "/Forbidden/";
+        });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireClaim("role", "Admin"));
+    options.AddPolicy("HR", policy => policy.RequireClaim("role", "HR"));
+});
+
+builder.Services.AddControllersWithViews();
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizePage("/EmployeeEntry", "Admin");
+});
 
 var app = builder.Build();
 
@@ -18,6 +38,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
