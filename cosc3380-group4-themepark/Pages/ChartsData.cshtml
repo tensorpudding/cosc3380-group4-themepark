@@ -1,0 +1,126 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.ChartsDataModel
+@{
+    ViewData["Title"] = "Charts";
+}
+
+<div>
+    <h1>This is the @ViewData["Title"] page</h1>
+    <div class="charts-container">
+        <div class="chart1-container">
+            <canvas id="chart1"></canvas>
+        </div>
+        <div class="chart2-container">
+            <canvas id="chart2"></canvas>
+        </div>
+        <div class="chart3-container">
+            <canvas id="chart3"></canvas>
+        </div>
+        <div class="chart4-container">
+            <canvas id="chart4"></canvas>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script type="text/javascript">
+
+    const chart1Canvas = document.getElementById("chart1").getContext("2d");
+    const chart2Canvas = document.getElementById("chart2").getContext("2d");
+    const chart3Canvas = document.getElementById("chart3").getContext("2d");
+    const chart4Canvas = document.getElementById("chart4").getContext("2d");
+
+    const labels = {
+        chart1 : ["January", "February", "March", "April", "May", "June"],
+        chart2 : [5,4,3,2,1],
+        chart3 : ["Project1", "Project2", "Project3", "Project4", "Project5"],
+        chart4 : ["Event1", "Event2", "Event3", "Event4", "Event5"]
+    };
+    const data = {
+        chart1: {
+            labels: labels["chart1"],
+            datasets: [{
+                label: 'My First Dataset',
+                data: [65, 59, 80, 81, 56, 55],
+                borderWidth: 1
+            }]
+        },
+        chart2:{
+            labels: labels["chart2"],
+            datasets: [{
+                label: 'My Second Dataset',
+                data: [65, 59, 80, 81, 56],
+                borderWidth: 1
+            }]
+        },
+        chart3:{
+            labels: labels["chart3"],
+            datasets: [{
+                label: 'Third Dataset',
+                data: [600,21, 321, 2000, 11],
+                borderWidth: 1
+            }]
+        },
+        chart4:{
+            labels: labels["chart4"],
+            datasets: [{
+                label: 'Fourth Dataset',
+                data: [1,2,3,4,5],
+                borderWidth: 1
+            }]
+        }
+    };
+
+    const config = {
+        chart1: {
+            type: 'bar',
+            data: data["chart1"],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        },
+        chart2:{
+            type: 'pie',
+            data: data["chart2"],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        },
+        chart3: {
+            type: 'line',
+            data: data["chart3"],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        },
+        chart4: {
+            type: 'scatter',
+            data: data["chart4"],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+    }
+
+    const Chart1 = new Chart(chart1Canvas, config["chart1"]);
+    const Chart2 = new Chart(chart2Canvas, config["chart2"]);
+    const Chart3 = new Chart(chart3Canvas, config["chart3"]);
+    const Chart4 = new Chart(chart4Canvas, config["chart4"]);
+
+
+</script>
