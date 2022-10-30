@@ -6,7 +6,7 @@ namespace cosc3380_group4_themepark
 {
     public class SqlHelper
     {
-        public static Int32 ExecuteProc(String procname, SqlParameter[] parameters)
+        public static Int32 ExecuteProc(String procname, params SqlParameter[] parameters)
         {
             try {
                 Int32 rows_affected = 0;
@@ -28,6 +28,22 @@ namespace cosc3380_group4_themepark
             {
                 Console.WriteLine(e);
                 return 0;
+            }
+        }
+        public static SqlDataReader ExecuteReader(String procname, params SqlParameter[] parameters)
+        {
+            SqlConnection conn = new SqlConnection(Credentials.getConnectionString());
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.Connection = conn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddRange(parameters);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                return reader;
             }
         }
     }
