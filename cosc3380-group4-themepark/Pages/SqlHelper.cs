@@ -6,6 +6,8 @@ namespace cosc3380_group4_themepark
 {
     public class SqlHelper
     {
+
+
         public static Int32 ExecuteProc(String procname, params SqlParameter[] parameters)
         {
             try {
