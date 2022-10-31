@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace cosc3380_group4_themepark.Models
 {
-    public class Employee
+    public class Employee//employee
 {
 
     [BindProperty]
