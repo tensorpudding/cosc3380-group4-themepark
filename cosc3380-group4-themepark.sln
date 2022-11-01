@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 25.0.1703.8
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cosc3380-group4-themepark", "cosc3380-group4-themepark\cosc3380-group4-themepark.csproj", "{9FFC45B6-C007-468B-B4C5-9744BF386564}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cosc3380-group4-themepark", "cosc3380-group4-themepark\cosc3380-group4-themepark.csproj", "{9FFC45B6-C007-468B-B4C5-9744BF386564}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

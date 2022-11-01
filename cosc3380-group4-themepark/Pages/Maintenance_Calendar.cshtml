@@ -1,0 +1,45 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.Maintenance_CalendarModel
+@{
+    ViewData["Title"] = "Maintenance Calendar";
+}
+
+<form method="post">
+    <div class="form-row">
+        <div class="col">
+            <input type="date" class="form-control" placeholder="Occurence Date" name="startDate" />
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Vendor Name" name="VendorID" />
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Attraction Name" name="AttrID" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <select class="form-control">
+                <option value = "Normal">Normal</option>
+                <option value ="Urgent">Urgent</option>
+                <option value ="ASAP">ASAP</option>
+            </select>
+        </div>
+        <div class="col">
+            <input type="date" class="form-control" placeholder="Start Time" name="MaintStart" />
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Completion Time" name="MaintEnd" />
+        </div>
+        <div class="col">
+            <input type="number" min=1 max=10 class="form-control" placeholder="Hours Taken" name="BilledHours" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+
+        </div>
+    </div>
+    <div class="form-row">
+        <input type="submit" value="Submit" asp-page-handler="Submit" />
+    </div>
+</form>
