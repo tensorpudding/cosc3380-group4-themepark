@@ -1,0 +1,14 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.LoginModel
+@{
+}
+
+<form method="post" asp-page-handler="Login">
+    <div class="form-row">
+        <input type="text" name="username" placeholder="Username" />
+    </div>
+    <div class="form-row">
+        <input type="text" name="password" placeholder="Password" />
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+</form>

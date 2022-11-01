@@ -1,11 +1,25 @@
 ﻿@page
 @model IndexModel
+@using cosc3380_group4_themepark.Pages
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h4>Currently logged in as user @Model.name</h4>
+<a asp-page-handler="Logout">Log out</a>
 
+<<<<<<< Updated upstream
+=======
+@if (Model.role == "Manager")
+            {
+                <div><h3>We are management</h3></div>
+            }
+@if (Model.role == "Sales")
+            {
+                <div><h3>We are sales</h3></div>
+            }
+@if (Model.role == "Customer")
+            {
+                <partial name="_Ticket_Purchase" model="new CustomerModel()" />
+            }
+>>>>>>> Stashed changes
