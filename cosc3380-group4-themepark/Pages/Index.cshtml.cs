@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-<<<<<<< Updated upstream
-=======
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Diagnostics;
@@ -9,7 +7,6 @@ using System.Security.Claims;
 using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using cosc3380_group4_themepark.Models;
->>>>>>> Stashed changes
 
 namespace cosc3380_group4_themepark.Pages;
 
@@ -25,13 +22,6 @@ public class IndexModel : PageModel
     {
         _logger = logger;
     }
-
-<<<<<<< Updated upstream
-    public void OnGet()
-    {
-
-=======
-    public CustomerModel customerModel { get; set; }
 
     public IActionResult OnGet(int? user_id)
     {
@@ -70,7 +60,6 @@ public class IndexModel : PageModel
         Console.WriteLine("CHECKPOINT");
         HttpContext.SignOutAsync();
         return Redirect("/Login");
->>>>>>> Stashed changes
     }
 }
 

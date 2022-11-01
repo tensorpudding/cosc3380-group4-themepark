@@ -8,8 +8,6 @@
 <h4>Currently logged in as user @Model.name</h4>
 <a asp-page-handler="Logout">Log out</a>
 
-<<<<<<< Updated upstream
-=======
 @if (Model.role == "Manager")
             {
                 <div><h3>We are management</h3></div>
@@ -22,4 +20,3 @@
             {
                 <partial name="_Ticket_Purchase" model="new CustomerModel()" />
             }
->>>>>>> Stashed changes
