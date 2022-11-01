@@ -20,7 +20,7 @@ namespace cosc3380_group4_themepark
 
         public void OnPostBuyTicket(Ticket ticket)
         {
-            Int32 rows = SqlHelper.ExecuteProc(
+            Int32 rows = SqlHelper.ExecuteProcNonQuery(
                 "[Theme_Park].[Proc_Customer_Buy_Ticket]",
                 new SqlParameter("@date", ticket.datetime),
                 new SqlParameter("@class", ticket.ticketClass),
