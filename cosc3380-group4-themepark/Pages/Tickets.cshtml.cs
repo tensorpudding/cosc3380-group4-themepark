@@ -109,5 +109,21 @@ namespace cosc3380_group4_themepark.Pages
             Console.WriteLine("The current value of customer_id is {0}", this.customer_id);
             return Redirect("/Tickets");
         }
+
+        public IActionResult OnPostCancelReservation(TicketReservation reservation)
+        {
+            if (reservation.Reservation_ID == 0)
+            {
+                Console.WriteLine("ERROR: attempted to cancel non-existent reservation {0}", reservation.Reservation_ID);
+            }
+            Int32 rows_affected = SqlHelper.ExecuteProcNonQuery(
+                "[Theme_Park].[Proc_Customer_Cancel_Reservation]",
+                new SqlParameter("@Reservation_ID", reservation.Reservation_ID));
+            if (rows_affected == 0)
+            {
+                Console.WriteLine("ERROR: attempted to cancel non-existent reservation {0}", reservation.Reservation_ID);
+            }
+            return Redirect("/Tickets");
+        }
     }
 }
