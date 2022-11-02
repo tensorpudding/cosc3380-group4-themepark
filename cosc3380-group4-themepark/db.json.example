@@ -1,0 +1,10 @@
+/*
+    db.json example
+    Edit this file and save it to 'db.json' in the same folder
+ */
+{
+    "server":"<server>",
+    "username":"<username>",
+    "password":"<password>",
+    "db":"<database>"
+}
