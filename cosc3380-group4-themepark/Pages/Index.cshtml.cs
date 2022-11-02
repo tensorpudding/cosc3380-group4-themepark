@@ -18,6 +18,8 @@ public class IndexModel : PageModel
 
     public String? name { get; set; }
 
+    public CustomerModel customermodel { get; set; }
+
     public IndexModel(ILogger<IndexModel> logger)
     {
         _logger = logger;
@@ -49,6 +51,7 @@ public class IndexModel : PageModel
         }
         else
         {
+            this.SetChildPageModels(role);
             Console.WriteLine("The user is named {0} and has role {1}", this.name, this.role);
             return Page();
         }
@@ -60,6 +63,22 @@ public class IndexModel : PageModel
         Console.WriteLine("CHECKPOINT");
         HttpContext.SignOutAsync();
         return Redirect("/Login");
+    }
+
+    public IActionResult OnPostBuyTicket(Ticket ticket)
+    {
+
+        return (new CustomerModel()).OnPostBuyTicket(ticket);
+    }
+
+    public void SetChildPageModels(String role)
+    {
+        switch(role)
+        {
+            case "Customer":
+                this.customermodel = new CustomerModel();
+                break;
+        }
     }
 }
 

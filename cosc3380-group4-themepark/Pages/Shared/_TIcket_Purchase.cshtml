@@ -16,13 +16,13 @@
         <button class="btn btn-lg btn-block btn-primary" type="submit">Buy Ticket</button>
     </form>
 
-    @if (Model.TicketPurchaseSuccess)
+    @if (Model.TicketPurchaseSuccess == true)
     {
         <div>
             Success! We bought a ticket!
         </div>
     }
-    else
+    @if (Model.TicketPurchaseSuccess == false)
     {
         <div>
             Failure! We didn't buy a ticket

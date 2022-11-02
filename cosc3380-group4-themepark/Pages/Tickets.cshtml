@@ -1,0 +1,37 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.TicketsModel
+@using cosc3380_group4_themepark.Models
+@{
+}
+
+<form method="post" asp-page-handler="BuyTicket">
+    <input type="text" name="FirstName" placeholder="First Name" />
+    <input type="text" name="LastName" placeholder="Last Name" />
+    <input type="date" name="Date_of_Visit" />
+    <input type="text" name="Credit_Card_Number" />
+    <select class="form-control" name="Ticket_Class">
+        <option selected>Choose...</option>
+        <option value="Poor">Poor</option>
+        <option value="Normal">Normal</option>
+        <option value="Premium">Premium</option>
+    </select>
+    <button class="btn btn-lg btn-block btn-primary" type="submit">Reserve Ticket</button>
+</form>
+
+<h4>
+    Current tickets:
+</h4>
+
+@if (@Model.MyTickets.Count > 0)
+{
+    <ul>
+        @foreach (TicketReservation reservation in Model.MyTickets)
+        {
+            <li>@reservation.Reservation_ID: Placed on @reservation.Date_Placed.ToString("yyyy-MM-dd") for @reservation.Date_of_Visit.Date.ToString("yyyy-MM-dd")</li>
+        }
+     </ul>
+}
+else
+{
+    <h4>No current ticket reservations</h4>
+}

@@ -18,5 +18,6 @@
             }
 @if (Model.role == "Customer")
             {
-                <partial name="_Ticket_Purchase" model="new CustomerModel()" />
+                <a href="/Tickets">Ticket Reservations</a>
+                //<partial name="_Ticket_Purchase" model="@Model.customermodel" />
             }

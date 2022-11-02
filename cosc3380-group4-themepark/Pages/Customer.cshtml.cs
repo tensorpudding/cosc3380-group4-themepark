@@ -12,14 +12,16 @@ namespace cosc3380_group4_themepark
 {
     public class CustomerModel : PageModel
     {
-        public bool TicketPurchaseSuccess { get; set; }
+        public bool? TicketPurchaseSuccess { get; set; }
 
         public void OnGet()
         {
         }
 
-        public void OnPostBuyTicket(Ticket ticket)
+        public IActionResult OnPostBuyTicket(Ticket ticket)
         {
+            Console.WriteLine("CHECKPOINT");
+            string returnURL = HttpContext.Request.Query["returnUrl"];
             Int32 rows = SqlHelper.ExecuteProcNonQuery(
                 "[Theme_Park].[Proc_Customer_Buy_Ticket]",
                 new SqlParameter("@date", ticket.datetime),
@@ -35,6 +37,14 @@ namespace cosc3380_group4_themepark
                 this.TicketPurchaseSuccess = true;
             }
             Console.WriteLine("The result was {0}", this.TicketPurchaseSuccess);
+            if (returnURL != null)
+            {
+                return Redirect(returnURL);
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
     }
 }
