@@ -1,0 +1,18 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.MaintenanceNotificationModel
+@using cosc3380_group4_themepark.Models
+@{
+}
+
+<div class="manager-header row">
+    <h4>There are @Model.Notifications.Count notifications in the inbox</h4>
+    <button class="btn btn-sm" type="submit" asp-page-handler="ClearNotifications">Clear</button>
+</div>
+<div class="manager-inbox">
+    @foreach (MaintenanceCalendarNotification notification in Model.Notifications)
+            {
+                <p>
+                    <h7>Maintenance task @notification.maintenance_id has been marked as completed at @notification.completion</h7>
+                </p>
+            }
+</div>
