@@ -3,43 +3,64 @@
 @{
     ViewData["Title"] = "Maintenance Calendar";
 }
-
-<form method="post">
+<h1>Create Maintenance Job</h1>
+<form method="post" asp-page-handler="CreateTicket">
     <div class="form-row">
         <div class="col">
-            <input type="date" class="form-control" placeholder="Occurence Date" name="startDate" />
+            <input type="text" class="form-control" placeholder="Vendor Name" name="Vendor_ID" />
         </div>
         <div class="col">
-            <input type="text" class="form-control" placeholder="Vendor Name" name="VendorID" />
+            <input type="text" class="form-control" placeholder="Attraction Name" name="Attraction_ID" />
         </div>
         <div class="col">
-            <input type="text" class="form-control" placeholder="Attraction Name" name="AttrID" />
+            <input type="date" class="form-control" placeholder="Occurence Date" name="Occurence_datetime" />
         </div>
     </div>
     <div class="form-row">
         <div class="col">
-            <select class="form-control">
-                <option value = "Normal">Normal</option>
+            <select class="form-control" name="Priority">
+                <option value = "Not Urgent">Not Urgent</option>
                 <option value ="Urgent">Urgent</option>
                 <option value ="ASAP">ASAP</option>
             </select>
         </div>
         <div class="col">
-            <input type="date" class="form-control" placeholder="Start Time" name="MaintStart" />
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Completion Time" name="MaintEnd" />
-        </div>
-        <div class="col">
-            <input type="number" min=1 max=10 class="form-control" placeholder="Hours Taken" name="BilledHours" />
+            <input type="date" class="form-control" placeholder="Start Time" name="Maint_Start" />
         </div>
     </div>
     <div class="form-row">
         <div class="col">
+        </div>
+    </div>
+    <div class="form-row">
+        <input type="submit" value="Submit"/>
+    </div>
+</form>
 
+<h1>Close Maintenance Job</h1>
+<form method="post" asp-page-handler="CloseTicket">
+    <div class="form-row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Maintenance ID" name="Maint_ID" />
+        </div>
+        <div class="col">
+            <input type="date" class="form-control" placeholder="Completion Date" name="Maint_Completion" />
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Hours Taken" name="Billed_Hours" />
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Invoice Amount" name="Invoice_amount" />
+        </div>
+        <!--<div class="col">
+            <input type="file" class="form-control" placeholder="Scanned Invoice" name="Scanned_invoice" />
+        </div>-->
+    </div>
+    <div class="form-row">
+        <div class="col">
         </div>
     </div>
     <div class="form-row">
-        <input type="submit" value="Submit" asp-page-handler="Submit" />
+        <input type="submit" value="Submit" />
     </div>
 </form>
