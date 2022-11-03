@@ -1,0 +1,72 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.TicketsModel
+@using cosc3380_group4_themepark.Models
+@{
+}
+
+<div class="login-bar">
+    <h7>Currently logged in as @Model.username</h7>
+</div>
+
+<div class="customer-form-section">
+    <h3>Reserve your ticket today!</h3>
+    <form method="post" asp-page-handler="BuyTicket">
+        <div class="row">
+            <div class="form-group col">
+                <label for="TicketFirstName">Cardholder First Name</label>
+                <input id="TicketFirstName" class="form-control" type="text" name="FirstName" placeholder="First Name" />
+            </div>
+            <div class="form-group col">
+                <label for="TicketLastName">Cardholder Last Name</label>
+                <input id="TicketLastName" class="form-control" type="text" name="LastName" placeholder="Last Name" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col">
+                <label for="TicketDateVisit">Date of Visit</label>
+                <input id="TicketDateVisit" class="form-control" type="date" name="Date_of_Visit" />
+            </div>
+            <div class="form-group col">
+                <label for="TicketCreditCardNumber">Credit Card Number</label>
+                <input id="TicketCreditCardNumber" class="form-control" type="text" name="Credit_Card_Number" />
+            </div>
+            <div class="form-group col">
+                <label for="TicketClassSelector">Ticket Class</label>
+                <select id="TicketClassSelector" class="form-control" name="Ticket_Class">
+                    <option selected>Choose...</option>
+                    <option value="Poor">Poor - $11.30</option>
+                    <option value="Normal">Normal - $11.30</option>
+                    <option value="Premium">Premium - $11.30</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-lg btn-block btn-primary" type="submit">Place Reservation</button>
+    </form>
+</div>
+
+<h4>
+    Current tickets:
+</h4>
+
+<div class="customer-output-section">
+    <h3>Your current reservations</h3>
+    @if (@Model.MyTickets.Count > 0)
+    {
+        <ul>
+            @foreach (TicketReservation reservation in Model.MyTickets)
+            {
+                <li>
+                    @reservation.Reservation_ID: Placed on @reservation.Date_Placed.ToString("yyyy-MM-dd") for @reservation.Date_of_Visit.Date.ToString("yyyy-MM-dd")
+                    <form method="post" asp-page-handler="CancelReservation">
+                        <input type="hidden" value="@reservation.Reservation_ID" name="Reservation_ID" />
+                        <button class="btn btn-sm" type="submit">Cancel</button>
+                    </form>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <h7>You have no current reservations. Why not add one today?</h7>
+    }
+</div>

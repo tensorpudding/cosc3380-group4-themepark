@@ -3,8 +3,8 @@
     Edit this file and save it to 'db.json' in the same folder
  */
 {
-    "server":"<servername>",
+    "server":"<server>",
     "username":"<username>",
     "password":"<password>",
-    "db":"<name of database>"
+    "db":"<database>"
 }

@@ -1,7 +1,9 @@
-﻿using System.Net;
-using System.Data;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Diagnostics;
+using System.Security.Claims;
 using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using cosc3380_group4_themepark.Models;
@@ -12,39 +14,70 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
 
+    public String role { get; set; }
+
+    public String? name { get; set; }
+
+    public CustomerModel customermodel { get; set; }
+
     public IndexModel(ILogger<IndexModel> logger)
     {
         _logger = logger;
     }
 
-
-
-    public void OnPostSubmit(Ticket ticket)
+    public IActionResult OnGet(int? user_id)
     {
-        try
+        // Get the ASP.NET Core Identity for the request
+        // Redirect user if they are not logged in
+        var user = HttpContext.User;
+        this.name = null;
+        foreach (var claim in user.Claims)
         {
-            using (SqlConnection connection = new SqlConnection(Credentials.getConnectionString()))
+            Console.WriteLine("Found a claim of type {0}, value {1}", claim.Type, claim.Value);
+            if (claim.Type == "Username")
             {
-                Console.WriteLine("Passed connection string is {0}", connection.ConnectionString);
-                Console.WriteLine("Passed values {0}, {1}, {2}, {3}, {4}", ticket.ticketID*10, ticket.datetime, ticket.ticketClass, ticket.price*2, ticket.reservation);
-                connection.Open();
-                Console.WriteLine("Creating SQL query...");
-                String sql = @"INSERT INTO [Theme_Park].[Ticket] ([Ticket_ID], [Date], [Ticket_Class], [Price], [Reservation]) VALUES (@ticketID, GETDATE(), @ticketClass, @price, NULL );";
-
-                using (SqlCommand command = new SqlCommand(sql, connection))
-                {
-
-                    command.CommandType = CommandType.Text;
-                    command.Parameters.Add(new SqlParameter("@ticketID", ticket.ticketID));
-                    command.Parameters.Add(new SqlParameter("@ticketClass", ticket.ticketClass));
-                    command.Parameters.Add(new SqlParameter("@price", ticket.price));
-                    command.ExecuteNonQuery();
-                }
+                this.name = claim.Value;
+                Console.WriteLine("CHECKPOINT");
+            }
+            if (claim.Type == "Role")
+            {
+                this.role = claim.Value;
             }
         }
-        catch (SqlException e)
+        if (this.name is null)
         {
-            Console.WriteLine(e);
+            Console.WriteLine("Login failed!");
+            return Redirect("/Login");
+        }
+        else
+        {
+            this.SetChildPageModels(role);
+            Console.WriteLine("The user is named {0} and has role {1}", this.name, this.role);
+            return Page();
+        }
+        //return Redirect("/Customer");
+    }
+
+    public IActionResult OnGetLogout()
+    {
+        Console.WriteLine("CHECKPOINT");
+        HttpContext.SignOutAsync();
+        return Redirect("/Login");
+    }
+
+    public IActionResult OnPostBuyTicket(Ticket ticket)
+    {
+
+        return (new CustomerModel()).OnPostBuyTicket(ticket);
+    }
+
+    public void SetChildPageModels(String role)
+    {
+        switch (role)
+        {
+            case "Customer":
+                this.customermodel = new CustomerModel();
+                break;
         }
     }
 }

@@ -1,26 +1,24 @@
 ﻿@page
 @model IndexModel
+@using cosc3380_group4_themepark.Pages
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h4>Currently logged in as user @Model.name</h4>
+<a asp-page-handler="Logout">Log out</a>
 
-<a href="/EmployeeEntry">Employee Entry Form</a>
+@if (Model.role == "Manager")
+            {
+                <div><h3>We are management</h3></div>
+            }
+@if (Model.role == "Sales")
+            {
+                <div><h3>We are sales</h3></div>
+            }
+@if (Model.role == "Customer")
+            {
+                <a href="/Tickets">Ticket Reservations</a>
+                //<partial name="_Ticket_Purchase" model="@Model.customermodel" />
+            }
 
-<form method="post">
-    <label>TicketID</label>
-    <input type="text" name="ticketID" />
-    <label>Date</label>
-    <input type="text" name="datetime" />
-    <label>Class</label>
-    <input type="text" name="ticketClass" />
-    <label>Price</label>
-    <input type="text" name="price" />
-    <label>Reservation ID</label>
-    <input type="text" name="reservation" />
-    <input type="submit" value="Submit" asp-page-handler="Submit" />
-</form>

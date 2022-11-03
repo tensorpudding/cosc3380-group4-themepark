@@ -6,9 +6,12 @@ namespace cosc3380_group4_themepark
 {
     public class SqlHelper
     {
-        public static Int32 ExecuteProc(String procname, params SqlParameter[] parameters)
+
+
+        public static Int32 ExecuteProcNonQuery(String procname, params SqlParameter[] parameters)
         {
-            try {
+            try
+            {
                 Int32 rows_affected = 0;
                 using (SqlConnection conn = new SqlConnection(Credentials.getConnectionString()))
                 {
@@ -30,7 +33,7 @@ namespace cosc3380_group4_themepark
                 return 0;
             }
         }
-        public static SqlDataReader ExecuteReader(String procname, params SqlParameter[] parameters)
+        public static SqlDataReader ExecuteProcReader(String procname, params SqlParameter[] parameters)
         {
             SqlConnection conn = new SqlConnection(Credentials.getConnectionString());
 
@@ -38,6 +41,25 @@ namespace cosc3380_group4_themepark
             {
                 cmd.Connection = conn;
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = procname;
+                cmd.Parameters.AddRange(parameters);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                return reader;
+            }
+        }
+
+        public static SqlDataReader ExecuteQueryReader(String queryString, params SqlParameter[] parameters)
+        {
+            SqlConnection conn = new SqlConnection(Credentials.getConnectionString());
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.Connection = conn;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = queryString;
                 cmd.Parameters.AddRange(parameters);
 
                 conn.Open();

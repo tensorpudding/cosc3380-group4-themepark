@@ -404,5 +404,6 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
-#project stuff fro phillip
+db.json
+#project stuff from phillip
 cosc3380-group4-themepark/db.json

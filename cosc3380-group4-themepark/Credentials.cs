@@ -33,5 +33,5 @@ namespace cosc3380_group4_themepark
             }
             return builder.ConnectionString;
         }
-   }
+    }
 }
