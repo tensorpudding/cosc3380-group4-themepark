@@ -5,38 +5,49 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using cosc3380_group4_themepark.Models;
 using cosc3380_group4_themepark;
+using Microsoft.IdentityModel.Tokens;
 
 namespace cosc3380_group4_themepark.Pages;
 
 public class Maintenance_CalendarModel : PageModel
 {
-    public string? RequestId { get; set; }
-
-    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-
-    private readonly ILogger<EmployeeEntryModel> _logger;
+    private readonly ILogger<Maintenance_CalendarModel> _logger;
 
     public Maintenance_CalendarModel(ILogger<Maintenance_CalendarModel> logger)
     {
         _logger = logger;
     }
 
-    public void OnPostSubmit(Maintenance_CalendarModel Maintenance_Calendar)
+    public IActionResult OnPostCreateTicket(Maintenance_Calendar OpenTicket)
     {
-        List<SqlParameter> parameters = new List<SqlParameter>();
-        parameters.Add(new SqlParameter("@Maint_ID", Maintenance_Calendar.Maint_ID));
-        parameters.Add(new SqlParameter("@Occurence_date", Maintenance_Calendar.Occurence_date));
-        parameters.Add(new SqlParameter("@Vendor_ID", Maintenance_Calendar.Vendor_ID));
-        parameters.Add(new SqlParameter("@AttractionID", Maintenance_Calendar.gender));
-        parameters.Add(new SqlParameter("@address", Maintenance_Calendar.address));
-        parameters.Add(new SqlParameter("@phone", Maintenance_Calendar.phone));
-        parameters.Add(new SqlParameter("@date_joined", Maintenance_Calendar.date_joined));
-        parameters.Add(new SqlParameter("@dept_id", Maintenance_Calendar.dept_id));
-        parameters.Add(new SqlParameter("@supervisor_ssn", Maintenance_Calendar.supervisor_ssn));
-        parameters.Add(new SqlParameter("@salaried", Maintenance_Calendar.salaried));
-        parameters.Add(new SqlParameter("@payrate", Maintenance_Calendar.payrate));
-        parameters.Add(new SqlParameter("@vacation_days", Maintenance_Calendar.vacation_days));
+        Console.WriteLine("Occurance date is {0}", OpenTicket.Occurence_datetime);
+        Console.WriteLine("Maint start date is {0}", OpenTicket.Maint_Start);
 
-        Int32 rows_affected = SqlHelper.ExecuteProc("[Theme_Park].[Proc_Add_Employee]", parameters.ToArray());
+        List<SqlParameter> parameters = new List<SqlParameter>();
+        parameters.Add(new SqlParameter("@Occurence_datetime", OpenTicket.Occurence_datetime));
+        parameters.Add(new SqlParameter("@Vendor_ID", OpenTicket.Vendor_ID));
+        parameters.Add(new SqlParameter("@Attraction_ID", OpenTicket.Attraction_ID));
+        parameters.Add(new SqlParameter("@Priority", OpenTicket.Priority));
+        parameters.Add(new SqlParameter("@Maint_Start", OpenTicket.Maint_Start));
+  
+
+        Int32 rows_affected = SqlHelper.ExecuteProc("[Theme_Park].[Proc_Add_Maint]", parameters.ToArray());
+        return Redirect("/Maintenance_Calendar");
+
+    }
+
+    public IActionResult OnPostCloseTicket(Maintenance_Calendar CloseTicket)
+    {
+        Console.WriteLine("Occurance date is {0}", CloseTicket.Maint_Completion);
+        List<SqlParameter> parameters = new List<SqlParameter>();
+        parameters.Add(new SqlParameter("@Maint_ID", CloseTicket.Maint_ID));
+        parameters.Add(new SqlParameter("@Maint_Completion", CloseTicket.Maint_Completion));
+        parameters.Add(new SqlParameter("@Billed_Hours", CloseTicket.Billed_Hours));
+        parameters.Add(new SqlParameter("@Invoice_amount", CloseTicket.Invoice_amount));
+        /*parameters.Add(new SqlParameter(null, CloseTicket.Scanned_invoice));*/
+
+        Int32 rows_affected = SqlHelper.ExecuteProc("[Theme_Park].[Proc_End_Maint]", parameters.ToArray());
+        return Redirect("/Maintenance_Calendar");
+
     }
 }
