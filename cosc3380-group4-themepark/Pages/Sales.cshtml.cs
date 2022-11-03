@@ -9,25 +9,32 @@ namespace cosc3380_group4_themepark.Pages
         public static int Test; //Delete Later
         public static string? ticketSalesArray;
         public static string? ticketSalesIncomeArray;
-        public static string? merchSalesArray; //Convert to json
+        public static string? merchSalesArray;
         public static string? foodSalesArray;
         public static int _year = 2022;
 
         public static decimal? expenses;
         public static decimal? revenue;
         public static decimal? profit;
+        public static string? expenseColor;
+        public static string? revenueColor;
+        public static string? profitColor;
 
-        public void OnGet(int year=2022)
+        public static List<FinanceItem>? itemizedFinances;
+
+        public void OnGet(int year = 2022)
         {
             _year = year;
-            revenue = 0;
-            expenses = 0;
-            profit = 0;
             FetchTicketSalesInYear(year);
             FetchMonthlyMerchSalesInYear(year);
             FetchMonthlyFoodSalesInYear(year);
-            profit = revenue - expenses;
-            
+            itemizedFinances = FetchItemizedFinances(year);
+
+            expenseColor = "color: " + ((expenses > 0) ? "red" : "green") + ";";
+            revenueColor = "color: " + ((revenue < 0) ? "red" : "green") + ";";
+            profitColor = "color: " + ((profit < 0) ? "red" : "green") + ";";
+
+
         }
 
 
@@ -39,9 +46,9 @@ namespace cosc3380_group4_themepark.Pages
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@year", year));
             SqlDataReader reader = SqlHelper.ExecuteProcReader("[Theme_Park].[Proc_Query_Ticket_Purchases_Aggregate_In_Year]", parameters.ToArray());
-            while (reader.Read()) 
+            while (reader.Read())
             {
-                int month = reader.GetInt32(0)-1;
+                int month = reader.GetInt32(0) - 1;
                 MonthlyTicketSales[month] = reader.GetInt32(1);
                 MonthlyIncomeFromTickets[month] = reader.GetDecimal(2);
             }
@@ -88,17 +95,45 @@ namespace cosc3380_group4_themepark.Pages
             revenue += MonthlyFoodIncome.Sum();
         }
 
-        private void FetchAllSalesInYear(int year = 2022)
+        private List<FinanceItem> FetchItemizedFinances(int year = 2022)
         {
-            
+            expenses = 0;
+            revenue = 0;
+
+            List<FinanceItem> ary = new List<FinanceItem>();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@year", year));
+
+            SqlDataReader reader = SqlHelper.ExecuteProcReader("[Theme_Park].[Query_Itemized_Finances]", parameters.ToArray());
+
+            while (reader.Read())
+            {
+                DateTime date = reader.GetDateTime(2);
+                string type = reader.GetString(0);
+                string desc = reader.GetString(1);
+                decimal amount = reader.GetDecimal(3);
+                ary.Add(new FinanceItem(date, type, desc, amount));
+                if(type == "Revenue")
+                {
+                    revenue += amount;
+                }
+                else if(type == "Expense")
+                {
+                    expenses += amount;
+                }
+            }
+            profit = revenue - expenses;
+            reader.Close();
+
+            return ary;
         }
         private string FetchTicketSalesOnYearAndType(int year, string ticketClass) // Do this after Checkpoint 3
         {
             return ("");
         }
-        
 
-        
+
+
         public void OnPostSubmit() // Do this after checkpoint
         {
             //year = Int32.Parse(Request.Form["yearSelect"]);
@@ -106,6 +141,22 @@ namespace cosc3380_group4_themepark.Pages
             //year = int.Parse(Request.Form["yearSelect"]);
             //Console.WriteLine("Pog");
         }
-        
+
+    }
+
+    public class FinanceItem 
+    {
+        public DateTime billingDate { get; set; }
+        public string type { get; set; } //Expense or Revenue item
+        public string desc { get; set; }
+        public decimal amount { get; set; }
+
+        public FinanceItem(DateTime _billingDate, string _type, string _desc, decimal _amount)
+        {
+            billingDate = _billingDate;
+            type = _type;
+            desc = _desc;
+            amount = _amount;
+        }
     }
 }
