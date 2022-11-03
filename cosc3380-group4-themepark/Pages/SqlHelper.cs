@@ -6,13 +6,7 @@ namespace cosc3380_group4_themepark
 {
     public class SqlHelper
     {
-
-
-<<<<<<< HEAD
         public static Int32 ExecuteProcNonQuery(String procname, params SqlParameter[] parameters)
-=======
-        public static Int32 ExecuteProc(String procname, params SqlParameter[] parameters)
->>>>>>> form-submit-test
         {
             try
             {
