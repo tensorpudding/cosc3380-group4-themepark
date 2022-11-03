@@ -31,7 +31,7 @@ public class Maintenance_CalendarModel : PageModel
         parameters.Add(new SqlParameter("@Maint_Start", OpenTicket.Maint_Start));
   
 
-        Int32 rows_affected = SqlHelper.ExecuteProc("[Theme_Park].[Proc_Add_Maint]", parameters.ToArray());
+        Int32 rows_affected = SqlHelper.ExecuteProcNonQuery("[Theme_Park].[Proc_Add_Maint]", parameters.ToArray());
         return Redirect("/Maintenance_Calendar");
 
     }
@@ -46,7 +46,7 @@ public class Maintenance_CalendarModel : PageModel
         parameters.Add(new SqlParameter("@Invoice_amount", CloseTicket.Invoice_amount));
         /*parameters.Add(new SqlParameter(null, CloseTicket.Scanned_invoice));*/
 
-        Int32 rows_affected = SqlHelper.ExecuteProc("[Theme_Park].[Proc_End_Maint]", parameters.ToArray());
+        Int32 rows_affected = SqlHelper.ExecuteProcNonQuery("[Theme_Park].[Proc_End_Maint]", parameters.ToArray());
         return Redirect("/Maintenance_Calendar");
 
     }
