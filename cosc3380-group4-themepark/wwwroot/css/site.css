@@ -61,6 +61,12 @@ body {
     padding: 20px;
 }
 
+.dashboard-small-section {
+    padding-top: 15px;
+    text-align: center;
+    padding-right: 20px;
+    font-size: 25px;
+}
 
 
 .main1-chart-wrapper {

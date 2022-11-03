@@ -17,10 +17,10 @@
                         @{
                             for(int i = DateTime.Now.Year; i >= 2000; i--){
                                 if(SalesModel._year == i){
-                                    <option selected value="@i">@i</option>
+                                                <option selected value="@i">@i</option>
                                 }
                                 else{
-                                    <option value=@i>@i</option>
+                                                <option value=@i>@i</option>
                                 }
                             }
                         }
@@ -36,17 +36,17 @@
         </div>
         <div class="sub1-chart-wrapper chart-wrapper">
             <h2>Revenue</h2>
-            <div id="dashboard-revenue-text">$ @String.Format("{0:0.00}", SalesModel.revenue)</div>
+            <div id="dashboard-revenue-text" class="dashboard-small-section" style="@SalesModel.revenueColor">$ @string.Format("{0:0.00}", SalesModel.revenue)</div>
             <canvas id="sub1-chart"></canvas>
         </div>
         <div class="sub2-chart-wrapper chart-wrapper">
             <h2>Expenses</h2>
-            <div id="dashboard-expenses-text">$ @String.Format("{0:0.00}", SalesModel.expenses)</div>
+            <div id="dashboard-expenses-text" class="dashboard-small-section" style="@SalesModel.expenseColor">$ @string.Format("{0:0.00}", SalesModel.expenses)</div>
             <canvas id="sub2-chart"></canvas>
         </div>
         <div class="sub3-chart-wrapper chart-wrapper">
             <h2>Profit</h2>
-            <div id="dashboard-profit-text">$ @String.Format("{0:0.00}", SalesModel.profit)</div>
+            <div id="dashboard-profit-text" class="dashboard-small-section" style="@SalesModel.profitColor">$ @String.Format("{0:0.00}", SalesModel.profit)</div>
             <canvas id="sub2-chart"></canvas>
         </div>
     </div>
@@ -54,7 +54,14 @@
     <div class="itemized-list-wrapper" style="margin: 10px 0 0 0;">
         <h2>Itemized Finances</h2>
         <div class="itemized-finance-container">
-            
+            @{
+                for(int i = 0; i < SalesModel.itemizedFinances.Count(); i++)
+                {
+                    FinanceItem item = SalesModel.itemizedFinances[i];
+                    string color = (item.type == "Revenue") ? "green" : "red";
+                    <p style="color: @color">@item.billingDate | @item.desc | $ @string.Format("{0:0.00}", @item.amount)</p>
+                }
+            }
         </div>
     </div>
 </div>
