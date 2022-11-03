@@ -1,0 +1,24 @@
+﻿@page
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model MerchandiseModel
+@{
+    ViewData["Title"] = "Merchandise Request";
+}
+
+
+
+
+<form method="post">
+    <div class="form-row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Start Date" name="sdate" />
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="End Date" name="edate" />
+        </div>
+    </div>
+    <div class="form-row">
+        <input type="submit" value="Submit" asp-page-handler="Submit" />
+    </div>
+</form>
