@@ -73,7 +73,7 @@ public class IndexModel : PageModel
 
     public void SetChildPageModels(String role)
     {
-        switch(role)
+        switch (role)
         {
             case "Customer":
                 this.customermodel = new CustomerModel();

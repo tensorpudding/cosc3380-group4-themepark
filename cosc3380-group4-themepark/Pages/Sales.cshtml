@@ -1,0 +1,70 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.SalesModel
+@{
+    ViewData["Title"] = "Sales";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="sales-container">
+    <h1 style="padding-bottom: 20px;">Finance Dashboard</h1>
+    <div class="dashboard-wrapper">
+        <div class="main1-chart-wrapper chart-wrapper">
+            <div style="display: flex; justify-content: flex-end;">
+                <form id="yearSelection" method="GET">
+                    <label for="year-select">Year:</label>
+                    
+                    <select id="yearSelect" name="year" onchange="this.form.submit()">
+                        @{
+                            for(int i = DateTime.Now.Year; i >= 2000; i--){
+                                if(SalesModel._year == i){
+                                    <option selected value="@i">@i</option>
+                                }
+                                else{
+                                    <option value=@i>@i</option>
+                                }
+                            }
+                        }
+                    </select>
+                </form>
+            </div>
+            <div style="flex-grow: 1;">
+                <canvas id="main1-chart"></canvas>
+            </div>
+        </div>
+        <div class="main2-chart-wrapper chart-wrapper">
+            <canvas id="main2-chart"></canvas>
+        </div>
+        <div class="sub1-chart-wrapper chart-wrapper">
+            <h2>Revenue</h2>
+            <div id="dashboard-revenue-text">$ @String.Format("{0:0.00}", SalesModel.revenue)</div>
+            <canvas id="sub1-chart"></canvas>
+        </div>
+        <div class="sub2-chart-wrapper chart-wrapper">
+            <h2>Expenses</h2>
+            <div id="dashboard-expenses-text">$ @String.Format("{0:0.00}", SalesModel.expenses)</div>
+            <canvas id="sub2-chart"></canvas>
+        </div>
+        <div class="sub3-chart-wrapper chart-wrapper">
+            <h2>Profit</h2>
+            <div id="dashboard-profit-text">$ @String.Format("{0:0.00}", SalesModel.profit)</div>
+            <canvas id="sub2-chart"></canvas>
+        </div>
+    </div>
+
+    <div class="itemized-list-wrapper" style="margin: 10px 0 0 0;">
+        <h2>Itemized Finances</h2>
+        <div class="itemized-finance-container">
+            
+        </div>
+    </div>
+</div>
+
+<script 
+    src="~/js/Sales.js" 
+    type="text/javascript" 
+    year=@SalesModel._year
+    ticketSales=@SalesModel.ticketSalesArray 
+    ticketSalesIncome=@SalesModel.ticketSalesIncomeArray
+    foodSalesIncome=@SalesModel.foodSalesArray
+    merchSalesIncome=@SalesModel.merchSalesArray
+></script>

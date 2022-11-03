@@ -10,7 +10,8 @@ namespace cosc3380_group4_themepark
 
         public static Int32 ExecuteProcNonQuery(String procname, params SqlParameter[] parameters)
         {
-            try {
+            try
+            {
                 Int32 rows_affected = 0;
                 using (SqlConnection conn = new SqlConnection(Credentials.getConnectionString()))
                 {
