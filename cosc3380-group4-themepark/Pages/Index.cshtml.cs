@@ -49,7 +49,6 @@ public class IndexModel : PageModel
         }
         else
         {
-            this.SetChildPageModels(role);
             Console.WriteLine("The user is named {0} and has role {1}", this.name, this.role);
             return Page();
         }
