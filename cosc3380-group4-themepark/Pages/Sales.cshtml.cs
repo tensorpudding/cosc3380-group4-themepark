@@ -29,7 +29,7 @@ namespace cosc3380_group4_themepark.Pages
 
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@year", year));
-            SqlDataReader reader = SqlHelper.ExecuteReader("[Theme_Park].[Proc_Query_Ticket_Purchases_Aggregate_In_Year]", parameters.ToArray());
+            SqlDataReader reader = SqlHelper.ExecuteProcReader("[Theme_Park].[Proc_Query_Ticket_Purchases_Aggregate_In_Year]", parameters.ToArray());
             while (reader.Read()) 
             {
                 int month = reader.GetInt32(0)-1;
@@ -49,7 +49,7 @@ namespace cosc3380_group4_themepark.Pages
             parameters.Add(new SqlParameter("@year", year));
             parameters.Add(new SqlParameter("@type", "Merch"));
 
-            SqlDataReader reader = SqlHelper.ExecuteReader("[Theme_Park].[Query_Merch_Sales_In_Year]", parameters.ToArray());
+            SqlDataReader reader = SqlHelper.ExecuteProcReader("[Theme_Park].[Query_Merch_Sales_In_Year]", parameters.ToArray());
 
             while (reader.Read())
             {
@@ -66,7 +66,7 @@ namespace cosc3380_group4_themepark.Pages
             parameters.Add(new SqlParameter("@year", year));
             parameters.Add(new SqlParameter("@type", "Merch"));
 
-            SqlDataReader reader = SqlHelper.ExecuteReader("[Theme_Park].[Query_Merch_Sales_In_Year]", parameters.ToArray());
+            SqlDataReader reader = SqlHelper.ExecuteProcReader("[Theme_Park].[Query_Merch_Sales_In_Year]", parameters.ToArray());
 
             while (reader.Read())
             {

@@ -43,6 +43,6 @@ public class EmployeeEntryModel : PageModel
         parameters.Add(new SqlParameter("@payrate", employee.payrate));
         parameters.Add(new SqlParameter("@vacation_days", employee.vacation_days));
 
-        Int32 rows_affected = SqlHelper.ExecuteProc("[Theme_Park].[Proc_Add_Employee]", parameters.ToArray());
+        Int32 rows_affected = SqlHelper.ExecuteProcNonQuery("[Theme_Park].[Proc_Add_Employee]", parameters.ToArray());
     }
 }
