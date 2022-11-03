@@ -7,32 +7,51 @@ const displayCharts = () => {
 
     const ticketSalesAry = document.currentScript.getAttribute("ticketSales").split(",").map(obj => { return parseInt(obj) });
     const ticketSalesIncomeAry = document.currentScript.getAttribute("ticketSalesIncome").split(",").map(obj => { return parseFloat(obj) })
+    const foodSalesIncomeAry = document.currentScript.getAttribute("foodSalesIncome").split(",").map(obj => { return parseFloat(obj) })
+    const merchSalesIncomeAry = document.currentScript.getAttribute("merchSalesIncome").split(",").map(obj => { return parseFloat(obj) })
+    let totalIncomeAry = new Array(12);
+    for (let i = 0; i < totalIncomeAry.length; i++) {
+        totalIncomeAry[i] = ticketSalesIncomeAry[i] + foodSalesIncomeAry[i] + merchSalesIncomeAry[i]
+    }
+
+
     // Chart 1 Stuff
     _ = new Chart(mainChart1, {
         type: 'line',
         data: {
             labels: ['Jan', 'Feb', 'Mar', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', "Dec"],
-            datasets: [{
-                label: 'Ticket Income',
-                data: ticketSalesIncomeAry,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1,
-                tension: 0.2
+            datasets: [
+                {
+                    label: 'Total Income',
+                    data: totalIncomeAry,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(0, 255, 0, 0.5)',
+                    borderWidth: 1,
+                    tension: 0.2
+                },
+                {
+                    label: 'Ticket Income',
+                    data: ticketSalesIncomeAry,
+                    backgroundColor: 'rgba(238, 1, 5, 0.2)',
+                    borderColor: 'rgba(238, 1, 5, 0.2)',
+                    borderWidth: 1,
+                    tension: 0.2
+                },
+                {
+                    label: 'Food Income',
+                    data: foodSalesIncomeAry,
+                    backgroundColor: 'rgb(234,182,118)',
+                    borderColor: 'rgb(234,182,118)',
+                    borderWidth: 1,
+                    tension: 0.2
+                },
+                {
+                    label: 'Merch Income',
+                    data: merchSalesIncomeAry,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 0.2)',
+                    borderWidth: 1,
+                    tension: 0.2
             }]
         },
         options: {
@@ -42,7 +61,7 @@ const displayCharts = () => {
                 },
                 title: {
                     display: true,
-                    text: 'Annual Earnings',
+                    text: document.currentScript.getAttribute('year') + ' Annual Earnings',
                     align: "start",
                     font: {
                         size: "24px"
@@ -76,25 +95,19 @@ const displayCharts = () => {
     _ = new Chart(mainChart2, {
         type: 'doughnut',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: ['Ticket', 'Food', 'Merch'],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'Revenue Split Dataset',
+                data: [sum(ticketSalesIncomeAry), sum(foodSalesIncomeAry), sum(merchSalesIncomeAry)],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(238, 1, 5, 0.2)',
+                    'rgb(234,182,118)',
                     'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    'rgba(238, 1, 5, 0.2)',
+                    'rgb(234,182,118)',
+                    'rgba(54, 162, 235, 0.2)',
                 ],
                 borderWidth: 1
             }]
@@ -106,7 +119,7 @@ const displayCharts = () => {
                 },
                 title: {
                     display: true,
-                    text: 'Revenue Split',
+                    text: document.currentScript.getAttribute('year') + ' Annual Revenue Split',
                     align: "center",
                     font: {
                         size: "24px"
@@ -131,11 +144,12 @@ const displayCharts = () => {
     });
 }
 
-const preventReloadOnFormSubmit = () => {
-    const form = document.getElementById("yearSelection");
-    function handleForm(event) { event.preventDefault(); }
-    form.addEventListener('submit', handleForm);
+const sum = (ary) => {
+    total = 0;
+    ary.forEach(obj => {
+        total += obj
+    })
+    return total;
 }
 
-//preventReloadOnFormSubmit();
 displayCharts();

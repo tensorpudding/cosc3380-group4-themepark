@@ -36,17 +36,17 @@
         </div>
         <div class="sub1-chart-wrapper chart-wrapper">
             <h2>Revenue</h2>
-            <div id="dashboard-revenue-text"></div>
+            <div id="dashboard-revenue-text">$ @String.Format("{0:0.00}", SalesModel.revenue)</div>
             <canvas id="sub1-chart"></canvas>
         </div>
         <div class="sub2-chart-wrapper chart-wrapper">
             <h2>Expenses</h2>
-            <div id="dashboard-expenses-text"></div>
+            <div id="dashboard-expenses-text">$ @String.Format("{0:0.00}", SalesModel.expenses)</div>
             <canvas id="sub2-chart"></canvas>
         </div>
         <div class="sub3-chart-wrapper chart-wrapper">
             <h2>Profit</h2>
-            <div id="dashboard-profit-text"></div>
+            <div id="dashboard-profit-text">$ @String.Format("{0:0.00}", SalesModel.profit)</div>
             <canvas id="sub2-chart"></canvas>
         </div>
     </div>
@@ -62,8 +62,9 @@
 <script 
     src="~/js/Sales.js" 
     type="text/javascript" 
+    year=@SalesModel._year
     ticketSales=@SalesModel.ticketSalesArray 
     ticketSalesIncome=@SalesModel.ticketSalesIncomeArray
-    foodSales=@SalesModel.foodSalesArray
-    merchSales=@SalesModel.merchSalesArray
+    foodSalesIncome=@SalesModel.foodSalesArray
+    merchSalesIncome=@SalesModel.merchSalesArray
 ></script>

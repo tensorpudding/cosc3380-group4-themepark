@@ -12,13 +12,22 @@ namespace cosc3380_group4_themepark.Pages
         public static string? merchSalesArray; //Convert to json
         public static string? foodSalesArray;
         public static int _year = 2022;
-        
+
+        public static decimal? expenses;
+        public static decimal? revenue;
+        public static decimal? profit;
+
         public void OnGet(int year=2022)
         {
             _year = year;
+            revenue = 0;
+            expenses = 0;
+            profit = 0;
             FetchTicketSalesInYear(year);
             FetchMonthlyMerchSalesInYear(year);
             FetchMonthlyFoodSalesInYear(year);
+            profit = revenue - expenses;
+            
         }
 
 
@@ -39,7 +48,7 @@ namespace cosc3380_group4_themepark.Pages
             reader.Close();
             ticketSalesArray = String.Join(",", MonthlyTicketSales);
             ticketSalesIncomeArray = String.Join(",", MonthlyIncomeFromTickets);
-            
+            revenue += MonthlyIncomeFromTickets.Sum();
         }
 
         private void FetchMonthlyMerchSalesInYear(int year = 2022)
@@ -47,7 +56,7 @@ namespace cosc3380_group4_themepark.Pages
             List<decimal> MonthlyMerchIncome = new List<decimal> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@year", year));
-            parameters.Add(new SqlParameter("@type", "Merch"));
+            parameters.Add(new SqlParameter("@type", "Food"));
 
             SqlDataReader reader = SqlHelper.ExecuteProcReader("[Theme_Park].[Query_Merch_Sales_In_Year]", parameters.ToArray());
 
@@ -58,6 +67,7 @@ namespace cosc3380_group4_themepark.Pages
             }
             reader.Close();
             merchSalesArray = String.Join(",", MonthlyMerchIncome);
+            revenue += MonthlyMerchIncome.Sum();
         }
         private void FetchMonthlyFoodSalesInYear(int year = 2022)
         {
@@ -75,6 +85,7 @@ namespace cosc3380_group4_themepark.Pages
             }
             reader.Close();
             foodSalesArray = String.Join(",", MonthlyFoodIncome);
+            revenue += MonthlyFoodIncome.Sum();
         }
 
         private void FetchAllSalesInYear(int year = 2022)
