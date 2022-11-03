@@ -9,6 +9,16 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
             });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ManagerSpecific", policy => policy.RequireClaim("Role", "Manager", "Maintenance_Manager"));
+    options.AddPolicy("SalesSpecific", policy => policy.RequireClaim("Role", "Sales"));
+    options.AddPolicy("MaintenanceSpecific", policy => policy.RequireClaim("Role", "Maintenance", "Maintenance_Manager"));
+    options.AddPolicy("MaintManagerSpecific", policy => policy.RequireClaim("Role", "Maintenance_Manager"));
+    options.AddPolicy("CustomerSpecific", policy => policy.RequireClaim("Role", "Customer"));
+    options.AddPolicy("HRSpecific", policy => policy.RequireClaim("Role", "HR"));
+});
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 
