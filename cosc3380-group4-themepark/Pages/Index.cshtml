@@ -12,13 +12,16 @@
             {
                 <div><h3>We are management</h3></div>
             }
-@if (Model.role == "Sales")
-            {
-                <div><h3>We are sales</h3></div>
-            }
 @if (Model.role == "Customer")
             {
-                <a href="/Tickets">Ticket Reservations</a>
-                //<partial name="_Ticket_Purchase" model="@Model.customermodel" />
+                <div>
+                    <a href="/Tickets">Ticket Reservations</a>
+                </div>
+            }
+@if (Model.role == "Sales")
+            {
+               <div>
+                    <a href="/Sales">Sales Dashboard</a>
+               </div>
             }
 
