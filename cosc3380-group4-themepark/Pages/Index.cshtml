@@ -8,10 +8,10 @@
 <h4>Currently logged in as user @Model.name</h4>
 <a asp-page-handler="Logout">Log out</a>
 
-@if (Model.role == "Manager")
+@*@if (Model.role == "Manager")
             {
                 <div><h3>We are management</h3></div>
-            }
+            }*@
 @if (Model.role == "Customer")
             {
                 <div>
@@ -21,7 +21,19 @@
 @if (Model.role == "Sales")
             {
                <div>
-                    <a href="/Sales">Sales Dashboard</a>
+                    <p><a href="/Sales">Sales Dashboard</a></p>
+                    <p><a href="/Merchandise">Merchandise Sales Report</a></p>
                </div>
             }
-
+@if (Model.role == "Maintenance" || Model.role == "Maintenance_Manager")
+            {
+                <div>
+                    <a href="/Maintenance_Calendar">Maintenance Ticket Form</a>
+                </div>
+            }
+@if (Model.role == "Maintenance_Manager")
+            {
+                <div>
+                    <a href="/MaintenanceNotification">Notification Inbox</a>
+                </div>
+            }
