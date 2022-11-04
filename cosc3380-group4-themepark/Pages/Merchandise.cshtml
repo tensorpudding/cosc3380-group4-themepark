@@ -22,3 +22,22 @@
         <input type="submit" value="Submit" asp-page-handler="Submit" />
     </div>
 </form>
+
+<div class="customer-output-section">
+    <h3>Merchandise Report</h3>
+    @if (@Model.MyMerch.Count > 0)
+    {
+        <ul>
+            @foreach (MerchandiseRow merch in Model.MyMerch)
+            {
+                <li>
+                    @merch.itemName,@merch.numSold,@merch.price,@merch.itemRevenue
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <h7>You have no current reservations. Why not add one today?</h7>
+    }
+</div>
