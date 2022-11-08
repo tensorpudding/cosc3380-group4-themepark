@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using Microsoft.Data.SqlClient;
 
 namespace cosc3380_group4_themepark

@@ -1,10 +1,40 @@
 ﻿@page
 @model IndexModel
+@using cosc3380_group4_themepark.Pages
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<h4>Currently logged in as user @Model.name</h4>
+<a asp-page-handler="Logout">Log out</a>
+
+@*@if (Model.role == "Manager")
+            {
+                <div><h3>We are management</h3></div>
+            }*@
+@if (Model.role == "Customer")
+            {
+                <div>
+                    <a href="/Tickets">Ticket Reservations</a>
+                </div>
+            }
+@if (Model.role == "Sales")
+            {
+               <div>
+                    <p><a href="/Sales">Sales Dashboard</a></p>
+                    <p><a href="/Merchandise">Merchandise Sales Report</a></p>
+               </div>
+            }
+@if (Model.role == "Maintenance" || Model.role == "Maintenance_Manager")
+            {
+                <div>
+                    <a href="/Maintenance_Calendar">Maintenance Ticket Form</a>
+                </div>
+            }
+@if (Model.role == "Maintenance_Manager")
+            {
+                <div>
+                    <a href="/MaintenanceNotification">Notification Inbox</a>
+                </div>
+            }

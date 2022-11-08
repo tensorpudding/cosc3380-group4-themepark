@@ -1,7 +1,28 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/Login";
+
+            });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ManagerSpecific", policy => policy.RequireClaim("Role", "Manager", "Maintenance_Manager"));
+    options.AddPolicy("SalesSpecific", policy => policy.RequireClaim("Role", "Sales"));
+    options.AddPolicy("MaintenanceSpecific", policy => policy.RequireClaim("Role", "Maintenance", "Maintenance_Manager"));
+    options.AddPolicy("MaintManagerSpecific", policy => policy.RequireClaim("Role", "Maintenance_Manager"));
+    options.AddPolicy("CustomerSpecific", policy => policy.RequireClaim("Role", "Customer"));
+    options.AddPolicy("HRSpecific", policy => policy.RequireClaim("Role", "HR"));
+});
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+
 
 var app = builder.Build();
 
@@ -18,6 +39,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

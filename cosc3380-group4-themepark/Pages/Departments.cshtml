@@ -1,0 +1,11 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.DepartmentsModel
+@using cosc3380_group4_themepark.Models
+@{
+}
+<ul>
+    @foreach (cosc3380_group4_themepark.Models.Departments dept in Model.departmentList)
+    {
+        <li>@dept.dept_name</li>
+    }
+</ul>
