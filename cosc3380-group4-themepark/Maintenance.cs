@@ -32,6 +32,9 @@ public class Maintenance_Calendar
     [BindProperty]
     public decimal Invoice_amount { get; set; }
 
+    [BindProperty]
+    public string Maint_Description { get; set; }
+
     /*[BindProperty]
     public Byte[] Scanned_invoice { get; set; }*/
 
