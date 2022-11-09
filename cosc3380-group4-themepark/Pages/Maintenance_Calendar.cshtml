@@ -6,18 +6,31 @@
 <h1>Create Maintenance Job</h1>
 <form method="post" asp-page-handler="CreateTicket">
     <div class="form-row">
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Vendor Name" name="Vendor_ID" />
+ @*       <div class="col">
+            <label for="Vendor_ID">  Vendor Name</label><br>
+            <input type="text" class="form-control" name="Vendor_ID" />
+        </div>
+ *@       <div class="col">
+            <label for="Vendor_ID">  Vendor Name</label><br>
+            <select class="form-control" name="Vendor_ID">
+                @foreach (var vendor in Model.vendors)
+                {
+                    <option value=@vendor.vendor_id>@vendor.name</option>
+                }
+            </select>
         </div>
         <div class="col">
-            <input type="text" class="form-control" placeholder="Attraction Name" name="Attraction_ID" />
+            <label for="Attraction_ID">  Attraction Name</label><br>
+            <input type="text" class="form-control" name="Attraction_ID" />
         </div>
         <div class="col">
-            <input type="date" class="form-control" placeholder="Occurence Date" name="Occurence_datetime" />
+            <label for="Occurence_datetime">  Occurence Date</label><br>
+            <input type="date" class="form-control" name="Occurence_datetime" />
         </div>
     </div>
     <div class="form-row">
         <div class="col">
+            <label for="Priority">  Priority</label><br>
             <select class="form-control" name="Priority">
                 <option value = "Not Urgent">Not Urgent</option>
                 <option value ="Urgent">Urgent</option>
@@ -25,7 +38,12 @@
             </select>
         </div>
         <div class="col">
-            <input type="date" class="form-control" placeholder="Start Time" name="Maint_Start" />
+            <label for="Maint_Description">  Description</label><br>
+            <input type="text" class="form-control" name="Maint_Description" />
+        </div>
+        <div class="col">
+            <label for="Maint_Start">  Start of Maintenance</label><br>
+            <input type="date" class="form-control" name="Maint_Start" />
         </div>
     </div>
     <div class="form-row">
@@ -41,16 +59,20 @@
 <form method="post" asp-page-handler="CloseTicket">
     <div class="form-row">
         <div class="col">
-            <input type="text" class="form-control" placeholder="Maintenance ID" name="Maint_ID" />
+            <label for="Maint_ID">  Maintenance ID</label><br>
+            <input type="text" class="form-control" name="Maint_ID" />
         </div>
         <div class="col">
-            <input type="date" class="form-control" placeholder="Completion Date" name="Maint_Completion" />
+            <label for="Maint_Completion">  Maintenance Completion Time</label><br>
+            <input type="date" class="form-control" name="Maint_Completion" />
         </div>
         <div class="col">
-            <input type="text" class="form-control" placeholder="Hours Taken" name="Billed_Hours" />
+            <label for="Billed_Hours">  Hours Taken</label><br>
+            <input type="text" class="form-control" name="Billed_Hours" />
         </div>
         <div class="col">
-            <input type="text" class="form-control" placeholder="Invoice Amount" name="Invoice_amount" />
+            <label for="Invoice_amount"> Cost of job</label><br>
+            <input type="text" class="form-control" name="Invoice_amount" />
         </div>
         <!--<div class="col">
             <input type="file" class="form-control" placeholder="Scanned Invoice" name="Scanned_invoice" />

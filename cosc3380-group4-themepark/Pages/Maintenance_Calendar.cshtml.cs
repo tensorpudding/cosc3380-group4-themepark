@@ -11,11 +11,31 @@ namespace cosc3380_group4_themepark.Pages;
 
 public class Maintenance_CalendarModel : PageModel
 {
+
+    public List<Vendor> vendors { get; set; }
+
     private readonly ILogger<Maintenance_CalendarModel> _logger;
 
     public Maintenance_CalendarModel(ILogger<Maintenance_CalendarModel> logger)
     {
         _logger = logger;
+    }
+
+    public IActionResult OnGet()
+    {
+        SqlDataReader reader = SqlHelper.ExecuteProcReader(
+            "[Theme_Park].[Proc_Get_Vendors]");
+        this.vendors = new List<Vendor>();
+
+        while (reader.Read())
+        {
+            Vendor vendor = new Vendor();
+            vendor.vendor_id = reader.GetInt32(1);
+            vendor.name = reader.GetString(0);
+            this.vendors.Add(vendor);
+        }
+
+        return Page();
     }
 
     public IActionResult OnPostCreateTicket(Maintenance_Calendar OpenTicket)
@@ -29,7 +49,7 @@ public class Maintenance_CalendarModel : PageModel
         parameters.Add(new SqlParameter("@Attraction_ID", OpenTicket.Attraction_ID));
         parameters.Add(new SqlParameter("@Priority", OpenTicket.Priority));
         parameters.Add(new SqlParameter("@Maint_Start", OpenTicket.Maint_Start));
-  
+        parameters.Add(new SqlParameter("@Maint_Description", OpenTicket.Maint_Description));
 
         Int32 rows_affected = SqlHelper.ExecuteProcNonQuery("[Theme_Park].[Proc_Add_Maint]", parameters.ToArray());
         return Redirect("/Maintenance_Calendar");
