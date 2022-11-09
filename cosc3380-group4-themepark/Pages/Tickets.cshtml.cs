@@ -12,7 +12,7 @@ using cosc3380_group4_themepark.Models;
 
 namespace cosc3380_group4_themepark.Pages
 {
-    [Authorize]
+    [Authorize(Policy="CustomerSpecific")]
     public class TicketsModel : PageModel
     {
 
