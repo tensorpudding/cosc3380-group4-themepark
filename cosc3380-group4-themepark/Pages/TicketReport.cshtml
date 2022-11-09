@@ -1,0 +1,22 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.TicketReportModel
+@{
+    int i = 0;
+}
+
+<div class="report-header">
+    <h3>Ticket sales reports</h3>
+</div>
+<div class="report-body">
+    @foreach (var agg in @Model.thisYearTickets.totals_by_weekday)
+            {
+                <div class="report-item">
+                    <p>Sales of tickets for day @i:</p>
+                        @foreach (var ticket_class in agg.Keys)
+                            {
+                                <p>@ticket_class : @agg[ticket_class]</p>
+                            }
+                </div>
+            i += 1;
+        }
+</div>
