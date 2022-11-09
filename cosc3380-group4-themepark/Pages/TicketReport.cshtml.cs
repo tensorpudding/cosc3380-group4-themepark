@@ -49,18 +49,6 @@ namespace cosc3380_group4_themepark.Pages
             // populate previous and this year tickets items
             this.thisYearTickets = new TicketsByWeekdayAggregate(2022);
             this.previousYearTickets = new TicketsByWeekdayAggregate(2021);
-
-            Int32 i = 0;
-            foreach (Dictionary<String, Int32> agg in this.thisYearTickets.totals_by_weekday)
-            {
-                Console.WriteLine("The total for day {0} is: ", i);
-                foreach (var ticket_class in agg.Keys)
-                {
-                    Console.WriteLine("{0}: {1}", ticket_class, agg[ticket_class]);
-                }
-                Console.WriteLine("");
-                i++;
-            }
         }
     }
 }
