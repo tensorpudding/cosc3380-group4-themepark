@@ -23,17 +23,32 @@
     </div>
 </form>
 
-<div class="customer-output-section">
-    <h3>Merchandise Report</h3>
+<table class="table">
     @if (@Model.MyMerch.Count > 0)
     {
-        <ul>
-            @foreach (MerchandiseRow merch in Model.MyMerch)
-            {
-                <li>
-                    @merch.itemName,@merch.numSold,@merch.price,@merch.itemRevenue
-                </li>
-            }
-        </ul>
+        <thead>
+            <tr>
+                <th> Item Name </th>
+                <th> Item Price </th>
+                <th> Items Sold </th>
+                <th> Item Revenue </th>
+            </tr>
+        </thead>
+
+        @foreach (MerchandiseRow merch in Model.MyMerch)
+        {
+            <tr>
+                <td>@merch.itemName</td>
+                <td>@merch.price</td>
+                <td>@merch.numSold</td>
+                <td>@merch.itemRevenue</td>
+            </tr>
+        }
+
     }
-</div>
+    else
+    {
+        <h7>Nothing found</h7>
+    }
+</table>
+
