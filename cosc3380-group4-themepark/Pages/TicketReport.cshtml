@@ -1,22 +1,28 @@
 ﻿@page
 @model cosc3380_group4_themepark.Pages.TicketReportModel
+@using System.Text.Json
 @{
     int i = 0;
 }
 
-<div class="report-header">
-    <h3>Ticket sales reports</h3>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="sales-container">
+    <h1 style="padding-bottom: 20px;">Ticket Sales Analytics</h1>
+    <div class="dashboard-wrapper">
+        <div class="main1-chart-wrapper chart-wrapper">
+            <div style="flex-grow: 1;">
+                <canvas id="main1-chart"></canvas>
+            </div>
+        </div>
+        <div class="main2-chart-wrapper chart-wrapper">
+            <canvas id="main2-chart"></canvas>
+        </div>
+        </div>
+    </div>
 </div>
-<div class="report-body">
-    @foreach (var agg in @Model.thisYearTickets.totals_by_weekday)
-            {
-                <div class="report-item">
-                    <p>Sales of tickets for day @i:</p>
-                        @foreach (var ticket_class in agg.Keys)
-                            {
-                                <p>@ticket_class : @agg[ticket_class]</p>
-                            }
-                </div>
-            i += 1;
-        }
-</div>
+
+<script
+    weekday_breakdown_this_year=@JsonSerializer.Serialize(Model.thisYearTickets)
+    weekday_breakdown_last_year=@JsonSerializer.Serialize(Model.previousYearTickets)
+></script>

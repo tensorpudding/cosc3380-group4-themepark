@@ -68,7 +68,7 @@
                     @reservation.Reservation_ID: Placed on @reservation.Date_Placed.ToString("yyyy-MM-dd") for @reservation.Date_of_Visit.Date.ToString("yyyy-MM-dd")
                     <form method="post" asp-page-handler="CancelReservation">
                         <input type="hidden" value="@reservation.Reservation_ID" name="Reservation_ID" />
-                        <button class="btn btn-sm" type="submit">Cancel</button>
+                        <button class="btn btn-sm btn-danger" type="submit">Cancel</button>
                     </form>
                 </li>
             }
