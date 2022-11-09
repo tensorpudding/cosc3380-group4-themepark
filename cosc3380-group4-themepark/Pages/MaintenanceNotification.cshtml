@@ -6,13 +6,30 @@
 
 <div class="manager-header row">
     <h4>There are @Model.Notifications.Count notifications in the inbox</h4>
-    <button class="btn btn-sm" type="submit" asp-page-handler="ClearNotifications">Clear</button>
 </div>
-<div class="manager-inbox">
+<div class="maintenance-notification-inbox">
+    @if (Model.Notifications.Count == 0)
+            {
+                <p>
+                    No notifications found.
+                </p>
+            }
     @foreach (MaintenanceCalendarNotification notification in Model.Notifications)
             {
                 <p>
-                    <h7>Maintenance task @notification.maintenance_id has been marked as completed at @notification.completion</h7>
+                    <div class="maintenance-notification-item">
+                        <h7>Maintenance task @notification.maintenance_id has been marked as completed at @notification.completion</h7>
+                        @if (notification.description is not null)
+                {
+                        <h7>Description: @notification.description</h7>
+                }
+                        
+                    </div>
                 </p>
             }
+</div>
+<div class="maintenance-notification-clear-inbox">
+    <form method="post" asp-page-handler="ClearNotifications">
+        <button class="btn btn-sm" type="submit">Clear</button>
+    </form>
 </div>

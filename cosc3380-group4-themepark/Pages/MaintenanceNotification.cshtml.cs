@@ -38,8 +38,20 @@ namespace cosc3380_group4_themepark.Pages
                     notification.amount = reader.GetDecimal(4);
                 else
                     notification.amount = null;
+                if (!reader.IsDBNull(5))
+                    notification.description = reader.GetString(5);
+                else
+                    notification.description = null;
                 this.Notifications.Add(notification);
             }
+        }
+
+        public IActionResult OnPostClearNotifications()
+        {
+            Int32 rows_affected = SqlHelper.ExecuteProcNonQuery(
+                "[Theme_Park].[Proc_Mark_Maintenance_Notifications_Read]");
+
+            return Redirect("/MaintenanceNotification");
         }
     }
 }

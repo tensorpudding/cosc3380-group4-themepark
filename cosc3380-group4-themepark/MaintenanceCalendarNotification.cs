@@ -20,6 +20,9 @@ namespace cosc3380_group4_themepark.Models
         [BindProperty]
         public decimal? amount { get; set; }
 
+        [BindProperty]
+        public String? description { get; set; }
+
         public MaintenanceCalendarNotification()
         {
         }
