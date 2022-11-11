@@ -1,0 +1,49 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.ManagerNotificationModel
+@using cosc3380_group4_themepark.Models
+@{
+
+}
+
+<div class="manager-notifications-box">
+    <div class="manager-notification-title">
+        <h4>Employee Status Notifications</h4>
+    </div>
+    <div class="manager-pay-notifications-list">
+        <ul>
+            @foreach (ManagerNotification pay_notification in Model.myPayNotifications)
+            {
+                <div class="manager-notification-list-item">
+                    @if (pay_notification.salaried)
+                    {
+                    <li>
+                        Employee @pay_notification.employee_fname @pay_notification.employee_lname
+                        has been updated to an annual rate of @pay_notification.payrate
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        Employee @pay_notification.employee_fname @pay_notification.employee_lname
+                        has been updated to an hourly rate of @pay_notification.payrate
+                    </li>
+                }
+            </div>
+        }
+            </ul>
+        </div>
+        <div class="manager-role-notifications-list">
+            <ul>
+                @foreach (ManagerNotification role_notification in Model.myRoleNotifications)
+                {
+                    <div class="manager-notification-list-item">
+                       <li>
+                           Employee @role_notification.employee_fname @role_notification.employee_lname
+                           has been reassigned to the @role_notification.dept_name department under supervisor
+                           @role_notification.super_fname @role_notification.super_lname
+                       </li>
+                    </div>
+                }
+                </ul>
+        </div>
+</div>
