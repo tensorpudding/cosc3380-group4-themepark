@@ -22,8 +22,12 @@ namespace cosc3380_group4_themepark.Pages
 
         public List<TicketReservation> MyTickets { get; set; }
 
+        public String today { get; set; }
+
         public IActionResult OnGet()
         {
+            // Initialize context information using authentication cookie
+
             String? username = GetUsernameFromContext();
             if (username == null)
                 return Redirect("/");
@@ -39,6 +43,11 @@ namespace cosc3380_group4_themepark.Pages
                 new SqlParameter("@customer_id", this.customer_id));
 
             this.MyTickets = new List<TicketReservation>();
+
+            // We set the date here for the purposes of our form's initial value and for date validation
+            // Customers should not be able to choose dates in the past for reservations
+
+            this.today = DateTime.Now.Date.ToString("yyyy-MM-dd");
 
             while (reader.Read())
             {
