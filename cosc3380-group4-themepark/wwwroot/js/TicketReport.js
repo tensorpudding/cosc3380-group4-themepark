@@ -46,24 +46,23 @@ const displayCharts = () => {
                     label: 'Poor ticket sales',
                     data: get_numbers_by_day_by_type(thisYearNumbersAverage, 'Poor'),
                     backgroundColor: [
-                        // 7 different colors?
                         'rgba(0, 63, 92, 0.6)',
-                        'rgba(44, 72, 117, 0.6)',
-                        'rgba(138, 80, 143, 0.6)',
-                        'rgba(188, 80, 144, 0.6)',
-                        'rgba(255, 99, 97, 0.6)',
-                        'rgba(255, 133, 49, 0.6)',
-                        'rgba(255, 166, 0, 0.6)'
+                        'rgba(0, 63, 92, 0.6)',
+                        'rgba(0, 63, 92, 0.6)',
+                        'rgba(0, 63, 92, 0.6)',
+                        'rgba(0, 63, 92, 0.6)',
+                        'rgba(0, 63, 92, 0.6)',
+                        'rgba(0, 63, 92, 0.6)'
                     ],
                     borderColor: [
                         // 7 slightly different colors
                         'rgba(0, 63, 92, 1)',
-                        'rgba(44, 72, 117, 1)',
-                        'rgba(138, 80, 143, 1)',
-                        'rgba(188, 80, 144, 1)',
-                        'rgba(255, 99, 97, 1)',
-                        'rgba(255, 133, 49, 1)',
-                        'rgba(255, 166, 0, 1)'
+                        'rgba(0, 63, 92, 1)',
+                        'rgba(0, 63, 92, 1)',
+                        'rgba(0, 63, 92, 1)',
+                        'rgba(0, 63, 92, 1)',
+                        'rgba(0, 63, 92, 1)',
+                        'rgba(0, 63, 92, 1)'
                     ],
                     borderWidth: 1
                     },
@@ -72,23 +71,23 @@ const displayCharts = () => {
                         data: get_numbers_by_day_by_type(thisYearNumbersAverage, 'Normal'),
                         backgroundColor: [
                             // 7 different colors?
-                            'rgba(0, 63, 92, 0.6)',
-                            'rgba(44, 72, 117, 0.6)',
-                            'rgba(138, 80, 143, 0.6)',
                             'rgba(188, 80, 144, 0.6)',
-                            'rgba(255, 99, 97, 0.6)',
-                            'rgba(255, 133, 49, 0.6)',
-                            'rgba(255, 166, 0, 0.6)'
+                            'rgba(188, 80, 144, 0.6)',
+                            'rgba(188, 80, 144, 0.6)',
+                            'rgba(188, 80, 144, 0.6)',
+                            'rgba(188, 80, 144, 0.6)',
+                            'rgba(188, 80, 144, 0.6)',
+                            'rgba(188, 80, 144, 0.6)'
                         ],
                         borderColor: [
                             // 7 slightly different colors
-                            'rgba(0, 63, 92, 1)',
-                            'rgba(44, 72, 117, 1)',
-                            'rgba(138, 80, 143, 1)',
                             'rgba(188, 80, 144, 1)',
-                            'rgba(255, 99, 97, 1)',
-                            'rgba(255, 133, 49, 1)',
-                            'rgba(255, 166, 0, 1)'
+                            'rgba(188, 80, 144, 1)',
+                            'rgba(188, 80, 144, 1)',
+                            'rgba(188, 80, 144, 1)',
+                            'rgba(188, 80, 144, 1)',
+                            'rgba(188, 80, 144, 1)',
+                            'rgba(188, 80, 144, 1)'
                         ],
                         borderWidth: 1
                     },
@@ -97,23 +96,23 @@ const displayCharts = () => {
                         data: get_numbers_by_day_by_type(thisYearNumbersAverage, 'Premium'),
                         backgroundColor: [
                             // 7 different colors?
-                            'rgba(0, 63, 92, 0.6)',
-                            'rgba(44, 72, 117, 0.6)',
-                            'rgba(138, 80, 143, 0.6)',
-                            'rgba(188, 80, 144, 0.6)',
-                            'rgba(255, 99, 97, 0.6)',
                             'rgba(255, 133, 49, 0.6)',
-                            'rgba(255, 166, 0, 0.6)'
+                            'rgba(255, 133, 49, 0.6)',
+                            'rgba(255, 133, 49, 0.6)',
+                            'rgba(255, 133, 49, 0.6)',
+                            'rgba(255, 133, 49, 0.6)',
+                            'rgba(255, 133, 49, 0.6)',
+                            'rgba(255, 133, 49, 0.6)'
                         ],
                         borderColor: [
                             // 7 slightly different colors
-                            'rgba(0, 63, 92, 1)',
-                            'rgba(44, 72, 117, 1)',
-                            'rgba(138, 80, 143, 1)',
-                            'rgba(188, 80, 144, 1)',
-                            'rgba(255, 99, 97, 1)',
                             'rgba(255, 133, 49, 1)',
-                            'rgba(255, 166, 0, 1)'
+                            'rgba(255, 133, 49, 1)',
+                            'rgba(255, 133, 49, 1)',
+                            'rgba(255, 133, 49, 1)',
+                            'rgba(255, 133, 49, 1)',
+                            'rgba(255, 133, 49, 1)',
+                            'rgba(255, 133, 49, 1)'
                         ],
                         borderWidth: 1
                     }
@@ -177,23 +176,23 @@ const displayCharts = () => {
                         data: get_numbers_by_day_by_week(thisYearNumbersThisWeek),
                         backgroundColor: [
                             // 7 different colors?
-                            'rgba(0, 63, 92, 0.6)',
-                            'rgba(44, 72, 117, 0.6)',
-                            'rgba(138, 80, 143, 0.6)',
                             'rgba(188, 80, 144, 0.6)',
-                            'rgba(255, 99, 97, 0.6)',
-                            'rgba(255, 133, 49, 0.6)',
-                            'rgba(255, 166, 0, 0.6)'
+                            'rgba(188, 80, 144, 0.6)',
+                            'rgba(188, 80, 144, 0.6)',
+                            'rgba(188, 80, 144, 0.6)',
+                            'rgba(188, 80, 144, 0.6)',
+                            'rgba(188, 80, 144, 0.6)',
+                            'rgba(188, 80, 144, 0.6)'
                         ],
                         borderColor: [
                             // 7 slightly different colors
                             'rgba(0, 63, 92, 1)',
-                            'rgba(44, 72, 117, 1)',
-                            'rgba(138, 80, 143, 1)',
-                            'rgba(188, 80, 144, 1)',
-                            'rgba(255, 99, 97, 1)',
-                            'rgba(255, 133, 49, 1)',
-                            'rgba(255, 166, 0, 1)'
+                            'rgba(0, 63, 92, 1)',
+                            'rgba(0, 63, 92, 1)',
+                            'rgba(0, 63, 92, 1)',
+                            'rgba(0, 63, 92, 1)',
+                            'rgba(0, 63, 92, 1)',
+                            'rgba(0, 63, 92, 1)'
                         ],
                         borderWidth: 1,
                         hoverOffset: 4
@@ -203,23 +202,23 @@ const displayCharts = () => {
                         data: get_numbers_by_day_by_week(lastYearNumbersThisWeek),
                         backgroundColor: [
                             // 7 different colors?
-                            'rgba(0, 63, 92, 0.6)',
-                            'rgba(44, 72, 117, 0.6)',
-                            'rgba(138, 80, 143, 0.6)',
-                            'rgba(188, 80, 144, 0.6)',
-                            'rgba(255, 99, 97, 0.6)',
                             'rgba(255, 133, 49, 0.6)',
-                            'rgba(255, 166, 0, 0.6)'
+                            'rgba(255, 133, 49, 0.6)',
+                            'rgba(255, 133, 49, 0.6)',
+                            'rgba(255, 133, 49, 0.6)',
+                            'rgba(255, 133, 49, 0.6)',
+                            'rgba(255, 133, 49, 0.6)',
+                            'rgba(255, 133, 49, 0.6)'
                         ],
                         borderColor: [
                             // 7 slightly different colors
-                            'rgba(0, 63, 92, 1)',
-                            'rgba(44, 72, 117, 1)',
-                            'rgba(138, 80, 143, 1)',
-                            'rgba(188, 80, 144, 1)',
-                            'rgba(255, 99, 97, 1)',
                             'rgba(255, 133, 49, 1)',
-                            'rgba(255, 166, 0, 1)'
+                            'rgba(255, 133, 49, 1)',
+                            'rgba(255, 133, 49, 1)',
+                            'rgba(255, 133, 49, 1)',
+                            'rgba(255, 133, 49, 1)',
+                            'rgba(255, 133, 49, 1)',
+                            'rgba(255, 133, 49, 1)'
                         ],
                         borderWidth: 1,
                         hoverOffset: 4
