@@ -38,17 +38,22 @@ namespace cosc3380_group4_themepark.Pages
         }
     }
 
+    public class TicketsByWeekdayByWeekAggregate
+    {
+        public List<IDictionary<String, Int32>> totals_by_weekday { get; set; }
+    }
+
     public class TicketReportModel : PageModel
     {
-        public TicketsByWeekdayAggregate thisYearTickets { get; set; }
+        public TicketsByWeekdayAggregate thisYearTicketsAverage { get; set; }
 
-        public TicketsByWeekdayAggregate previousYearTickets { get; set; }
+        public TicketsByWeekdayAggregate previousYearTicketsAverage { get; set; }
 
         public void OnGet()
         {
             // populate previous and this year tickets items
-            this.thisYearTickets = new TicketsByWeekdayAggregate(2022);
-            this.previousYearTickets = new TicketsByWeekdayAggregate(2021);
+            this.thisYearTicketsAverage = new TicketsByWeekdayAggregate(2022);
+            this.previousYearTicketsAverage = new TicketsByWeekdayAggregate(2021);
         }
     }
 }

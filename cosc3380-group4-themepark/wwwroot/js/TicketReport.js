@@ -117,7 +117,46 @@ const displayCharts = () => {
                     y: {
                         beginAtZero: true
                     }
-                }
+                },
+                responsive: true
+            }
+        });
+    _ = new Chart(mainChart2,
+        {
+            type: 'pie',
+            data: {
+                labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                datasets: [
+                    {
+                        label: 'Ticket Sales this year by day of the week',
+                        data: get_numbers_by_day_by_type(thisYearNumbers, 'All'),
+                        backgroundColor: [
+                            // 7 different colors?
+                            'rgba(0, 63, 92, 0.6)',
+                            'rgba(44, 72, 117, 0.6)',
+                            'rgba(138, 80, 143, 0.6)',
+                            'rgba(188, 80, 144, 0.6)',
+                            'rgba(255, 99, 97, 0.6)',
+                            'rgba(255, 133, 49, 0.6)',
+                            'rgba(255, 166, 0, 0.6)'
+                        ],
+                        borderColor: [
+                            // 7 slightly different colors
+                            'rgba(0, 63, 92, 1)',
+                            'rgba(44, 72, 117, 1)',
+                            'rgba(138, 80, 143, 1)',
+                            'rgba(188, 80, 144, 1)',
+                            'rgba(255, 99, 97, 1)',
+                            'rgba(255, 133, 49, 1)',
+                            'rgba(255, 166, 0, 1)'
+                        ],
+                        borderWidth: 1,
+                        hoverOffset: 4
+                    } 
+                ]
+            },
+            options: {
+                responsive: true
             }
         });
 }
