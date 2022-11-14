@@ -6,6 +6,7 @@
 }
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="/css/TicketReport.css">
 <div class="sales-container">
     <h1 style="padding-bottom: 20px;">Ticket Sales Analytics</h1>
     <div class="dashboard-wrapper">
@@ -19,7 +20,7 @@
             <canvas id="main2-chart"></canvas>
         </div>
         <div class="main3-chart-wrapper chart-wrapper">
-            <canvas id="main3_chart"></canvas>
+            <canvas id="main3-chart"></canvas>
         </div>
     </div>
 </div>
@@ -27,7 +28,8 @@
 <script
     src="/js/TicketReport.js" 
     type="text/javascript" 
-    weekday_breakdown_this_year=@JsonSerializer.Serialize(Model.thisYearTickets)
-    weekday_breakdown_last_year=@JsonSerializer.Serialize(Model.previousYearTickets)
-
+    weekday_breakdown_this_year=@JsonSerializer.Serialize(Model.thisYearTicketsAverage)
+    weekday_breakdown_last_year=@JsonSerializer.Serialize(Model.previousYearTicketsAverage)
+    this_week_this_year=@JsonSerializer.Serialize(Model.thisWeekThisYearTickets)
+    this_week_last_year=@JsonSerializer.Serialize(Model.thisWeekLastYearTickets)
 ></script>
