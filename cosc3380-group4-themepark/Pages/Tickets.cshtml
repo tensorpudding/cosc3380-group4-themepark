@@ -23,39 +23,34 @@
         <div class="row">
             <div class="form-group col">
                 <label for="TicketFirstName">Cardholder First Name</label>
-                <input id="TicketFirstName" class="form-control" type="text" name="FirstName" placeholder="First Name" />
+                <input id="TicketFirstName" class="form-control" type="text" name="FirstName" placeholder="First Name" required/>
             </div>
             <div class="form-group col">
                 <label for="TicketLastName">Cardholder Last Name</label>
-                <input id="TicketLastName" class="form-control" type="text" name="LastName" placeholder="Last Name" />
+                <input id="TicketLastName" class="form-control" type="text" name="LastName" placeholder="Last Name"  required/>
             </div>
         </div>
         <div class="row">
             <div class="form-group col">
                 <label for="TicketDateVisit">Date of Visit</label>
-                <input id="TicketDateVisit" class="form-control" type="date" name="Date_of_Visit" />
+                <input id="TicketDateVisit" class="form-control" type="date" name="Date_of_Visit"  required/>
             </div>
             <div class="form-group col">
                 <label for="TicketCreditCardNumber">Credit Card Number</label>
-                <input id="TicketCreditCardNumber" class="form-control" type="text" name="Credit_Card_Number" />
+                <input id="TicketCreditCardNumber" class="form-control" type="text" name="Credit_Card_Number" placeholder="XXXX-XXXX-XXXX-XXXX" required/>
             </div>
             <div class="form-group col">
                 <label for="TicketClassSelector">Ticket Class</label>
                 <select id="TicketClassSelector" class="form-control" name="Ticket_Class">
-                    <option selected>Choose...</option>
-                    <option value="Poor">Poor - $11.30</option>
-                    <option value="Normal">Normal - $11.30</option>
-                    <option value="Premium">Premium - $11.30</option>
+                    <option value="Poor">Poor - $11.50</option>
+                    <option selected value="Normal">Normal - $13.00</option>
+                    <option value="Premium">Premium - $16.00</option>
                 </select>
             </div>
         </div>
         <button class="btn btn-lg btn-block btn-primary" type="submit">Place Reservation</button>
     </form>
 </div>
-
-<h4>
-    Current tickets:
-</h4>
 
 <div class="customer-output-section">
     <h3>Your current reservations</h3>
@@ -65,11 +60,15 @@
             @foreach (TicketReservation reservation in Model.MyTickets)
             {
                 <li>
-                    @reservation.Reservation_ID: Placed on @reservation.Date_Placed.ToString("yyyy-MM-dd") for @reservation.Date_of_Visit.Date.ToString("yyyy-MM-dd")
-                    <form method="post" asp-page-handler="CancelReservation">
-                        <input type="hidden" value="@reservation.Reservation_ID" name="Reservation_ID" />
-                        <button class="btn btn-sm btn-danger" type="submit">Cancel</button>
-                    </form>
+                    <div class="reservation-item">
+                        <p><h7>Reservation #@reservation.Reservation_ID for a @reservation.Ticket_Class class ticket on  @reservation.Date_of_Visit.Date.ToString("yyyy-MM-dd")</h7></p>
+                        <p><h7>Reserved on @reservation.Date_Placed.ToString("yyyy-MM-dd") by @reservation.FirstName @reservation.LastName</h7></p>
+                        <form method="post" asp-page-handler="CancelReservation">
+                            <input type="hidden" value="@reservation.Reservation_ID" name="Reservation_ID" />
+                            <button class="btn btn-sm btn-danger" type="submit">Cancel</button>
+                        </form>
+                    </div>
+
                 </li>
             }
         </ul>

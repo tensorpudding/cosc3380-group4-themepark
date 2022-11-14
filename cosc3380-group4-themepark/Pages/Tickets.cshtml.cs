@@ -48,6 +48,8 @@ namespace cosc3380_group4_themepark.Pages
                 current_Reservation.Date_of_Visit = reader.GetDateTime(2);
                 current_Reservation.Ticket_Class = reader.GetString(3);
                 current_Reservation.Price = reader.GetDecimal(4);
+                current_Reservation.FirstName = reader.GetString(6);
+                current_Reservation.LastName = reader.GetString(7);
                 if (reader.IsDBNull(5) == false)
                     current_Reservation.Ticket_ID = reader.GetInt32(5);
                 this.MyTickets.Add(current_Reservation);
