@@ -11,6 +11,9 @@ public class MerchandiseSelection
     [BindProperty]
     public DateTime endtime { get; set; }
 
+    [BindProperty]
+    public String type { get; set; }
+
     public MerchandiseSelection()
     {
     }

@@ -10,6 +10,7 @@ namespace cosc3380_group4_themepark
         public int numSold;
         public decimal price;
         public decimal itemRevenue;
+        public string mType;
 
     }
 }

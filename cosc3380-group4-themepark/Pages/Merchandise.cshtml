@@ -9,46 +9,47 @@
 
 
 
-<form method="post">
+<form method="post" asp-page-handler="Merchandise">
+
+    <label for="type">Merchandise Type: </label><br>
+    <input type="text" class="form-control" name="type"><br>
+
     <div class="form-row">
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Start Date" name="sdate" />
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="End Date" name="edate" />
-        </div>
-    </div>
-    <div class="form-row">
-        <input type="submit" value="Submit" asp-page-handler="Submit" />
+        <input type="submit" value="Submit" />
     </div>
 </form>
 
 <table class="table">
+    @if (@Model.MyMerch != null)
+        {
     @if (@Model.MyMerch.Count > 0)
-    {
+        {
         <thead>
             <tr>
                 <th> Item Name </th>
                 <th> Item Price </th>
                 <th> Items Sold </th>
                 <th> Item Revenue </th>
+                <th> Merch Type </th>
             </tr>
         </thead>
 
         @foreach (MerchandiseRow merch in Model.MyMerch)
-        {
+            {
             <tr>
                 <td>@merch.itemName</td>
-                <td>@merch.price</td>
+                <td>@string.Format("{0:0.00}", merch.price)</td>
                 <td>@merch.numSold</td>
-                <td>@merch.itemRevenue</td>
+                <td>@string.Format("{0:0.00}", merch.itemRevenue)</td>
+                <td>@merch.mType</td>
             </tr>
-        }
+            }
 
-    }
-    else
-    {
+        }
+        else
+        {
         <h7>Nothing found</h7>
-    }
+        }
+        }
 </table>
 
