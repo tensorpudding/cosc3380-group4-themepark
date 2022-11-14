@@ -11,11 +11,11 @@ namespace cosc3380_group4_themepark.Pages
     public class MerchandiseModel : PageModel
     {
 
-        
-
-       
 
 
+
+
+                
         public List<MerchandiseRow> MyMerch { get; set; }
 
 
@@ -25,9 +25,23 @@ namespace cosc3380_group4_themepark.Pages
             this.MyMerch = new List<MerchandiseRow>();
 
         }
-        public IActionResult OnPostSubmit(MerchandiseSelection selection)
+        public IActionResult OnPostMerchandise(MerchandiseSelection selection)
         {
-            SqlDataReader reader = SqlHelper.ExecuteProcReader("Theme_Park.Merchandise_Report");
+
+            SqlDataReader reader;
+
+
+            if (selection.type == null)
+            {
+                reader = SqlHelper.ExecuteProcReader("Theme_Park.Merchandise_Report");
+            }
+            else
+            {
+                reader = SqlHelper.ExecuteProcReader("Theme_Park.Merchandise_Report_Type",
+                 new SqlParameter("@type", selection.type));
+            }
+
+            Console.WriteLine(selection.type);
 
             //create list of varaibles
             this.MyMerch = new List<MerchandiseRow>();
@@ -42,8 +56,8 @@ namespace cosc3380_group4_themepark.Pages
                 current_Row.numSold = reader.GetInt32(1);
                 current_Row.price = reader.GetDecimal(2);
                 current_Row.itemRevenue = reader.GetDecimal(3);
+                current_Row.mType = reader.GetString(4);
                 this.MyMerch.Add(current_Row);
-
             }
 
 
