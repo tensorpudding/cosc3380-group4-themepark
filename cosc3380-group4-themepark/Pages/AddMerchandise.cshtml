@@ -1,0 +1,33 @@
+﻿@page
+@model AddMerchandiseModel
+@{
+    ViewData["Title"] = "Add Merchandise";
+}
+
+
+
+<div>
+    <h3>Adding Merchandise</h3>
+
+    <form method="post" asp-page-handler="AddMerchandise">
+        <label for="itemName">Item Name:</label>
+        <br>
+        <input type="text" class="form-control" name="itemName">
+        <br>
+        <label for="price">Price:</label>
+        <br>
+        <input type="number" class="form-control" name="price">
+        <br>
+        <label for="itemType">Item Type: </label><br>
+        <input type="text" class="form-control" name="itemType"><br>
+
+
+        <input type="submit" value="Submit">
+
+
+    </form>
+
+
+
+
+</div>
