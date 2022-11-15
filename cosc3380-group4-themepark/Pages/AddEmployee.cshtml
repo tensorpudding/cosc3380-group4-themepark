@@ -1,7 +1,6 @@
 ﻿@page
-@model AddEmployeeModel
-@{            ViewData["Title"] = "employee";
-}
+@model cosc3380_group4_themepark.Pages.AddEmployeeModel 
+@{}
 
     <div>
         <h3>Adding Employee</h3>
@@ -22,57 +21,76 @@
 
             <label for="ssn">Social Security Number:</label>
             <br>
-            <input type="number" class="form-control" name="ssn" placeholder="XXXXXXXXX">
+            <input type="number" class="form-control" name="ssn" placeholder="XXXXXXXXX" min="1000000000">
             <br>
 
-            <label for="supervisor_ssn"> Supervisor Social Security Number:</label>
-            <br>
-            <input type="number" class="form-control" name="supervisor_ssn" placeholder="XXXXXXXXX">
-            <br> 
 
+
+            <!----<label for="supervisor_ssn"> Supervisor: </label><br>-->
+
+            <label for="supervisor_ssn"> Supervisor: </label> <br>
+            <select name="supervisor_ssn">
+
+                @foreach (var supervisor in Model.supervisors)
+                {
+                    <option value=@supervisor.ssn>@supervisor.ssn @supervisor.fname @supervisor.lname</option>
+                }
+
+            </select>
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" name="address" class="form-control" placeholder="1234 Main St">
+                <input type="text" name="address" class="form-control" placeholder="1234 MAIN DR , ST, ZIP">
             </div>
-           <!--<div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
-                </div>
-                <div>
 
-                    <label for="state">State:</label><br>
-                    <input type="text" id="state" name="state"><br>
+            <!--<div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputCity">City</label>
+            <input type="text" class="form-control" id="inputCity">
+        </div>
+        <div>
+
+            <label for="state">State:</label><br>
+            <input type="text" id="state" name="state"><br>
 
 
 
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
-                </div>
-            </div>-->
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputZip">Zip</label>
+            <input type="text" class="form-control" id="inputZip">
+        </div>
+    </div>-->
             <br>
 
             <br>
 
             <label for="phone">Phone Number: </label>
             <br>
-            <input type="number" class="form-control" name="phone" placeholder="XXXXXXXXXX">
+            <input type="number" class="form-control" name="phone" placeholder="XXXXXXXXXX" min="1000000000">
             <br>
 
 
             <label for="date_joined">Joining Date: </label><br>
             <input type="date" class="form-control" name="date_joined"><br>
 
-            <label for="dept_id">Department ID: </label><br>
-            <input type="text" class="form-control" name="dept_id"><br>
+            <label for="dept_id"> Department Name</label><br>
 
+            <select name="dept_id">
+
+                @foreach (var department in Model.departments)
+                {
+                    <option value=@department.dept_id>@department.dept_name</option>
+                }
+            </select>
+            <br>
+            <!---- <label for="dept_id">Department ID: </label><br>
+    <input type="text" class="form-control" name="dept_id"><br>-->
+            <br>
             <input type="checkbox" name="salaried" value="salaried">
-            <label for="salaried"> salaried</label><br>
+            <label for="salaried"> Salaried</label><br>
 
             <label for="payrate">Payrate: </label><br>
-            <input type="number" class="form-control" name="payrate"><br>
+            <input type="number" class="form-control" name="payrate" step="0.01" <br>
 
             <label for="role">Role: </label><br>
             <input type="text" class="form-control" name="role"><br>
