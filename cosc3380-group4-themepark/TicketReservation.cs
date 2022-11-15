@@ -24,7 +24,7 @@ public class TicketReservation
     public DateTime Date_of_Visit { get; set; }
 
     [BindProperty]
-    public Int64 Credit_Card_Number { get; set; }
+    public String Credit_Card_Number { get; set; }
 
     [BindProperty]
     public String Ticket_Class { get; set; }

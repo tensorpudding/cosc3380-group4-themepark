@@ -13,10 +13,14 @@
         </li>
 }
 
+
 <div class="login-bar">
     <h7>Currently logged in as @Model.username</h7>
 </div>
 
+<script
+    src="/js/Tickets.js"
+></script>
 <div class="customer-form-section">
     <h3>Reserve your ticket today!</h3>
     <form method="post" asp-page-handler="BuyTicket">
@@ -37,7 +41,7 @@
             </div>
             <div class="form-group col">
                 <label for="TicketCreditCardNumber">Credit Card Number</label>
-                <input id="TicketCreditCardNumber" class="form-control" type="text" name="Credit_Card_Number" placeholder="XXXX-XXXX-XXXX-XXXX" required/>
+                <input id="TicketCreditCardNumber" class="form-control" type="text" name="Credit_Card_Number" placeholder="XXXX-XXXX-XXXX-XXXX" oninput="addSpaces(this.value)" required/>
             </div>
             <div class="form-group col">
                 <label for="TicketClassSelector">Ticket Class</label>
@@ -77,4 +81,5 @@
     {
         <h7>You have no current reservations. Why not add one today?</h7>
     }
+
 </div>

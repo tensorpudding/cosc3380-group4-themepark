@@ -91,6 +91,12 @@ namespace cosc3380_group4_themepark.Pages
             return null;
         }
 
+        public Int64 ParseCCNumber(String ccnumber)
+        {
+            // We accept a string from the form, now we can convert it to a number
+            return Int64.Parse(ccnumber.Replace(" ", ""));
+        }
+
         public IActionResult OnPostBuyTicket(TicketReservation reservation)
         {
             String? username = GetUsernameFromContext();
@@ -107,7 +113,7 @@ namespace cosc3380_group4_themepark.Pages
                 new SqlParameter("@FirstName", reservation.FirstName),
                 new SqlParameter("@LastName", reservation.LastName),
                 new SqlParameter("@Date_of_Visit", reservation.Date_of_Visit),
-                new SqlParameter("@Credit_Card_Number", reservation.Credit_Card_Number),
+                new SqlParameter("@Credit_Card_Number", ParseCCNumber(reservation.Credit_Card_Number)),
                 new SqlParameter("@Ticket_Class", reservation.Ticket_Class));
             if (rows_affected == 1)
             {
