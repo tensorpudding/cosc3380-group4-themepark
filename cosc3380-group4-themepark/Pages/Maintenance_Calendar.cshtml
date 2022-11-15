@@ -3,6 +3,29 @@
 @{
     ViewData["Title"] = "Maintenance Calendar";
 }
+
+<h1>Open Jobs</h1>
+<div>
+    <table width="100%">
+        <tr align="center">
+            <th style="color:black; background-color:grey" width="100">Priority</th>
+            <th style="color:black; background-color:grey" width="100">Attraction</th>
+            <th style="color:black; background-color:grey" width="100">Vendor</th>
+            <th style="color:black; background-color:grey" width="100">Description</th>
+        </tr>
+        @foreach (var job in Model.jobs)
+        {
+            <tr align="center">
+                <td style="color:black;">@job.Priority</td>
+                <td style="color:black;">@job.Attraction</td>
+                <td style="color:black;">@job.Vendor</td>
+                <td style="color:black;">@job.Maint_Description</td>
+            </tr>
+        }
+    </table>
+</div>
+<br />
+<br />
 <h1>Create Maintenance Job</h1>
 <form method="post" asp-page-handler="CreateTicket">
     <div class="form-row">
@@ -12,20 +35,27 @@
         </div>
  *@       <div class="col">
             <label for="Vendor_ID">  Vendor Name</label><br>
-            <select class="form-control" name="Vendor_ID">
+            <select class="form-control" placeholder=" " name="Vendor_ID">
+                <option>Choose a Vendor</option>
                 @foreach (var vendor in Model.vendors)
                 {
                     <option value=@vendor.vendor_id>@vendor.name</option>
                 }
             </select>
         </div>
-        <div class="col">
+         <div class="col">
             <label for="Attraction_ID">  Attraction Name</label><br>
-            <input type="text" class="form-control" name="Attraction_ID" />
+            <select class="form-control" placeholder=" " name="Attraction_ID">
+                <option>Choose an Attraction</option>
+                @foreach (var attraction in Model.attractions)
+                {
+                    <option value=@attraction.attraction_id>@attraction.name</option>
+                }
+            </select>
         </div>
         <div class="col">
             <label for="Occurence_datetime">  Occurence Date</label><br>
-            <input type="date" class="form-control" name="Occurence_datetime" />
+            <input type="date" class="form-control" name="Occurence_datetime"  />
         </div>
     </div>
     <div class="form-row">
@@ -39,12 +69,12 @@
         </div>
         <div class="col">
             <label for="Maint_Description">  Description</label><br>
-            <input type="text" class="form-control" name="Maint_Description" />
+            <input type="text" class="form-control" name="Maint_Description" required />
         </div>
-        <div class="col">
+       <!-- <div class="col">
             <label for="Maint_Start">  Start of Maintenance</label><br>
             <input type="date" class="form-control" name="Maint_Start" />
-        </div>
+        </div>-->
     </div>
     <div class="form-row">
         <div class="col">
@@ -59,11 +89,21 @@
 <form method="post" asp-page-handler="CloseTicket">
     <div class="form-row">
         <div class="col">
-            <label for="Maint_ID">  Maintenance ID</label><br>
-            <input type="text" class="form-control" name="Maint_ID" />
+            <label for="Maint_ID">  Choose Open Job</label><br>
+            <select class="form-control" placeholder="No Open Jobs" name="Maint_ID">
+                <option>Choose a Job </option>
+                @foreach (var description in Model.descriptions)
+                {
+                    <option value=@description.Maint_ID>(ID.@description.Maint_ID) @description.Maint_Description</option>
+                }
+            </select>
         </div>
         <div class="col">
-            <label for="Maint_Completion">  Maintenance Completion Time</label><br>
+            <label for="Maint_Start">  Start of Maintenance</label><br>
+            <input type="date" class="form-control" name="Maint_Start" />
+        </div>
+        <div class="col">
+            <label for="Maint_Completion">  Date of Completion</label><br>
             <input type="date" class="form-control" name="Maint_Completion" />
         </div>
         <div class="col">
@@ -86,3 +126,5 @@
         <input type="submit" value="Submit" />
     </div>
 </form>
+
+
