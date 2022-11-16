@@ -3,23 +3,25 @@
 @{
     ViewData["Title"] = "Maintenance Calendar";
 }
+<link rel="stylesheet" href="/css/Maintenance.css">
 
 <h1>Open Jobs</h1>
 <div>
     <table width="100%">
         <tr align="center">
             <th style="color:black; background-color:grey" width="100">Priority</th>
+            <th style="color:black; background-color:grey" width="100">ID/Description</th>
             <th style="color:black; background-color:grey" width="100">Attraction</th>
             <th style="color:black; background-color:grey" width="100">Vendor</th>
-            <th style="color:black; background-color:grey" width="100">Description</th>
+
         </tr>
         @foreach (var job in Model.jobs)
         {
             <tr align="center">
                 <td style="color:black;">@job.Priority</td>
+                <td style="color:black;">(ID.@job.Maint_ID) @job.Maint_Description</td>
                 <td style="color:black;">@job.Attraction</td>
                 <td style="color:black;">@job.Vendor</td>
-                <td style="color:black;">@job.Maint_Description</td>
             </tr>
         }
     </table>
@@ -29,11 +31,7 @@
 <h1>Create Maintenance Job</h1>
 <form method="post" asp-page-handler="CreateTicket">
     <div class="form-row">
- @*       <div class="col">
-            <label for="Vendor_ID">  Vendor Name</label><br>
-            <input type="text" class="form-control" name="Vendor_ID" />
-        </div>
- *@       <div class="col">
+        <div class="col">
             <label for="Vendor_ID">  Vendor Name</label><br>
             <select class="form-control" placeholder=" " name="Vendor_ID">
                 <option>Choose a Vendor</option>
@@ -55,7 +53,7 @@
         </div>
         <div class="col">
             <label for="Occurence_datetime">  Occurence Date</label><br>
-            <input type="date" class="form-control" name="Occurence_datetime"  />
+            <input type="date" class="form-control" name="Occurence_datetime" datemax="@Model.today" required/>
         </div>
     </div>
     <div class="form-row">

@@ -33,7 +33,7 @@
 
                 @foreach (var supervisor in Model.supervisors)
                 {
-                    <option value=@supervisor.ssn>@supervisor.ssn @supervisor.fname @supervisor.lname</option>
+                    <option value=@supervisor.ssn>@supervisor.last_four @supervisor.fname @supervisor.lname</option>
                 }
 
             </select>

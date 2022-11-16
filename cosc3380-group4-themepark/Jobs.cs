@@ -16,6 +16,10 @@ namespace cosc3380_group4_themepark
         [BindProperty]
         public String Priority { get; set; }
 
+        [BindProperty]
+
+        public Int32 Maint_ID { get; set; }
+
 
     }
 }

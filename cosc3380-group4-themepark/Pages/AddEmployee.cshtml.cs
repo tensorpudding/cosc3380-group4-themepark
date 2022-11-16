@@ -43,6 +43,7 @@ public class AddEmployeeModel : PageModel
        {
            Employee supervisor = new Employee();
            supervisor.ssn = SSNReader.GetDecimal(2);
+           supervisor.last_four = SSNReader.GetString(3);
            supervisor.fname = SSNReader.GetString(0);
            supervisor.lname = SSNReader.GetString(1);
            this.supervisors.Add(supervisor);
@@ -120,6 +121,9 @@ public class AddEmployeeModel : PageModel
 
         [BindProperty]
         public decimal? vacation_days { get; set; }
+
+        [BindProperty]
+        public String last_four { get; set; }
         public Employee()
 
         { }

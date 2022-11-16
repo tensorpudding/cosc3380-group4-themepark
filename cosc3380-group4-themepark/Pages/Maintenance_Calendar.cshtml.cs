@@ -17,6 +17,7 @@ public class Maintenance_CalendarModel : PageModel
     public List<Attraction> attractions { get; set; }
     public List<Description> descriptions { get; set; }
     public List<Jobs> jobs { get; set; }
+    public String today { get; set; }
 
     private readonly ILogger<Maintenance_CalendarModel> _logger;
 
@@ -74,6 +75,7 @@ public class Maintenance_CalendarModel : PageModel
             job.Vendor = JobsReader.GetString(1);
             job.Maint_Description = JobsReader.GetString(3);
             job.Priority = JobsReader.GetString(2);
+            job.Maint_ID = JobsReader.GetInt32(4);
             jobs.Add(job);
         }
 
@@ -83,6 +85,7 @@ public class Maintenance_CalendarModel : PageModel
     public IActionResult OnPostCreateTicket(Maintenance_Calendar OpenTicket)
     {
         Console.WriteLine("Occurance date is {0}", OpenTicket.Occurence_datetime);
+        this.today = DateTime.Now.Date.ToString("yyyy-MM-dd");
 
         List<SqlParameter> parameters = new List<SqlParameter>();
         parameters.Add(new SqlParameter("@Occurence_datetime", OpenTicket.Occurence_datetime));
