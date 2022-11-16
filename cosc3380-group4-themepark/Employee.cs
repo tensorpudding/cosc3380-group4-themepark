@@ -15,7 +15,7 @@ namespace cosc3380_group4_themepark.Models
     public String fname { get; set; }
 
     [BindProperty]
-    public Int32 ssn { get; set; }
+    public Decimal ssn { get; set; }
 
     [BindProperty]
     public char gender { get; set; }
@@ -36,7 +36,10 @@ namespace cosc3380_group4_themepark.Models
     public String role { get; set; }
 
     [BindProperty]
-    public Int32 supervisor_ssn { get; set; }
+    public Decimal supervisor_ssn { get; set; }
+
+    [BindProperty]
+    public String last_four { get; set; }
 
     [BindProperty]
     public bool salaried { get; set; }

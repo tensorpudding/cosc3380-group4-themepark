@@ -1,0 +1,55 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.EmployeeScheduleModel
+@{
+	ViewData["Title"] = "Employee Schedule";
+}
+<h1>Schedule</h1>
+<div>
+    <table width="100%">
+        <tr align="center">
+            <th style="color:black; background-color:grey" width="100">Name</th>
+            <th style="color:black; background-color:grey" width="100">Last 4</th>
+            <th style="color:black; background-color:grey" width="100">Shift Start</th>
+            <th style="color:black; background-color:grey" width="100">Shift End</th>
+
+        </tr>
+        @foreach (var schedule in Model.schedules)
+        {
+            <tr align="center">
+                <td style="color:black;">@schedule.fname @schedule.lname</td>
+                <td style="color:black;">@schedule.last_four</td>
+                <td style="color:black;">@schedule.shift_start</td>
+                <td style="color:black;">@schedule.shift_end</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<h1>Add Shift For Employee</h1>
+<form method="post" asp-page-handler="CreateSchedule">
+    <div class="form-row">
+        <div class="col">
+        <label for="employee_SSN"> Employee SSN </label> <br>
+        <select name="employee_SSN">
+
+            @foreach (var employee in Model.employees)
+            {
+                <option value=@employee.ssn>@employee.fname @employee.lname @employee.last_four</option>
+            }
+
+        </select>
+        </div>
+        <div class="col">
+            <label for="shift_start">  Shift Start</label><br>
+            <input type="datetime-local" class="form-control" name="shift_start" required/>
+        </div>
+        <div class="col">
+            <label for="shift_end">  Shift End</label><br>
+            <input type="datetime-local" class="form-control" name="shift_end" required />
+        </div>
+    <div class="form-row">
+        <input type="submit" value="Submit"/>
+    </div>
+</form>
+
+
