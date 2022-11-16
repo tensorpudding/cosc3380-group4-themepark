@@ -1,0 +1,41 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.AttractionReportModel
+@using System.Text.Json
+@{
+    int i = 0;
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="/css/AttractionReport.css">
+<div class="report-container">
+    <h1 style="padding-bottom: 20px;">Ride Analytics</h1>
+    <div class="report-wrapper">
+        <div class="report">
+            <form method="post" asp-page-handler="ChangeYear">
+                <h3>Generate report for year: </h3><select name="year">
+                    <option id="2022" value="2022">2022</option>
+                    <option id="2021" value="2021">2021</option>
+                    <option id="2020" value="2020">2020</option>
+                </select>
+                <button class="btn" type="submit">Generate Report</button>
+            </form>
+            
+            <div style="flex-grow: 1;">
+                @if (@Model.AttractionDataList.Count > 0)
+                {
+                <ul>
+                @foreach (var attraction in @Model.AttractionDataList)
+                {
+                    <li>Ride @attraction.attraction_name: @attraction.attraction_rides rides, with @attraction.attraction_days_in_maintenance days of maintenance, average @attraction.attraction_rides_average_this_season rides per day this season</li>
+                }
+                </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script
+    src="/js/AttractionReport.js" 
+    type="text/javascript"
+></script>

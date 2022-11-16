@@ -6,7 +6,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text.Json;
-
+using Microsoft.AspNetCore.Authorization;
 using cosc3380_group4_themepark.Models;
 using Microsoft.Data.SqlClient;
 
@@ -64,6 +64,7 @@ namespace cosc3380_group4_themepark.Pages
         }
     }
 
+    [Authorize(Policy="SalesSpecific")]
     public class TicketReportModel : PageModel
     {
         public TicketsByWeekdayAggregate thisYearTicketsAverage { get; set; }

@@ -22,7 +22,7 @@ namespace cosc3380_group4_themepark.Pages
 
         public List<TicketReservation> MyTickets { get; set; }
 
-        public String today { get; set; }
+        public String tomorrow { get; set; }
 
         public IActionResult OnGet()
         {
@@ -47,7 +47,7 @@ namespace cosc3380_group4_themepark.Pages
             // We set the date here for the purposes of our form's initial value and for date validation
             // Customers should not be able to choose dates in the past for reservations
 
-            this.today = DateTime.Now.Date.ToString("yyyy-MM-dd");
+            this.tomorrow = DateTime.Now.AddDays(1).Date.ToString("yyyy-MM-dd");
 
             while (reader.Read())
             {

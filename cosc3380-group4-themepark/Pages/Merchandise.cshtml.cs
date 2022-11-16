@@ -55,8 +55,8 @@ namespace cosc3380_group4_themepark.Pages
                 current_Row.itemName = reader.GetString(0);
                 current_Row.numSold = reader.GetInt32(1);
                 current_Row.price = reader.GetDecimal(2);
-                current_Row.itemRevenue = reader.GetDecimal(3);
-                current_Row.mType = reader.GetString(4);
+                current_Row.itemRevenue = current_Row.numSold * current_Row.price;
+                current_Row.mType = reader.GetString(3);
                 this.MyMerch.Add(current_Row);
             }
 
