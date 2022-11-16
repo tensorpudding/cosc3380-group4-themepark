@@ -60,22 +60,33 @@
     <h3>Your current reservations</h3>
     @if (@Model.MyTickets.Count > 0)
     {
-        <ul>
+        <table>
+            <th>Reservation ID</th>
+            <th>Name</th>
+            <th>Visit Date</th>
+            <th>Ticket Class</th>
             @foreach (TicketReservation reservation in Model.MyTickets)
             {
-                <li>
+                <tr>
+                    <td>@reservation.Reservation_ID</td>
+                    <td>@reservation.FirstName @reservation.LastName</td>
+                    <td>@reservation.Date_of_Visit.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@reservation.Ticket_Class</td>
+                    <td><form method="post" asp-page-handler="CancelReservation">
+                            <input type="hidden" value="@reservation.Reservation_ID" name="Reservation_ID" />
+                            <button class="btn btn-sm btn-danger" type="submit">Cancel</button>
+                        </form></td>
+                </tr>
+                @* <li>
                     <div class="reservation-item">
                         <p><h7>Reservation #@reservation.Reservation_ID for a @reservation.Ticket_Class class ticket on  @reservation.Date_of_Visit.Date.ToString("yyyy-MM-dd")</h7></p>
                         <p><h7>Reserved on @reservation.Date_Placed.ToString("yyyy-MM-dd") by @reservation.FirstName @reservation.LastName</h7></p>
-                        <form method="post" asp-page-handler="CancelReservation">
-                            <input type="hidden" value="@reservation.Reservation_ID" name="Reservation_ID" />
-                            <button class="btn btn-sm btn-danger" type="submit">Cancel</button>
-                        </form>
+                        
                     </div>
 
-                </li>
+                </li> *@
             }
-        </ul>
+        </table>
     }
     else
     {

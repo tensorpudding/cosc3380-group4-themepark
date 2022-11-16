@@ -2,6 +2,25 @@
 @model cosc3380_group4_themepark.Pages.AttractionReportModel
 @using System.Text.Json
 
+@section NavbarItems
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/Sales">Sales Report</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/TicketReport">Ticket Report</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/AttractionReport">Ride Report</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/AddMerchandise">Merchandise</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/Merchandise">Merchandise Report</a>
+    </li>    
+}
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="stylesheet" href="/css/AttractionReport.css">
 <div class="report-container">
