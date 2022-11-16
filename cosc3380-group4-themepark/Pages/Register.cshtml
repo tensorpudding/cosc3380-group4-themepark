@@ -1,0 +1,22 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.RegisterModel
+@{
+}
+
+<h3>Register</h3>
+
+<form method="post" asp-page-handler="Register">
+    <div class="form-row">
+        <input type="text" name="username" placeholder="Username" required />
+    </div>
+    <div class="form-row">
+        <input type="password" name="password" placeholder="Password" required />
+    </div>
+    <div class="form-row">
+        <input type="text" name="name" placeholder="Name" required />
+    </div>
+    <div class="form-row">
+        <input type="text" name="email" placeholder="Email" required />
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+</form>
