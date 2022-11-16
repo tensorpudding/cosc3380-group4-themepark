@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
@@ -10,6 +11,7 @@ using cosc3380_group4_themepark.Models;
 
 namespace cosc3380_group4_themepark.Pages
 {
+    [Authorize(Policy="ManagerSpecific")]
     public class ManagerNotificationModel : PageModel
     {
         public List<ManagerNotification> myPayNotifications { get; set; }

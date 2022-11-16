@@ -7,8 +7,8 @@ import pyodbc
 # NUM_TICKETS=int(1e6)-10)
 #NUM_TICKETS = 10000
 #NUM_SALES = 5000
-NUM_TICKETS=10
-NUM_SALES=10
+NUM_TICKETS=1000
+NUM_SALES=1000
 
 
 def softmax(arr):
@@ -74,16 +74,12 @@ def random_data_generator(beginYear = 2022, endYear = 2022, cursor = None):
             cursor.commit()
     print("COMPLETED MERCH")
     for i in range(NUM_TICKETS):
-        print(ticket_classes[i])
-        print(visit_dates[i])
-        print(ticket_prices[ticket_classes[i]])
         sql = "INSERT INTO [Theme_Park].[Ticket] (Date, Ticket_Class, Price) VALUES ('{}', '{}', {})".format(
             #visit_dates[i].strftime("%Y%m%d %H:%M:%S"), 
             visit_dates[i].strftime("%Y-%m-%d"),
             ticket_classes[i], 
             ticket_prices[ticket_classes[i]]
         )
-        print(sql)
         cursor.execute(sql)
         attraction_ridden = np.random.choice(list(range(len(attraction_ids))), size=np.random.random_integers(1, 7), p=attraction_prob)
         for id in attraction_ridden:
@@ -91,11 +87,11 @@ def random_data_generator(beginYear = 2022, endYear = 2022, cursor = None):
                 visit_dates[i].strftime("%Y-%m-%d"),
                 attraction_ids[id],
             )
-            print(sql)
             cursor.execute(sql)
         if i % 100 == 0 and i != 0:
             print(f"{i}/{NUM_SALES}")
             cursor.commit()
+    print("COMPLETED TICKETS/RIDES")
 
 def main():
     # TODO create sql cursor here
@@ -112,6 +108,8 @@ def main():
 
     #random_ticket_generator(2020, 2020, cursor)
     random_data_generator(2020, 2020, cursor)
+    random_data_generator(2021, 2021, cursor)
+    random_data_generator(2022, 2022, cursor)
     # probs, ids = get_rides(cursor)
     # for i in range(len(probs)):
     #     print(f"Attraction {ids[i]} has prob {probs[i]}")
