@@ -5,7 +5,60 @@
     ViewData["Title"] = "Home page";
 }
 
-
+@section NavbarItems
+{
+    @if (Model.role == "Manager" || Model.role == "Maintenance_Manager")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/ManagerNotification">Employee Notifications</a>
+        </li>
+    }
+    @if (Model.role == "HR")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/AddEmployee">Add Employee</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/EmployeeSchedule">Employee Schedule</a>
+        </li>        
+    }
+    @if (Model.role == "Sales")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Sales">Sales Report</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/TicketReport">Ticket Report</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/AttractionReport">Ride Report</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/AddMerchandise">Merchandise</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Merchandise">Merchandise Report</a>
+        </li>
+    }
+    @if (Model.role == "Customer")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Tickets">Ticket Reservations</a>
+        </li>
+    }
+    @if (Model.role == "Maintenance" || Model.role == "Maintenance_Manager")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Maintenance_Calendar">Maintenance Calendar</a>
+        </li>        
+    }
+    @if (Model.role == "Maintenance_Manager")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/MaintenanceNotification">Maintenance Updates</a>
+        </li>
+    }
+}
 @section LeftNavLinks {
     <ul class="nav-links customer-facing-nav-links">
         <li><a class="nav-item" href="#park-events">Park Events</a></li>
@@ -33,6 +86,8 @@
             <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus semper tortor, quis egestas odio placerat eget. Aenean sit amet orci malesuada nunc condimentum lacinia vitae id odio.</p>
         </div>
     </div>
+    <h4>Currently logged in as user @Model.name</h4>
+    <a asp-page-handler="Logout">Log out</a>
     <section id="park-events" class="info-section">
         <div class="info-section-area info-section-area-1">
             <h1 class="info-section-title">Park Events</h1>
@@ -65,3 +120,6 @@
         </div>
     </section>
 </main>
+
+
+

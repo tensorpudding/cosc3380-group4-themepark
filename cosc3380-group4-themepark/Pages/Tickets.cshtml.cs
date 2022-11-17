@@ -23,8 +23,12 @@ namespace cosc3380_group4_themepark.Pages
 
         public List<TicketReservation> MyTickets { get; set; }
 
+        public String tomorrow { get; set; }
+
         public IActionResult OnGet()
         {
+            // Initialize context information using authentication cookie
+
             String? username = GetUsernameFromContext();
             if (username == null)
                 //return Redirect("/");
@@ -44,6 +48,11 @@ namespace cosc3380_group4_themepark.Pages
 
             this.MyTickets = new List<TicketReservation>();
 
+            // We set the date here for the purposes of our form's initial value and for date validation
+            // Customers should not be able to choose dates in the past for reservations
+
+            this.tomorrow = DateTime.Now.AddDays(1).Date.ToString("yyyy-MM-dd");
+
             while (reader.Read())
             {
                 TicketReservation current_Reservation = new TicketReservation();
@@ -52,6 +61,8 @@ namespace cosc3380_group4_themepark.Pages
                 current_Reservation.Date_of_Visit = reader.GetDateTime(2);
                 current_Reservation.Ticket_Class = reader.GetString(3);
                 current_Reservation.Price = reader.GetDecimal(4);
+                current_Reservation.FirstName = reader.GetString(6);
+                current_Reservation.LastName = reader.GetString(7);
                 if (reader.IsDBNull(5) == false)
                     current_Reservation.Ticket_ID = reader.GetInt32(5);
                 this.MyTickets.Add(current_Reservation);
@@ -84,6 +95,12 @@ namespace cosc3380_group4_themepark.Pages
             return null;
         }
 
+        public Int64 ParseCCNumber(String ccnumber)
+        {
+            // We accept a string from the form, now we can convert it to a number
+            return Int64.Parse(ccnumber.Replace(" ", ""));
+        }
+
         public IActionResult OnPostBuyTicket(TicketReservation reservation)
         {
             String? username = GetUsernameFromContext();
@@ -100,7 +117,7 @@ namespace cosc3380_group4_themepark.Pages
                 new SqlParameter("@FirstName", reservation.FirstName),
                 new SqlParameter("@LastName", reservation.LastName),
                 new SqlParameter("@Date_of_Visit", reservation.Date_of_Visit),
-                new SqlParameter("@Credit_Card_Number", reservation.Credit_Card_Number),
+                new SqlParameter("@Credit_Card_Number", ParseCCNumber(reservation.Credit_Card_Number)),
                 new SqlParameter("@Ticket_Class", reservation.Ticket_Class));
             if (rows_affected == 1)
             {

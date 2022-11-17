@@ -1,0 +1,66 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.AttractionReportModel
+@using System.Text.Json
+
+@section NavbarItems
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/Sales">Sales Report</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/TicketReport">Ticket Report</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/AttractionReport">Ride Report</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/AddMerchandise">Merchandise</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/Merchandise">Merchandise Report</a>
+    </li>    
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="/css/AttractionReport.css">
+<div class="report-container">
+    <h1 style="padding-bottom: 20px;">Ride Analytics</h1>
+    <div class="report-wrapper">
+        <div class="report">
+            <form method="post" asp-page-handler="ChangeYear">
+                <h3>Generate report for year: </h3><select name="year">
+                    <option id="2022" value="2022">2022</option>
+                    <option id="2021" value="2021">2021</option>
+                    <option id="2020" value="2020">2020</option>
+                </select>
+                <button class="btn" type="submit">Generate Report</button>
+            </form>
+            
+            <div style="flex-grow: 1;">
+                <table>
+                    <th>Attraction Name</th>
+                    <th>Ride Count</th>
+                    <th>Days of Maintenance</th>
+                    <th>Average Rides/Day</th>
+                @if (@Model.AttractionDataList.Count > 0)
+                {
+                @foreach (var attraction in @Model.AttractionDataList)
+                {
+                    <tr>
+                        <td>@attraction.attraction_name</td>
+                        <td>@attraction.attraction_rides</td>
+                        <td>@attraction.attraction_days_in_maintenance</td>
+                        <td>@string.Format("{0:0.00}", attraction.attraction_rides_average_this_season)</td>
+                    </tr>
+                }
+                }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script
+    src="/js/AttractionReport.js" 
+    type="text/javascript"
+></script>

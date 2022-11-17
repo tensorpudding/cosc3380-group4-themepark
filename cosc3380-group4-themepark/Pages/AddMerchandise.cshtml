@@ -1,0 +1,51 @@
+﻿@page
+@model AddMerchandiseModel
+@{
+    ViewData["Title"] = "Add Merchandise";
+}
+
+@section NavbarItems
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/Sales">Sales Report</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/TicketReport">Ticket Report</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/AttractionReport">Ride Report</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/AddMerchandise">Merchandise</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/Merchandise">Merchandise Report</a>
+    </li>    
+}
+
+
+<div>
+    <h3>Adding Merchandise</h3>
+
+    <form method="post" asp-page-handler="AddMerchandise">
+        <label for="itemName">Item Name:</label>
+        <br>
+        <input type="text" class="form-control" name="itemName">
+        <br>
+        <label for="price">Price:</label>
+        <br>
+        <input type="number" class="form-control" name="price">
+        <br>
+        <label for="itemType">Item Type: </label><br>
+        <input type="text" class="form-control" name="itemType"><br>
+
+
+        <input type="submit" value="Submit">
+
+
+    </form>
+
+
+
+
+</div>

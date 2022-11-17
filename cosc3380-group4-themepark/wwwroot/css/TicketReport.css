@@ -1,0 +1,42 @@
+.dashboard-wrapper {
+    display: grid;
+    gap: 10px;
+    grid-template-areas:
+        "main main main main2"
+        "main3 main3 main3 main2";
+    grid-template-columns: 23% 23% 23% 31%;
+    grid-template-rows: minmax(auto, 400px) 25%;
+    min-width: 1000px;
+    max-width: 1500px;
+    max-height: 750px;
+}
+
+.chart-wrapper {
+    background-color: var(--main-div-background-color);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.dashboard-small-section {
+    padding-top: 15px;
+    text-align: center;
+    padding-right: 20px;
+    font-size: 25px;
+}
+
+
+.main1-chart-wrapper {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+}
+
+.main2-chart-wrapper {
+    grid-area: main2;
+}
+
+.main3-chart-wrapper {
+    grid-area: main3;
+    display: flex;
+    flex-direction: column;
+}
