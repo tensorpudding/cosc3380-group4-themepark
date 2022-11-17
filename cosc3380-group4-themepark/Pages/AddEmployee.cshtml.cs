@@ -77,7 +77,8 @@ public class AddEmployeeModel : PageModel
           new SqlParameter("@supervisor_ssn", Decimal.ToInt32(employee.supervisor_ssn.GetValueOrDefault())),
           new SqlParameter("@salaried", employee.salaried),
           new SqlParameter("@payrate", employee.payrate),
-          new SqlParameter("@vacation_days", employee.vacation_days));
+          new SqlParameter("@vacation_days", employee.vacation_days),
+          new SqlParameter("@db_user", employee.db_user));
 
         return Redirect("/AddEmployee");
     }
@@ -124,6 +125,9 @@ public class AddEmployeeModel : PageModel
 
         [BindProperty]
         public String last_four { get; set; }
+
+        [BindProperty]
+        public String db_user { get; set; }
         public Employee()
 
         { }
