@@ -41,7 +41,7 @@ namespace cosc3380_group4_themepark.Pages
                 this.username = username;
             SqlDataReader reader = SqlHelper.ExecuteProcReader(
                 "[Theme_Park].[Proc_Get_Manager_Notifications]",
-                new SqlParameter("@username", this.username));
+                new SqlParameter("@username", "jerry"));
 
             this.myPayNotifications = new List<ManagerNotification>();
             this.myRoleNotifications = new List<ManagerNotification>();
