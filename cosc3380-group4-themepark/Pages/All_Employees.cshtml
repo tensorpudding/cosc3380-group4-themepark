@@ -1,0 +1,48 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.EmployeeModel
+@{
+    ViewData["Title"] = "All Employees";
+
+
+}
+<h1>All Employees</h1>
+<div>
+    <table width="100%">
+        <tr align="center">
+            <th style="color:black; background-color:grey" width="90">First Name: </th>
+            <th style="color:black; background-color:grey" width="90">Last Name: </th>
+            <th style="color:black; background-color:grey" width="90">SSN:     </th>
+            <th style="color:black; background-color:grey" width="90">Address:     </th>
+            <th style="color:black; background-color:grey" width="90">Phone Number: </th>
+            <th style="color:black; background-color:grey" width="90">Joining Date:       </th>
+            <th style="color:black; background-color:grey" width="90">Dept ID: </th>
+            <th style="color:black; background-color:grey" width="90">Role: </th>
+            <th style="color:black; background-color:grey" width="90">Supervisor SSN: </th>
+            <th style="color:black; background-color:grey" width="90">Salaried: </th>
+            <th style="color:black; background-color:grey" width="90">Payrate: </th>
+            <th style="color:black; background-color:grey" width="90">Gender: </th>
+            <th style="color:black; background-color:grey" width="90">Vacation Days: </th>
+
+        </tr>
+        @foreach (var employee in Model.employees)
+        {
+            <tr align="center">
+                <td style="color:black;">@employee.fname</td>
+                <td style="color:black;">@employee.lname</td>
+                <td style="color:black;">@employee.ssn</td>
+                <td style="color:black;">@employee.address</td>
+                <td style="color:black;">@employee.phone</td>
+                <td style="color:black;">@employee.date_joined</td>
+                <td style="color:black;">@employee.dept_id</td>
+                <td style="color:black;">@employee.role</td>
+                <td style="color:black;">@employee.supervisor_ssn</td>
+                <td style="color:black;">@employee.salaried</td>
+                <td style="color:black;">@employee.payrate</td>
+                <td style="color:black;">@employee.gender</td>
+                <td style="color:black;">@employee.vacation_days</td>
+
+
+            </tr>
+        }
+    </table>
+</div>
