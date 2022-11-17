@@ -1,0 +1,23 @@
+main {
+    flex-direction: column;
+    gap: 30px;
+}
+
+.customer-form-section {
+    order: 1;
+}
+
+.customer-output-section {
+    order: 2;
+}
+
+table {
+    width: 100%;
+}
+
+td, th {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

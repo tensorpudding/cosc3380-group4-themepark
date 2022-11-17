@@ -11,6 +11,8 @@
     </li>
 }*@
 
+<link ref="stylesheet" href="~/Tickets.css" />
+
 <div style="padding-top: 80px; height: 100vh;">
     <div class="login-bar">
         <h7>Currently logged in as @Model.username</h7>
@@ -19,7 +21,7 @@
 <script
     src="/js/Tickets.js"
 ></script>
-<div class="customer-form-section">
+<div class="customer-form-section page-content-box">
     <h3>Reserve your ticket today!</h3>
     <form method="post" asp-page-handler="BuyTicket">
         <div class="row">
@@ -54,7 +56,7 @@
     </form>
 </div>
 
-<div class="customer-output-section">
+<div class="customer-output-section page-content-box">
     <h3>Your current reservations</h3>
     @if (@Model.MyTickets.Count > 0)
     {
@@ -90,5 +92,6 @@
     {
         <h7>You have no current reservations. Why not add one today?</h7>
     }
+
 
 </div>
