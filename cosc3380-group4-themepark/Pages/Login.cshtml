@@ -1,14 +1,16 @@
-﻿@page
-@model cosc3380_group4_themepark.Pages.LoginModel
+﻿@model cosc3380_group4_themepark.Pages.LoginModel
+
 @{
 }
 
-<form method="post" asp-page-handler="Login">
+
+<h1 style="color: black">Sign In</h1>
+<form id="login-form" method="post" asp-page-handler="Login">
     <div class="form-row">
-        <input type="text" name="username" placeholder="Username" required />
+        <input type="text" name="username" placeholder="Username" asp-for=@Model.username required />
     </div>
     <div class="form-row">
-        <input type="password" name="password" placeholder="Password" required />
+        <input type="password" name="password" placeholder="Password" asp-for=@Model.password required />
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
 </form>

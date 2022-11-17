@@ -9,10 +9,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Data.SqlClient;
 using System.Security.Claims;
 using cosc3380_group4_themepark.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace cosc3380_group4_themepark.Pages
 {
-    [Authorize(Policy="CustomerSpecific")]
+    //[Authorize(Policy="CustomerSpecific")]
     public class TicketsModel : PageModel
     {
 
@@ -26,12 +27,15 @@ namespace cosc3380_group4_themepark.Pages
         {
             String? username = GetUsernameFromContext();
             if (username == null)
-                return Redirect("/");
+                //return Redirect("/");
+                Console.WriteLine("");
             else
                 this.username = username;
             Int32? customer_id = GetCustomerID(this.username);
             if (customer_id == null)
-                return Redirect("/");
+                //return Redirect("/");
+                Console.WriteLine("");
+
             else
                 this.customer_id = customer_id.Value;
             SqlDataReader reader = SqlHelper.ExecuteProcReader(

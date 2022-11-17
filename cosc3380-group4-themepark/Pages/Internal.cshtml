@@ -1,0 +1,37 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.InternalModel
+@section SignInForm {
+    <partial name="Login" model=@Model.viewModels.login />
+}
+@{
+
+}
+
+
+<main id="internal-main">
+    <aside id="sidebar">
+        <ul id="side-links">
+            <li><a href="?_year=@Model.year&_currPage=Sales">Sales</a></li>
+            <li><a href="?_year=@Model.year&_currPage=Merchandise">Merchandise</a></li>
+            <li><a href="?_year=@Model.year&_currPage=Tickets">Tickets</a></li>
+            <li><a href="?_year=@Model.year&_currPage=Employees">Employees</a></li>
+            <li><a href="?_year=@Model.year&_currPage=Maintenance">Maintenance</a></li>
+        </ul>
+    </aside>
+    <div id="internal-main-body">
+    @{
+        switch(Model.currPage)
+        {
+            case InternalPages.Merchandise:
+                <partial name="Login" model="new LoginModel()"/>
+                break;
+            case InternalPages.Tickets:
+                <partial />
+                break;
+            default:
+                <partial name="Sales" model=@Model.viewModels.sales/>
+                break;
+        }
+        }
+    </div>
+</main> 

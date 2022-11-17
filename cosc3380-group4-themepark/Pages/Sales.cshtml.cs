@@ -6,7 +6,6 @@ namespace cosc3380_group4_themepark.Pages
 {
     public class SalesModel : PageModel
     {
-        public static int Test; //Delete Later
         public static string? ticketSalesArray;
         public static string? ticketSalesIncomeArray;
         public static string? merchSalesArray;
@@ -22,6 +21,18 @@ namespace cosc3380_group4_themepark.Pages
 
         public static List<FinanceItem>? itemizedFinances;
 
+        public SalesModel()
+        {
+            _year = 2022; //find a way to dynamically get curr year?
+            FetchTicketSalesInYear(_year);
+            FetchMonthlyMerchSalesInYear(_year);
+            FetchMonthlyFoodSalesInYear(_year);
+            itemizedFinances = FetchItemizedFinances(_year);
+
+            expenseColor = "color: " + ((expenses > 0) ? "red" : "green") + ";";
+            revenueColor = "color: " + ((revenue < 0) ? "red" : "green") + ";";
+            profitColor = "color: " + ((profit < 0) ? "red" : "green") + ";";
+        }
         public void OnGet(int year = 2022)
         {
             _year = year;
@@ -33,7 +44,6 @@ namespace cosc3380_group4_themepark.Pages
             expenseColor = "color: " + ((expenses > 0) ? "red" : "green") + ";";
             revenueColor = "color: " + ((revenue < 0) ? "red" : "green") + ";";
             profitColor = "color: " + ((profit < 0) ? "red" : "green") + ";";
-
 
         }
 
