@@ -22,7 +22,7 @@ namespace cosc3380_group4_themepark.Pages
             this.Notifications = new List<MaintenanceCalendarNotification>();
 
             SqlDataReader reader = SqlHelper.ExecuteProcReader(
-                "[Theme_Park].[Proc_Get_Maintenance_Notifications]");
+                "[Theme_Park].[Get_Maintenance_Notifications]");
 
             while (reader.Read())
             {
