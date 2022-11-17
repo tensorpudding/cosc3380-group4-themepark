@@ -100,7 +100,7 @@ public class AddEmployeeModel : PageModel
         public String address { get; set; }
 
         [BindProperty]
-        public Int64 phone { get; set; }
+        public Decimal phone { get; set; }
 
         [BindProperty]
         public DateTime? date_joined { get; set; }
