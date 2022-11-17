@@ -18,8 +18,20 @@ namespace cosc3380_group4_themepark.Pages
 
         public MyViewModels viewModels = new MyViewModels();
         public int year = 2022;
+        public string role { get; set; }
         public void OnGet(int? _year = null, string? _currPage = null)
         {
+
+            //Find Role
+            var user = HttpContext.User;
+            foreach (var claim in user.Claims)
+            {
+                if (claim.Type == "Role")
+                {
+                    this.role = claim.Value;
+                }
+            }
+
             Console.WriteLine("the year is " + _year);
             year = _year.GetValueOrDefault(year);
             switch (_currPage)

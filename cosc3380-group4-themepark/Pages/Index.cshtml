@@ -1,3 +1,71 @@
+@page
+@model IndexModel
+@using cosc3380_group4_themepark.Pages
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+@section LeftNavLinks {
+    <ul class="nav-links customer-facing-nav-links">
+        <li><a class="nav-item" href="#park-events">Park Events</a></li>
+        <li><a class="nav-item" href="#tickets">Tickets</a></li>
+        <li><a class="nav-item" href="#about">About</a></li>
+    </ul>
+}
+@if(Model.role != "Customer"){
+    @section RightNavLinks{
+        <a class="nav-item" asp-page="/Internal">Internal</a>
+    }
+}
+@section SignInForm {
+    <partial name="Login" model=@Model.models.login/>
+}
+
+
+<main>
+    <div class="hero">
+        <video autoplay="" id="heroVideo" loop="" muted="" poster="./static_files/images/HeroPicture.jpg">
+            <source src="/media/BackgroundHeroVideo.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-text">
+            <h1 class="logo">LOREM IPSUM</h1>
+            <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus semper tortor, quis egestas odio placerat eget. Aenean sit amet orci malesuada nunc condimentum lacinia vitae id odio.</p>
+        </div>
+    </div>
+    <section id="park-events" class="info-section">
+        <div class="info-section-area info-section-area-1">
+            <h1 class="info-section-title">Park Events</h1>
+        </div>
+        <div class="info-section-area info-section-area-2">
+            <p>Scrollable div of park events</p>
+        </div>
+    </section>
+    <div class="info-section static-image img1"></div>
+    <section id="tickets" class="info-section">
+        <div class="info-section-area info-section-area-2">
+            <h1>Tickets</h1>
+            <p>Buy or Reserve now!</p>
+            
+
+        </div>
+        <div class="info-section-area info-section-area-1">
+            <p>Form to buy tickets</p>
+                <a href="/Tickets">Click here</a>
+
+        </div>
+    </section>
+    <div class="info-section static-image img2"></div>
+    <section id="about" class="info-section">
+        <div class="info-section-area info-section-area-1">
+            <h1>About</h1>
+        </div>
+        <div class="info-section-area info-section-area-2">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+    </section>
+</main>
+@*=======
 ﻿@page
 @model IndexModel
 @using cosc3380_group4_themepark.Pages
@@ -59,67 +127,8 @@
         </li>
     }
 }
-@section LeftNavLinks {
-    <ul class="nav-links customer-facing-nav-links">
-        <li><a class="nav-item" href="#park-events">Park Events</a></li>
-        <li><a class="nav-item" href="#tickets">Tickets</a></li>
-        <li><a class="nav-item" href="#about">About</a></li>
-    </ul>
-}
-@if(Model.role != "Customer"){
-    @section RightNavLinks{
-        <a class="nav-item" asp-page="/Internal">Internal</a>
-    }
-}
-@section SignInForm {
-    <partial name="Login" model=@Model.models.login/>
-}
 
-
-<main>
-    <div class="hero">
-        <video autoplay="" id="heroVideo" loop="" muted="" poster="./static_files/images/HeroPicture.jpg">
-            <source src="/media/BackgroundHeroVideo.mp4" type="video/mp4" />
-        </video>
-        <div class="hero-text">
-            <h1 class="logo">LOREM IPSUM</h1>
-            <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus semper tortor, quis egestas odio placerat eget. Aenean sit amet orci malesuada nunc condimentum lacinia vitae id odio.</p>
-        </div>
-    </div>
-    <h4>Currently logged in as user @Model.name</h4>
-    <a asp-page-handler="Logout">Log out</a>
-    <section id="park-events" class="info-section">
-        <div class="info-section-area info-section-area-1">
-            <h1 class="info-section-title">Park Events</h1>
-        </div>
-        <div class="info-section-area info-section-area-2">
-            <p>Scrollable div of park events</p>
-        </div>
-    </section>
-    <div class="info-section static-image img1"></div>
-    <section id="tickets" class="info-section">
-        <div class="info-section-area info-section-area-2">
-            <h1>Tickets</h1>
-            <p>Buy or Reserve now!</p>
-            
-
-        </div>
-        <div class="info-section-area info-section-area-1">
-            <p>Form to buy tickets</p>
-                <a href="/Tickets">Click here</a>
-
-        </div>
-    </section>
-    <div class="info-section static-image img2"></div>
-    <section id="about" class="info-section">
-        <div class="info-section-area info-section-area-1">
-            <h1>About</h1>
-        </div>
-        <div class="info-section-area info-section-area-2">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-    </section>
-</main>
-
-
-
+<h4>Currently logged in as user @Model.name</h4>
+<a asp-page-handler="Logout">Log out</a>
+>>>>>>> 4763538c37183ceb338713eaf70536333de7f736
+*@
