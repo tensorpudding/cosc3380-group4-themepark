@@ -40,22 +40,21 @@
             @RenderSection("LeftNavLinks", required: false)
             <a class="nav-logo" asp-page="/Index">Theme Park</a>
             <ul class="nav-links">
-                <li>
+                @RenderSection("RightNavLinks", required: false)
+                @*<li>
                     @RenderSection("RightNavLinks", required: false)
                 </li>
                 <li>
                     <div class="drop-down-container">
                         <button class="nav-item drop-down-button" href="">Sign In</button>
+                        @RenderSection("SignInButton", required: false)
                         <div class="drop-down-menu">
+                            
                             @RenderSection("SignInForm", required: false)
                         </div>
                     </div>
-                </li>
+                </li>*@
             </ul>
-                @RenderSection("HeaderOptions", required: false)
-            </ul>
-            @*</div>
-            </div>*@
         </nav>
     </header>
     @RenderBody()

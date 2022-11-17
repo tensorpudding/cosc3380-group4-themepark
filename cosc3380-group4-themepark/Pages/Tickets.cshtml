@@ -12,8 +12,91 @@
 }*@
 
 <link ref="stylesheet" href="~/Tickets.css" />
+<div style="background-color: var(--main-background-color);">
+    <div style="padding-top: 80px; height: 100vh;">
+        <div class="login-bar">
+            <h7>Currently logged in as @Model.username</h7>
+        </div>
 
-<div style="padding-top: 80px; height: 100vh;">
+        <script src="/js/Tickets.js"></script>
+        <div class="customer-form-section page-content-box">
+            <h3>Reserve your ticket today!</h3>
+            <form method="post" asp-page-handler="BuyTicket">
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="TicketFirstName">Cardholder First Name</label>
+                        <input id="TicketFirstName" class="form-control" type="text" name="FirstName" placeholder="First Name" required />
+                    </div>
+                    <div class="form-group col">
+                        <label for="TicketLastName">Cardholder Last Name</label>
+                        <input id="TicketLastName" class="form-control" type="text" name="LastName" placeholder="Last Name" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="TicketDateVisit">Date of Visit</label>
+                        <input id="TicketDateVisit" class="form-control" type="date" name="Date_of_Visit" min="@Model.tomorrow" required />
+                    </div>
+                    <div class="form-group col">
+                        <label for="TicketCreditCardNumber">Credit Card Number</label>
+                        <input id="TicketCreditCardNumber" class="form-control" type="text" name="Credit_Card_Number" placeholder="XXXX-XXXX-XXXX-XXXX" oninput="addSpaces(this.value)" required />
+                    </div>
+                    <div class="form-group col">
+                        <label for="TicketClassSelector">Ticket Class</label>
+                        <select id="TicketClassSelector" class="form-control" name="Ticket_Class">
+                            <option value="Poor">Poor - $11.50</option>
+                            <option selected value="Normal">Normal - $13.00</option>
+                            <option value="Premium">Premium - $16.00</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-block btn-primary" type="submit" style="margin: 10px 0 0 0;">Place Reservation</button>
+            </form>
+        </div>
+
+        <div class="customer-output-section page-content-box">
+            <h3>Your current reservations</h3>
+            @if (@Model.MyTickets.Count > 0)
+            {
+                <table class="ticketTable" style="width: 100%;">
+                    <th>Reservation ID</th>
+                    <th>Name</th>
+                    <th>Visit Date</th>
+                    <th>Ticket Class</th>
+                    @foreach (TicketReservation reservation in Model.MyTickets)
+                    {
+                        <tr>
+                            <td>@reservation.Reservation_ID</td>
+                            <td>@reservation.FirstName @reservation.LastName</td>
+                            <td>@reservation.Date_of_Visit.Date.ToString("yyyy-MM-dd")</td>
+                            <td>@reservation.Ticket_Class</td>
+                            <td>
+                                <form method="post" asp-page-handler="CancelReservation">
+                                    <input type="hidden" value="@reservation.Reservation_ID" name="Reservation_ID" />
+                                    <button class="btn btn-sm btn-danger" type="submit">Cancel</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @* <li>
+                <div class="reservation-item">
+                <p><h7>Reservation #@reservation.Reservation_ID for a @reservation.Ticket_Class class ticket on  @reservation.Date_of_Visit.Date.ToString("yyyy-MM-dd")</h7></p>
+                <p><h7>Reserved on @reservation.Date_Placed.ToString("yyyy-MM-dd") by @reservation.FirstName @reservation.LastName</h7></p>
+
+                </div>
+
+                </li> *@
+                    }
+                </table>
+            }
+            else
+            {
+                <h7>You have no current reservations. Why not add one today?</h7>
+            }
+
+
+        </div>
+</div>
+@*<div style="padding-top: 80px; height: 100vh;">
     <div class="login-bar">
         <h7>Currently logged in as @Model.username</h7>
     </div>
@@ -52,7 +135,7 @@
                 </select>
             </div>
         </div>
-        <button class="btn btn-lg btn-block btn-primary" type="submit">Place Reservation</button>
+        <button class="btn btn-lg btn-block btn-primary" type="submit" style="margin: 10px 0 0 0;">Place Reservation</button>
     </form>
 </div>
 
@@ -84,7 +167,7 @@
                         
                     </div>
 
-                </li> *@
+                </li> 
             }
         </table>
     }
@@ -94,4 +177,4 @@
     }
 
 
-</div>
+</div>*@

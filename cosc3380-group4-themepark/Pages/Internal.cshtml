@@ -1,88 +1,52 @@
 ﻿@page
 @model cosc3380_group4_themepark.Pages.InternalModel
-@section SignInForm {
-    <partial name="Login" model=@Model.viewModels.login />
-}
+
 @{
 }
-@*
+@section RightNavLinks{
+    <li>
+        @if ((Model.role != "Customer") && (Model.role != null) && (Model.role != ""))
+        {
+            <a class="nav-item" asp-page="/Internal">Internal</a>
+        }
+    </li>
+    @*<li>
+        <div class="drop-down-container">
+            @{
+                if ((Model.role != null) && (Model.role != ""))
+                {
+                        <button class="nav-item drop-down-button" href="">Sign In</button>
+                }
+                else
+                {
+                        <button class="nav-item drop-down-button" href="">Sign Out</button>
+                }
+            }
+            <div class="drop-down-menu">
 
- @if (Model.role == "Manager" || Model.role == "Maintenance_Manager")
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/ManagerNotification">Employee Notifications</a>
-        </li>
-    }
-    @if (Model.role == "HR")
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/AddEmployee">Add Employee</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/EmployeeSchedule">Employee Schedule</a>
-        </li>
-    }
-    @if (Model.role == "Sales")
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Sales">Sales Report</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/TicketReport">Ticket Report</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/AttractionReport">Ride Report</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/AddMerchandise">Merchandise</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Merchandise">Merchandise Report</a>
-        </li>
-    }
-    @if (Model.role == "Customer")
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Tickets">Ticket Reservations</a>
-        </li>
-    }
-    @if (Model.role == "Maintenance" || Model.role == "Maintenance_Manager")
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Maintenance_Calendar">Maintenance Calendar</a>
-        </li>
-    }
-    @if (Model.role == "Maintenance_Manager")
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/MaintenanceNotification">Maintenance Updates</a>
-        </li>
-    }
+                @{
+                    if(Model.role != null){
+                        <h1>sign out</h1>
+                    }
+                    else{
+                        <partial name="Login" model=@Model.models.login />
+                    }
+                }
+            </div>
+        </div>
+    </li>*@
+    <li>
+        <div class="drop-down-container">
+            <button class="nav-item drop-down-button" href="">Sign In</button>
+            <div class="drop-down-menu">
+                <partial name="Login" model=@Model.viewModels.login />
+                <a style="color: black;" asp-page="/Index" asp-page-hander="Logout">Sign Out</a>
+            </div>
+        </div>
+    </li>
+}
 
 
-
-
-
-    @if (Model.role == "Manager" || Model.role == "Maintenance_Manager")
-    {
-    }
-    @if (Model.role == "HR")
-    {
-    }
-    @if (Model.role == "Sales")
-    {
-    }
-    @if (Model.role == "Customer")
-    {
-    }
-    @if (Model.role == "Maintenance" || Model.role == "Maintenance_Manager")
-    {
-    }
-    @if (Model.role == "Maintenance_Manager")
-    {
-    }
-
-*@
 
 <main id="internal-main">
     <aside id="sidebar">
@@ -124,6 +88,7 @@
         </ul>
     </aside>
     <div id="internal-main-body">
+    <h1>Welcome @Model.role</h1>
     @{
         switch(Model.currPage)
         {
@@ -138,5 +103,6 @@
                 break;
         }
         }
+        
     </div>
 </main> 

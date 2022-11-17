@@ -14,7 +14,7 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
 
-    public String role { get; set; }
+    public String? role { get; set; }
 
     public String? name { get; set; }
 
@@ -80,12 +80,13 @@ public class IndexModel : PageModel
             String role = reader.GetString(0);
             //_logger.LogDebug("We have authenticated user {username} as having role {role}", username, role);
             Console.WriteLine("We have authenticated user {0} as having role {1}", username, role);
+            
             var claims = new List<Claim>
             {
                 new Claim("Username", username),
                 new Claim("Role", role)
             };
-
+            this.role = role;
             var claimsIdentity = new ClaimsIdentity(claims, "Login");
 
             HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
