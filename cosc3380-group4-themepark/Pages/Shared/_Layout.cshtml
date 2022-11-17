@@ -3,50 +3,68 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - cosc3380_group4_themepark</title>
+    <title>Theme Park - @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Internal.css" />
+    <link rel="stylesheet" href="~/css/Sales.css" />
+
     <link rel="stylesheet" href="~/cosc3380_group4_themepark.styles.css" asp-append-version="true" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">COSC 3380 Group 4 Project</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        @if (IsSectionDefined("NavbarItems"))
-                        {
-                            @RenderSection("NavbarItems")
-                        }
-                    </ul>
-                </div>
-            </div>
+        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+        <a class="navbar-brand" asp-area="" asp-page="/Index">COSC 3380 Group 4 Project</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+        </li>
+        @if (IsSectionDefined("NavbarItems"))
+        {
+        @RenderSection("NavbarItems")
+        }
+        </ul>
+        </div>
+        </div>*@
+        <nav id="@((ViewData["Title"] == "Home page")? "main-nav" : "internal-nav")" class="">
+            @RenderSection("LeftNavLinks", required: false)
+            <a class="nav-logo" asp-page="/Index">Theme Park</a>
+            <ul class="nav-links">
+                <li>
+                    @RenderSection("RightNavLinks", required: false)
+                </li>
+                <li>
+                    <div class="drop-down-container">
+                        <button class="nav-item drop-down-button" href="">Sign In</button>
+                        <div class="drop-down-menu">
+                            @RenderSection("SignInForm", required: false)
+                        </div>
+                    </div>
+                </li>
+            </ul>
+                @RenderSection("HeaderOptions", required: false)
+            </ul>
+            @*</div>
+            </div>*@
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - COSC 3380 Group 4: Michael Moorman, Fernando Recinos, Phillip Sudario, Carissa Beccera, Josh Kanagasabai
-        </div>
+    @RenderBody()
+    <footer>
+        &copy; 2022 - COSC 3380 Group 4: Michael Moorman, Fernando Recinos, Phillip Sudario, Carissa Beccera, Josh Kanagasabai
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <div style="display: none;">@RenderSection("NavbarItems", required:false)</div>
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/site.js"></script>
 </body>
 </html>

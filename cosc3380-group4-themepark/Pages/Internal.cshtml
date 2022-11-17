@@ -1,0 +1,142 @@
+﻿@page
+@model cosc3380_group4_themepark.Pages.InternalModel
+@section SignInForm {
+    <partial name="Login" model=@Model.viewModels.login />
+}
+@{
+}
+@*
+
+ @if (Model.role == "Manager" || Model.role == "Maintenance_Manager")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/ManagerNotification">Employee Notifications</a>
+        </li>
+    }
+    @if (Model.role == "HR")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/AddEmployee">Add Employee</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/EmployeeSchedule">Employee Schedule</a>
+        </li>
+    }
+    @if (Model.role == "Sales")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Sales">Sales Report</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/TicketReport">Ticket Report</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/AttractionReport">Ride Report</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/AddMerchandise">Merchandise</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Merchandise">Merchandise Report</a>
+        </li>
+    }
+    @if (Model.role == "Customer")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Tickets">Ticket Reservations</a>
+        </li>
+    }
+    @if (Model.role == "Maintenance" || Model.role == "Maintenance_Manager")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Maintenance_Calendar">Maintenance Calendar</a>
+        </li>
+    }
+    @if (Model.role == "Maintenance_Manager")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/MaintenanceNotification">Maintenance Updates</a>
+        </li>
+    }
+
+
+
+
+
+    @if (Model.role == "Manager" || Model.role == "Maintenance_Manager")
+    {
+    }
+    @if (Model.role == "HR")
+    {
+    }
+    @if (Model.role == "Sales")
+    {
+    }
+    @if (Model.role == "Customer")
+    {
+    }
+    @if (Model.role == "Maintenance" || Model.role == "Maintenance_Manager")
+    {
+    }
+    @if (Model.role == "Maintenance_Manager")
+    {
+    }
+
+*@
+
+<main id="internal-main">
+    <aside id="sidebar">
+        <ul id="side-links">
+            @if (Model.role == "Manager" || Model.role == "Maintenance_Manager")
+            {
+                <li><a class="nav-link text-dark" asp-area="" asp-page="/ManagerNotification">Employee Notifications</a></li>
+            }
+            @if (Model.role == "HR")
+            {
+                <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-page="/AddEmployee">Add Employee</a></li>
+                <li><a class="nav-link text-dark" asp-area="" asp-page="/EmployeeSchedule">Employee Schedule</a></li>
+            }
+            @if (Model.role == "Sales")
+            {
+                <li><a class="nav-link text-dark" asp-area="" asp-page="/Sales">Sales Report</a></li>
+                <li><a class="nav-link text-dark" asp-area="" asp-page="/TicketReport">Ticket Report</a></li>
+                <li><a class="nav-link text-dark" asp-area="" asp-page="/AttractionReport">Ride Report</a></li>
+                <li><a class="nav-link text-dark" asp-area="" asp-page="/AddMerchandise">Merchandise</a></li>
+                <li><a class="nav-link text-dark" asp-area="" asp-page="/Merchandise">Merchandise Report</a></li>
+            }
+            @if (Model.role == "Customer")
+            {
+                <li><a class="nav-link text-dark" asp-area="" asp-page="/Tickets">Ticket Reservations</a></li>
+            }
+            @if (Model.role == "Maintenance" || Model.role == "Maintenance_Manager")
+            {
+                <li><a class="nav-link text-dark" asp-area="" asp-page="/Maintenance_Calendar">Maintenance Calendar</a></li>
+            }
+            @if (Model.role == "Maintenance_Manager")
+            {
+                <li><a class="nav-link text-dark" asp-area="" asp-page="/MaintenanceNotification">Maintenance Updates</a></li>
+            }
+            @*<li><a href="?_year=@Model.year&_currPage=Sales">Sales</a></li>
+            <li><a href="?_year=@Model.year&_currPage=Merchandise">Merchandise</a></li>
+            <li><a href="?_year=@Model.year&_currPage=Tickets">Tickets</a></li>
+            <li><a href="?_year=@Model.year&_currPage=Employees">Employees</a></li>
+            <li><a href="?_year=@Model.year&_currPage=Maintenance">Maintenance</a></li>*@
+        </ul>
+    </aside>
+    <div id="internal-main-body">
+    @{
+        switch(Model.currPage)
+        {
+            case InternalPages.Merchandise:
+                <partial name="Login" model="new LoginModel()"/>
+                break;
+            case InternalPages.Tickets:
+                <partial />
+                break;
+            default:
+                <partial name="Sales" model=@Model.viewModels.sales/>
+                break;
+        }
+        }
+    </div>
+</main> 

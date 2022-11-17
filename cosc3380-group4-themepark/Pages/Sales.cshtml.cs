@@ -6,7 +6,6 @@ namespace cosc3380_group4_themepark.Pages
 {
     public class SalesModel : PageModel
     {
-        public static int Test; //Delete Later
         public static string? ticketSalesArray;
         public static string? ticketSalesIncomeArray;
         public static string? merchSalesArray;
@@ -22,6 +21,18 @@ namespace cosc3380_group4_themepark.Pages
 
         public static List<FinanceItem>? itemizedFinances;
 
+        public SalesModel()
+        {
+            _year = 2022; //find a way to dynamically get curr year?
+            FetchTicketSalesInYear(_year);
+            FetchMonthlyMerchSalesInYear(_year);
+            FetchMonthlyFoodSalesInYear(_year);
+            itemizedFinances = FetchItemizedFinances(_year);
+
+            expenseColor = "color: " + ((expenses > 0) ? "red" : "green") + ";";
+            revenueColor = "color: " + ((revenue < 0) ? "red" : "green") + ";";
+            profitColor = "color: " + ((profit < 0) ? "red" : "green") + ";";
+        }
         public void OnGet(int year = 2022)
         {
             _year = year;
@@ -34,7 +45,6 @@ namespace cosc3380_group4_themepark.Pages
             revenueColor = "color: " + ((revenue < 0) ? "red" : "green") + ";";
             profitColor = "color: " + ((profit < 0) ? "red" : "green") + ";";
 
-
         }
 
 
@@ -43,19 +53,19 @@ namespace cosc3380_group4_themepark.Pages
             List<int> MonthlyTicketSales = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             List<decimal> MonthlyIncomeFromTickets = new List<decimal> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@year", year));
-            SqlDataReader reader = SqlHelper.ExecuteProcReader("[Theme_Park].[Proc_Query_Ticket_Purchases_Aggregate_In_Year]", parameters.ToArray());
-            while (reader.Read())
-            {
-                int month = reader.GetInt32(0) - 1;
-                MonthlyTicketSales[month] = reader.GetInt32(1);
-                MonthlyIncomeFromTickets[month] = reader.GetDecimal(2);
-            }
-            reader.Close();
-            ticketSalesArray = String.Join(",", MonthlyTicketSales);
-            ticketSalesIncomeArray = String.Join(",", MonthlyIncomeFromTickets);
-            revenue += MonthlyIncomeFromTickets.Sum();
+            //List<SqlParameter> parameters = new List<SqlParameter>();
+            //parameters.Add(new SqlParameter("@year", year));
+            //SqlDataReader reader = SqlHelper.ExecuteProcReader("[Theme_Park].[Proc_Query_Ticket_Purchases_Aggregate_In_Year]", parameters.ToArray());
+            //while (reader.Read())
+            //{
+            //    int month = reader.GetInt32(0) - 1;
+            //    MonthlyTicketSales[month] = reader.GetInt32(1);
+            //    MonthlyIncomeFromTickets[month] = reader.GetDecimal(2);
+            //}
+            //reader.Close();
+            //ticketSalesArray = String.Join(",", MonthlyTicketSales);
+            //ticketSalesIncomeArray = String.Join(",", MonthlyIncomeFromTickets);
+            //revenue += MonthlyIncomeFromTickets.Sum();
         }
 
         private void FetchMonthlyMerchSalesInYear(int year = 2022)
