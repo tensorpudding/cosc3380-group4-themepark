@@ -53,19 +53,19 @@ namespace cosc3380_group4_themepark.Pages
             List<int> MonthlyTicketSales = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             List<decimal> MonthlyIncomeFromTickets = new List<decimal> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-            //List<SqlParameter> parameters = new List<SqlParameter>();
-            //parameters.Add(new SqlParameter("@year", year));
-            //SqlDataReader reader = SqlHelper.ExecuteProcReader("[Theme_Park].[Proc_Query_Ticket_Purchases_Aggregate_In_Year]", parameters.ToArray());
-            //while (reader.Read())
-            //{
-            //    int month = reader.GetInt32(0) - 1;
-            //    MonthlyTicketSales[month] = reader.GetInt32(1);
-            //    MonthlyIncomeFromTickets[month] = reader.GetDecimal(2);
-            //}
-            //reader.Close();
-            //ticketSalesArray = String.Join(",", MonthlyTicketSales);
-            //ticketSalesIncomeArray = String.Join(",", MonthlyIncomeFromTickets);
-            //revenue += MonthlyIncomeFromTickets.Sum();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@year", year));
+            SqlDataReader reader = SqlHelper.ExecuteProcReader("[Theme_Park].[Proc_Query_Ticket_Purchases_Aggregate_In_Year]", parameters.ToArray());
+            while (reader.Read())
+            {
+               int month = reader.GetInt32(0) - 1;
+               MonthlyTicketSales[month] = reader.GetInt32(1);
+               MonthlyIncomeFromTickets[month] = reader.GetDecimal(2);
+            }
+            reader.Close();
+            ticketSalesArray = String.Join(",", MonthlyTicketSales);
+            ticketSalesIncomeArray = String.Join(",", MonthlyIncomeFromTickets);
+            revenue += MonthlyIncomeFromTickets.Sum();
         }
 
         private void FetchMonthlyMerchSalesInYear(int year = 2022)
