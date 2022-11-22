@@ -29,19 +29,36 @@ namespace cosc3380_group4_themepark.Pages
         {
 
             SqlDataReader reader;
+            Console.WriteLine(selection.type);
+            Console.WriteLine(selection.starttime);
+            Console.WriteLine(selection.endtime);
 
 
-            if (selection.type == null)
+            if (selection.type == null && (selection.starttime == default(DateTime)) || selection.endtime == default(DateTime))
             {
+                Console.WriteLine("1");
                 reader = SqlHelper.ExecuteProcReader("Theme_Park.Merchandise_Report");
+            }
+            else if (selection.type == null)
+            {
+                Console.WriteLine("2");
+                reader = SqlHelper.ExecuteProcReader("Theme_Park.Merchandise_Report_Datetime", new SqlParameter("starttime", selection.starttime),
+                 new SqlParameter("endtime", selection.endtime));
+            }
+            else if(selection.starttime == default(DateTime) || selection.endtime == default(DateTime))
+            {
+                Console.WriteLine("3");
+                reader = SqlHelper.ExecuteProcReader("Theme_Park.Merchandise_Report_Type", new SqlParameter("@type", selection.type));
             }
             else
             {
-                reader = SqlHelper.ExecuteProcReader("Theme_Park.Merchandise_Report_Type",
+                Console.WriteLine("4");
+                reader = SqlHelper.ExecuteProcReader("Theme_Park.Proc_Merchandise_Report_Date", new SqlParameter("starttime", selection.starttime),
+                 new SqlParameter("endtime", selection.endtime),
                  new SqlParameter("@type", selection.type));
             }
 
-            Console.WriteLine(selection.type);
+            
 
             //create list of varaibles
             this.MyMerch = new List<MerchandiseRow>();
