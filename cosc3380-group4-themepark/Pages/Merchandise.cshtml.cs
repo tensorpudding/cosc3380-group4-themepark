@@ -33,8 +33,8 @@ namespace cosc3380_group4_themepark.Pages
             Console.WriteLine(selection.starttime);
             Console.WriteLine(selection.endtime);
 
-
-            if (selection.type == null && (selection.starttime == default(DateTime)) || selection.endtime == default(DateTime))
+            
+            if (selection.type == null && ((selection.starttime == default(DateTime)) || selection.endtime == default(DateTime)))
             {
                 Console.WriteLine("1");
                 reader = SqlHelper.ExecuteProcReader("Theme_Park.Merchandise_Report");
