@@ -56,7 +56,7 @@ For localhost testing, it is possible to build and run the app from the command 
 From the root directory of the repository, in the terminal enter:
 
 * `dotnet build`
-* `dotnet run -project cosc3380-group4-themepark`
+* `dotnet run --project cosc3380-group4-themepark`
 
 This will fetch the NuGet library dependencies, build the app, and start a Kestrel server hosting the app locally at `localhost:7035`.
 
