@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Authorization;
+using cosc3380_group4_themepark.Models;
 
 namespace cosc3380_group4_themepark.Pages
 {
@@ -137,6 +139,39 @@ namespace cosc3380_group4_themepark.Pages
 
             return ary;
         }
+
+        private List<FinanceItem> FetchItemizedFinancesInRange(DateTime starttime, DateTime endtime)
+        {
+            expenses = 0;
+            revenue = 0;
+
+            List<FinanceItem> ary = new List<FinanceItem>();
+
+            SqlDataReader reader = SqlHelper.ExecuteProcReader("[Theme_Park].[Query_Itemized_Finances_By_Range]",
+                new SqlParameter("@startdate", starttime),
+                new SqlParameter("@enddate", endtime));
+
+            while (reader.Read())
+            {
+                DateTime date = reader.GetDateTime(2);
+                string type = reader.GetString(0);
+                string desc = reader.GetString(1);
+                decimal amount = reader.GetDecimal(3);
+                ary.Add(new FinanceItem(date, type, desc, amount));
+                if(type == "Revenue")
+                {
+                    revenue += amount;
+                }
+                else if(type == "Expense")
+                {
+                    expenses += amount;
+                }
+            }
+            profit = revenue - expenses;
+            reader.Close();
+
+            return ary;
+        }
         private string FetchTicketSalesOnYearAndType(int year, string ticketClass) // Do this after Checkpoint 3
         {
             return ("");
@@ -152,7 +187,23 @@ namespace cosc3380_group4_themepark.Pages
             //Console.WriteLine("Pog");
         }
 
+        public PartialViewResult OnGetItemize(String checkyearorrange, Int32? _year, String? startdate, String? enddate)
+        {
+            List<FinanceItem> items = new List<FinanceItem>();
+            Console.WriteLine("Debug test OnPostGenerateItemized");
+            if (checkyearorrange == "year")
+            {
+                items = FetchItemizedFinances(_year.GetValueOrDefault());
+            }
+            else if (checkyearorrange == "range")
+            {
+                items = FetchItemizedFinancesInRange(DateTime.Parse(startdate), 
+                                                     DateTime.Parse(enddate));
+            }
+            return Partial("_ItemizedFinances", items);
+        }
     }
+
 
     public class FinanceItem 
     {

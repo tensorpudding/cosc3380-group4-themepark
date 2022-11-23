@@ -1,4 +1,5 @@
-﻿@model cosc3380_group4_themepark.Pages.SalesModel
+﻿@page
+@model cosc3380_group4_themepark.Pages.SalesModel
 @{
     //ViewData["Title"] = "Sales";
 }
@@ -72,8 +73,46 @@
 
     <div class="itemized-list-wrapper" style="margin: 10px 0 0 0;">
         <h2 style="border-bottom: 1px black solid;">Itemized Finances</h2>
-        <div class="itemized-finance-container">
-            @{
+        <form>
+            <div class="form-row">
+                <input class="form-check-radio" type="radio" name="checkyearorrange" value="year" checked>
+                <label for="checkyear" class="form-check-label">Itemize for year</label>
+                <input class="form-check-radio" type="radio" name="checkyearorrange" value="range">
+                <label for="checkrange" class="form-check-label">Itemize for date range</label>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="starttime">Year: </label><br>
+                    <select id="itemizedYear" name="_year" class="form-control">
+                        @{
+                            
+                            for(int i = DateTime.Now.Year; i >= 2000; i--){
+                                if(SalesModel._year == i){
+                                                            <option selected value="@i">@i</option>
+                                }
+                                else{
+                                                            <option value=@i>@i</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="starttime">Start Date: </label><br>
+                    <input type="date" class="form-control" id="itemizedStartDate" name="starttime" disabled="true"><br>
+                </div>
+                <div class="col">
+                    <label for="endtime">End Date: </label><br>
+                
+                    <input type="date" class="form-control" id="itemizedEndDate" name="endtime" disabled="true"><br>
+                </div>
+                <div class="col">
+                </div>         
+            </div>
+        </form>
+        <button id="generate-itemized-button">Generate Itemized Finance Report</button>
+        <div class="itemized-finance-container" id="itemized-finance-container">
+            @* @{
                 for(int i = 0; i < SalesModel.itemizedFinances.Count(); i++)
                 {
                     FinanceItem item = SalesModel.itemizedFinances[i];
@@ -85,7 +124,8 @@
                                     <p class="finance-item">$ @string.Format("{0:0.00}", @item.amount)</p>
                                 </div>
                 }
-            }
+            } *@
+            @* Results of Partial will go here *@
         </div>
     </div>
 </div>

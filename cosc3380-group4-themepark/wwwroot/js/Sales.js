@@ -153,3 +153,60 @@ const sum = (ary) => {
 }
 
 displayCharts();
+
+const disableItemizedForm = () =>
+{
+    byYearCheck = document.getElementsByName("checkyearorrange")[0];
+    byRangeCheck = document.getElementsByName("checkyearorrange")[1];
+    startDateInput = document.getElementById("itemizedStartDate");
+    endDateInput = document.getElementById("itemizedEndDate");
+    yearInput = document.getElementById("itemizedYear");
+    if (byYearCheck.checked)
+    {
+        console.log("We have it set by year");
+        startDateInput.disabled = true;
+        startDateInput.required = false;
+        endDateInput.disabled = true;
+        endDateInput.required = false;
+        yearInput.disabled = false;
+        yearInput.required = true;
+    }
+    else
+    {
+        console.log("We have it set by range");
+        startDateInput.disabled = false;
+        startDateInput.required = true;
+        endDateInput.disabled = false;
+        endDateInput.required = true;
+        yearInput.disabled = true;
+        yearInput.required = false;
+    }
+}
+
+document.getElementsByName("checkyearorrange")[0].addEventListener("change", disableItemizedForm);
+document.getElementsByName("checkyearorrange")[1].addEventListener("change", disableItemizedForm);
+
+document.getElementById("generate-itemized-button").addEventListener('click', () => {
+    let check = document.getElementsByName("checkyearorrange")[0].checked;
+    var choice;
+    if (check)
+    {
+        choice = "year";
+    }
+    else
+    {
+        choice = "range"
+    }
+    let year = document.getElementById("itemizedYear").value;
+    let startdate = document.getElementById("itemizedStartDate").value;
+    let enddate = document.getElementById("itemizedEndDate").value;
+    let partialString = "/Sales?handler=Itemize&checkyearorrange=" + choice + "&_year=" + year + "&startdate=" + startdate + "&enddate=" + enddate;
+    console.log(partialString);
+    fetch(partialString)
+        .then((response) => {
+            return response.text();
+        })
+        .then((result) => {
+            document.getElementById("itemized-finance-container").innerHTML = result;
+        });
+})
