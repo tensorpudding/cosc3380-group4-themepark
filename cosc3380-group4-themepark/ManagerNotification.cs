@@ -1,6 +1,12 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+
+/* ManagerNotification.cs
+ *
+ * Class which encapsulates ManagerNotification table
+ */
+
 namespace cosc3380_group4_themepark.Models
 {
     public class ManagerNotification

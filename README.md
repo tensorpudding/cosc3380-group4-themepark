@@ -6,7 +6,7 @@ This is the group project by Team 4 of COSC 3380, Fall 2022 semester at the Univ
 
 The app can be built on Windows, macOS (both Intel and Apple Silicon), or Linux. In each case, you will need:
 
-* [Microsoft .NET 6 with ASP.NET Core Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) This is included in Visual Studio and Visual Studio for Mac, but Visual Studio is not required to build the app. The SDK installer bundles the ASP.NET Core Runtime and is preferred.
+* [Microsoft .NET 6 with ASP.NET Core Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) This is included in recent versions of Visual Studio and Visual Studio for Mac, but Visual Studio is not required to build the app. The SDK installer bundles the ASP.NET Core Runtime and is preferred.
 
 # Database Installation
 
@@ -31,7 +31,7 @@ The easiest (in my experience) way to deploy is using Docker Engine. Besides the
 * Install Docker Engine, Docker for Windows, or Docker for Mac
 * Verify that Docker is running and that it has been allocated at least 2 GB of RAM
 * In a terminal or command prompt, run `docker pull mcr.microsoft.com/mssql/server:2019-latest` to fetch the latest updated version of SQL Server 2019.
-* Run `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest` to quickly create a new container running Microsoft SQL Server 2019 MAYBE ELABORATE?
+* Run `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest` to quickly create a new container running Microsoft SQL Server 2019
 
 Further documentation regarding running Microsoft SQL Server 2019 on Docker can be found on [DockerHub](https://hub.docker.com/_/microsoft-mssql-server)
 
@@ -39,13 +39,37 @@ Further documentation regarding running Microsoft SQL Server 2019 on Docker can 
 
 The included BACPAC file includes a full database dump. Before using the app, it will be necessary to restore the database schema and data from the dump.
 
-The easiest means to do this is using Microsoft's SqlPackage.exe utility. ELABORATE
+The easiest means to do this is using Microsoft's SqlPackage.exe utility, using the `Import` option as documented [here](https://learn.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage?view=sql-server-ver16)
+
+An example invocation, used to produce daily database dumps to prevent data loss:
+
+```
+./sqlpackage /Action:"Export" /SourceServerName:"cosc3380group4.moorman.xyz" /SourceDatabaseName:"themepark_dev" /SourceUser:"sa" /SourcePassword:"<password>" /TargetFile:"./themepark_dev-$(date --rfc-3339="date").bacpac"
+```
+
+The corresponding invocation to restore the backup 
+
+```
+./sqlpackage /Action:"Import" /SourceFile:"./themepark_dev.bacpac" /TargetServerName:"cosc3380group4.moorman.xyz" /TargetDatabaseName:"themepark_dev" /TargetUser:"sa" /TargetPassword:"<password>"
+```
 
 # Configuration
 
+Besides the code included in the repository, there were further configuration required for the application.
+
+## `db.json`
+
 The app is configured to connect to the database using a configuration read from `db.json`. This file is not included in the repository for security reasons, but a copy of `db.json` relevant to our Docker-based deployment is included in the project submission. For usage of a different SQL database server, the file must be modified appropriately with the hostname, username, and password appropriate to that database.
 
+## `appsettings.json` and `Dockerfile`
+
 For debug testing on localhost, the app configuration here is sufficient; however, for production deployment using Docker it was necessary to modify Kestrel's configuration to accept an external SSL certificate and key in order for HTTPS hosting to be successful. For the sake of completion, the requisite files have been included in the project submission.
+
+The `Dockerfile` used to build the application is based on the ASP.NET example Dockerfile from Microsoft documentation.
+
+## `docker-compose.yaml`
+
+The final combination of running both Microsoft SQL Server and our application on the production server was managed through [Docker Compose](https://docs.docker.com/compose/). The included `docker-compose.yaml` provides the script definition for instantiating and configuring the containers.
 
 # Building and testing the app
 

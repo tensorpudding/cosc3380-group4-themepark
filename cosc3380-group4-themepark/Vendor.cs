@@ -2,6 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+/* Vendor.cs
+ * 
+ * Class definition to encapsulate the Vendor table
+ */
+
 
 namespace cosc3380_group4_themepark.Models
 {

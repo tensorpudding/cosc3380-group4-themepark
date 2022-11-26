@@ -1,6 +1,10 @@
 ﻿using System;
 namespace cosc3380_group4_themepark
 {
+    /* MerchandiseRow.cs
+     *
+     * Auxilliary class for Merchandise report
+     */
     public class MerchandiseRow
     {
         public MerchandiseRow()

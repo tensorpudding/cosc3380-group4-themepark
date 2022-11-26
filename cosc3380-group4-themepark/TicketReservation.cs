@@ -3,6 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace cosc3380_group4_themepark.Models;
 
+/* TicketReservation.cs
+ *
+ * Class to encapsulate the TicketReservation table
+ */
+
 public class TicketReservation
 {
     [BindProperty]
