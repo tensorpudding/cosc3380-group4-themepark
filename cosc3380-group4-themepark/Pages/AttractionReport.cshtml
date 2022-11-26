@@ -27,17 +27,47 @@
     <h1 style="padding-bottom: 20px;">Ride Analytics</h1>
     <div class="report-wrapper">
         <div class="report">
-            <form method="post" asp-page-handler="ChangeYear">
-                <h3>Generate report for year: </h3><select name="year">
-                    <option id="2022" value="2022">2022</option>
-                    <option id="2021" value="2021">2021</option>
-                    <option id="2020" value="2020">2020</option>
-                </select>
-                <button class="btn" type="submit">Generate Report</button>
-            </form>
+            <form>
+            <div class="form-row">
+                <input class="form-check-radio" type="radio" name="checkyearorrange" value="year" checked>
+                <label for="checkyear" class="form-check-label">Generate report for whole year</label>
+                <input class="form-check-radio" type="radio" name="checkyearorrange" value="range">
+                <label for="checkrange" class="form-check-label">Generate report for date range</label>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="reportYear">Year: </label><br>
+                    <select id="reportYear" name="reportYear" class="form-control">
+                        @{
+                            
+                            for(int i = DateTime.Now.Year; i >= 2000; i--){
+                                if(@Model._year == i){
+                                                            <option selected value="@i">@i</option>
+                                }
+                                else{
+                                                            <option value=@i>@i</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="starttime">Start Date: </label><br>
+                    <input type="date" class="form-control" id="reportStartDate" name="starttime" disabled="true"><br>
+                </div>
+                <div class="col">
+                    <label for="endtime">End Date: </label><br>
+                
+                    <input type="date" class="form-control" id="reportEndDate" name="endtime" disabled="true"><br>
+                </div>
+                <div class="col">
+                </div>         
+            </div>
+        </form>
+        <button id="generate-report-button" class="btn btn-primary btn-sm">Generate Ride Report</button>
             
-            <div style="flex-grow: 1;">
-                <table>
+            <div style="flex-grow: 1;" id="attraction-report-container">
+                @* <table>
                     <th>Attraction Name</th>
                     <th>Ride Count</th>
                     <th>Days of Maintenance</th>
@@ -54,13 +84,13 @@
                     </tr>
                 }
                 }
-                </table>
+                </table> *@
             </div>
         </div>
     </div>
 </div>
 
 <script
-    src="/js/AttractionReport.js" 
+    src="/js/AttractionReport.js"
     type="text/javascript"
 ></script>
