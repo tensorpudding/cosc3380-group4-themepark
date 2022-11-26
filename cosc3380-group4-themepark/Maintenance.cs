@@ -3,6 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace cosc3380_group4_themepark.Models;
 
+/* Maintenance.cs
+ *
+ * Class to encapsulate Maintenance_Calendar table
+ */
+
 public class Maintenance_Calendar
 {
     [BindProperty]

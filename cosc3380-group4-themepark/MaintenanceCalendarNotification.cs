@@ -1,6 +1,11 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+
+/* MaintenanceCalenderNotification.cs
+ *
+ * Class encapsulating MaintenanceNotification table
+ */
 namespace cosc3380_group4_themepark.Models
 {
     public class MaintenanceCalendarNotification

@@ -11,6 +11,12 @@ using System.Security.Claims;
 using cosc3380_group4_themepark.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
+/* Tickets.cshtml.cs
+ *
+ * PageModel for ticket reservation page
+ * The methods here provide handlers for GET and POST on form elements
+ */
+
 namespace cosc3380_group4_themepark.Pages
 {
     //[Authorize(Policy="CustomerSpecific")]

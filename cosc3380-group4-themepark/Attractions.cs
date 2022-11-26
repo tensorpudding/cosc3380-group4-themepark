@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-
+/* Attractions.cs
+ *
+ * Auxilliary class for encapsulating information about Attractions
+ */
 namespace cosc3380_group4_themepark.Models
 {
     public class Attraction

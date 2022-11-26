@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
+/* EmployeeSchedule.cs
+ *
+ * Class to encapsulate the EmployeeSchedule table
+ */
+
 namespace cosc3380_group4_themepark
 {
     public class EmployeeSchedule

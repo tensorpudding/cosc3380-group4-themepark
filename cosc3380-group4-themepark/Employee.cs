@@ -2,6 +2,11 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+/* Employee.cs
+ *
+ * Class to encapsulate the Employee table
+ */
+
 public class Employee
     {
         [BindProperty]

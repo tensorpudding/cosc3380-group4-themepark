@@ -2,6 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+/* Description.cs
+ *
+ * Auxilliary class to the Maintenance form
+ */
 
 namespace cosc3380_group4_themepark.Models
 {

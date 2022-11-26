@@ -1,6 +1,13 @@
 using System.Text.Json;
 using Microsoft.Data.SqlClient;
 
+/* Credentials.cs
+ *
+ * This class contains the methods to parse the database configuration
+ * and generate a connection string, used by the SqlHelper class methods
+ * The configuration is contained in the db.json file, as a single JSON object
+ */
+
 namespace cosc3380_group4_themepark
 {
     public class Credentials
