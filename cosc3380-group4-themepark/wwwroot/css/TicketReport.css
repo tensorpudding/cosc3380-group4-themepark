@@ -2,8 +2,8 @@
     display: grid;
     gap: 10px;
     grid-template-areas:
-        "main main main main2"
-        "main3 main3 main3 main2";
+        "main main main"
+        "main3 main3 main2";
     grid-template-columns: 23% 23% 23% 31%;
     grid-template-rows: minmax(auto, 400px) 25%;
     min-width: 1000px;
