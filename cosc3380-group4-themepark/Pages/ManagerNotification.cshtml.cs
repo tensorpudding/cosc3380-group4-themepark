@@ -71,5 +71,19 @@ namespace cosc3380_group4_themepark.Pages
 
             return Page();
         }
+
+        public IActionResult OnPostClearNotification()
+        {  
+            String? username = GetUsernameFromContext();
+            Console.WriteLine("Debug: we are trying to clear notifications");
+            if (username == null)
+            {
+                return Redirect("/");
+            }
+
+            SqlHelper.ExecuteProcNonQuery("[Theme_Park].[Proc_Clear_Manager_Notifications]",
+                new SqlParameter("@username", username));
+            return Redirect("/Internal");
+        }
     }
 }
