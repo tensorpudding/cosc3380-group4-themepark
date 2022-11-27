@@ -9,8 +9,6 @@ The app can be built on Windows, macOS (both Intel and Apple Silicon), or Linux.
 * [Microsoft .NET 6 with ASP.NET Core Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) This is included in recent versions of Visual Studio and Visual Studio for Mac, but Visual Studio is not required to build the app. The SDK installer bundles the ASP.NET Core Runtime and is preferred.
 * [Microsoft's SQL client library for .NET](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) This is probably included in your build of Visual Studio.
 
-in the terminal or command prompt inside of the `cosc3380-group4-themepark/cosc3380-group4-themepark` directory. This app was tested with version 5.0.1
-
 # Database Installation and Configuration
 
 ## Platform options
