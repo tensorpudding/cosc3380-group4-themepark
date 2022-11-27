@@ -12,13 +12,13 @@ The app can be built on Windows, macOS (both Intel and Apple Silicon), or Linux.
 
 ## Platform options
 
-The database used for this project was Microsoft SQL Server 2019 Developer Edition, as packaged for Docker Engine for running on Ubuntu Linux hosts. However, any other available deployment of SQL Server 2019 Developer Edition will work.
+The database used for this project was Microsoft SQL Server 2017 Developer Edition, as packaged for Docker Engine for running on Ubuntu Linux hosts. However, any other available deployment of SQL Server 2017 Developer Edition will work.
 
 Regardless of platform, the machine or VM guest which is hosting SQL server requires at least 2 GB of RAM.
 
 ## Windows
 
-Microsoft provides a free installer for the Windows version of SQL Server 2019 Developer Edition [here](https://www.microsoft.com/en-IN/sql-server/sql-server-downloads). TEST THIS
+Microsoft provides a free installer for the Windows version of SQL Server 2017 Developer Edition [here](https://www.microsoft.com/en-IN/sql-server/sql-server-downloads). TEST THIS
 
 ## Linux (bare-metal)
 
@@ -30,46 +30,48 @@ The easiest (in my experience) way to deploy is using Docker Engine. Besides the
 
 * Install Docker Engine, Docker for Windows, or Docker for Mac
 * Verify that Docker is running and that it has been allocated at least 2 GB of RAM
-* In a terminal or command prompt, run `docker pull mcr.microsoft.com/mssql/server:2019-latest` to fetch the latest updated version of SQL Server 2019.
-* Run `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest` to quickly create a new container running Microsoft SQL Server 2019
+* In a terminal or command prompt, run `docker pull mcr.microsoft.com/mssql/server:2017-latest` to fetch the latest updated version of SQL Server 2017.
+* Run `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest` to quickly create a new container running Microsoft SQL Server 2017
 
-Further documentation regarding running Microsoft SQL Server 2019 on Docker can be found on [DockerHub](https://hub.docker.com/_/microsoft-mssql-server)
+Further documentation regarding running Microsoft SQL Server on Docker can be found on [DockerHub](https://hub.docker.com/_/microsoft-mssql-server)
 
 # Database Deployment
 
-The included BACPAC file includes a full database dump. Before using the app, it will be necessary to restore the database schema and data from the dump.
+The BACPAC file `themepark_dev.bacpac` includes a full database dump. Before using the app, it will be necessary to restore the database schema and data from the dump.
 
 The easiest means to do this is using Microsoft's SqlPackage.exe utility, using the `Import` option as documented [here](https://learn.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage?view=sql-server-ver16)
 
-An example invocation, used to produce daily database dumps to prevent data loss:
+The invocation we used to produce this database dump:
 
 ```
 ./sqlpackage /Action:"Export" /SourceServerName:"cosc3380group4.moorman.xyz" /SourceDatabaseName:"themepark_dev" /SourceUser:"sa" /SourcePassword:"<password>" /TargetFile:"./themepark_dev-$(date --rfc-3339="date").bacpac"
 ```
 
-The corresponding invocation to restore the backup 
+The corresponding invocation to restore the backup. It will be possible to change the `TargetServerName` to the appropriate hostname that is hosting your SQL Server i.e. `localhost` and changing `TargetPassword` appropriately to the system administrator password set when you had installed SQL Server.
 
 ```
 ./sqlpackage /Action:"Import" /SourceFile:"./themepark_dev.bacpac" /TargetServerName:"cosc3380group4.moorman.xyz" /TargetDatabaseName:"themepark_dev" /TargetUser:"sa" /TargetPassword:"<password>"
 ```
 
-# Configuration
+# Additional Configuration
 
-Besides the code included in the repository, there were further configuration required for the application.
+Besides the code included in the repository, there were further configuration required for the application for its current deployment at [https://cosc3380group4.moorman.xyz](https://cosc3380group4.moorman.xyz)
 
 ## `db.json`
 
-The app is configured to connect to the database using a configuration read from `db.json`. This file is not included in the repository for security reasons, but a copy of `db.json` relevant to our Docker-based deployment is included in the project submission. For usage of a different SQL database server, the file must be modified appropriately with the hostname, username, and password appropriate to that database.
+The app is configured to connect to the database using a configuration read from `db.json`. This file is not included in the repository for security reasons, but a copy of `db.json` relevant to our Docker-based deployment is included in the project submission. For usage of a different SQL database server, the file must be modified appropriately with the hostname, username, and password appropriate to that database. The database and application were served on the same Docker Engine in a shared network.
 
 ## `appsettings.json` and `Dockerfile`
 
-For debug testing on localhost, the app configuration here is sufficient; however, for production deployment using Docker it was necessary to modify Kestrel's configuration to accept an external SSL certificate and key in order for HTTPS hosting to be successful. For the sake of completion, the requisite files have been included in the project submission.
+For production deployment using Docker it was necessary to modify Kestrel's configuration to accept an external SSL certificate and key in order for HTTPS hosting to be successful, as many browsers do not accept the developer SSL certificates. For the sake of completion, the requisite file has been included in the project submission. This relies on the existence of Let's Encrypt SSL certificates to be installed in the same directory. It is completely unnecesary for non-production deployment.
 
-The `Dockerfile` used to build the application is based on the ASP.NET example Dockerfile from Microsoft documentation.
+## `Dockerfile`
+
+The `Dockerfile` included was used to build the application for deployment on Docker Engine. It is based almost exactly on the ASP.NET example Dockerfile from Microsoft's documentation.
 
 ## `docker-compose.yaml`
 
-The final combination of running both Microsoft SQL Server and our application on the production server was managed through [Docker Compose](https://docs.docker.com/compose/). The included `docker-compose.yaml` provides the script definition for instantiating and configuring the containers.
+The final combination of running both Microsoft SQL Server and our application on the production server was managed through [Docker Compose](https://docs.docker.com/compose/). The included `docker-compose.yaml` provides the script definition for instantiating and configuring the containers. They share a private network which allows for the 
 
 # Building and testing the app
 
