@@ -7,11 +7,7 @@ This is the group project by Team 4 of COSC 3380, Fall 2022 semester at the Univ
 The app can be built on Windows, macOS (both Intel and Apple Silicon), or Linux. In each case, you will need:
 
 * [Microsoft .NET 6 with ASP.NET Core Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) This is included in recent versions of Visual Studio and Visual Studio for Mac, but Visual Studio is not required to build the app. The SDK installer bundles the ASP.NET Core Runtime and is preferred.
-* [Microsoft's SQL client library for .NET](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) This is probably included in your build of Visual Studio, but to be sure, one can run:
-
-```
-dotnet add package Microsoft.Data.SqlClient
-```
+* [Microsoft's SQL client library for .NET](https://www.nuget.org/packages/Microsoft.Data.SqlClient/) This is probably included in your build of Visual Studio.
 
 in the terminal or command prompt inside of the `cosc3380-group4-themepark/cosc3380-group4-themepark` directory. This app was tested with version 5.0.1
 
@@ -33,12 +29,12 @@ For bare-metal installations on Linux, Microsoft provides documentation for Red 
 
 ### Docker
 
-The easiest (in my experience) way to deploy is using Docker Engine. Besides the typical Docker Engine on Linux, Docker for Windows also works. Although we have not tested it, Docker for Mac will work on Intel Macs, but Microsoft SQL Server does not support Apple Silicon Macs.
+The easiest (in my experience) way to deploy is using Docker Engine. Besides the typical Docker Engine on Linux, Docker for Windows should also work. Although we have not tested it, Docker for Mac will work on Intel Macs, but Microsoft SQL Server does not support Apple Silicon Macs.
 
 * Install Docker Engine, Docker for Windows, or Docker for Mac
 * Verify that Docker is running and that it has been allocated at least 2 GB of RAM
 * In a terminal or command prompt, run `docker pull mcr.microsoft.com/mssql/server:2017-latest` to fetch the latest updated version of SQL Server 2017.
-* Run `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong(!)Passwordtesting" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest` to quickly create a new container running Microsoft SQL Server 2017
+* Run `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong(!)Passwordtesting" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest` to quickly create a new container running Microsoft SQL Server 2017. This creates a user "sa" with the given password, using SQL Authentication.
 
 Further documentation regarding running Microsoft SQL Server on Docker can be found on [DockerHub](https://hub.docker.com/_/microsoft-mssql-server)
 
@@ -71,7 +67,7 @@ In order to be sure that the login is setup correctly, run the following in the 
 sqlcmd -S localhost -i fix-login.sql
 ```
 
-## Additional Configuration for local install
+# Configuration for local install
 
 Besides the code included in the repository, there were further configuration required for the application for its current deployment at [https://cosc3380group4.moorman.xyz](https://cosc3380group4.moorman.xyz)
 
@@ -101,20 +97,23 @@ For localhost testing, it is possible to build and run the app from the command 
 
 From the root directory of the repository, in the terminal enter:
 
+* `dotnet add package Microsoft.Data.SqlClient`
 * `dotnet build`
 * `dotnet run --project cosc3380-group4-themepark`
 
-This will fetch the NuGet library dependencies, build the app, and start a Kestrel server hosting the app locally at `localhost:7035`.
+This will fetch the NuGet library dependency for the app, build the app, and start a Kestrel server hosting the app locally at `localhost:7035`.
 
 ## Visual Studio
 
 * Open the `cosc3380-group4-themepark.sln` file from the root directory in Visual Studio
 * Build and run the application using the menu
 
-The server should start automatically and a new browser tab will open to `localhost:7035`.
+The server should start automatically and a new browser tab will open to `localhost:7035`. You may need to add NuGet packages manually.
 
 ## Using the app
 
 After opening the browser to the `localhost:7035` page, you will be greeted with a landing page with login options on the top-right corner. By logging into accounts with the customer role, users will be able to scroll to "Tickets" and enter the ticket reservation page, allowing them to view their ticket reservations, cancel their reservations, and place new ones for future dates.
 
-Logins with employee roles will be able to access the "Internal" site and will be permitted access to pages with functionality specific to their role, such as maintenance request and completion forms, sales reports, and employee rosters and forms to add new employee.s
+Logins with employee roles will be able to access the "Internal" site and will be permitted access to pages with functionality specific to their role, such as maintenance request and completion forms, sales reports, and employee rosters and forms to add new employee.
+
+The included document `Database Paper.docx` describes the high-level functionality of the system. The file `Logins.txt` includes information on predefined logins for different user roles and their passwords.
