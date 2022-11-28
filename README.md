@@ -2,6 +2,14 @@
 
 This is the group project by Team 4 of COSC 3380, Fall 2022 semester at the University of Houston.
 
+# Submission file layout
+
+The submission is contained in three separate subdirectories:
+
+* `source` contains the repository with the application code, plus production deployment scripts and configuration files for the app
+* `doc` contains documentation, including this README, our design document, and a set of prepared logins
+* `db` contains a database dump and an auxilliary script to be described below, used for setting up the database on a local machine
+
 # App Dependencies
 
 The app can be built on Windows, macOS (both Intel and Apple Silicon), or Linux. In each case, you will need:
@@ -99,7 +107,7 @@ From the root directory of the repository, in the terminal enter:
 * `dotnet build`
 * `dotnet run --project cosc3380-group4-themepark`
 
-This will fetch the NuGet library dependency for the app, build the app, and start a Kestrel server hosting the app locally at `localhost:7035`.
+This will fetch the library dependency for the app, build the app, and start a Kestrel server hosting the app locally at `localhost:7035`.
 
 ## Visual Studio
 
@@ -109,6 +117,8 @@ This will fetch the NuGet library dependency for the app, build the app, and sta
 The server should start automatically and a new browser tab will open to `localhost:7035`. You may need to add NuGet packages manually.
 
 ## Using the app
+
+The production deployment of our application is located at [https://cosc3380group4.moorman.xyz](https://cosc3380group4.moorman.xyz). All logins work the same there as they do for a local deployment using our DB dump.
 
 After opening the browser to the `localhost:7035` page, you will be greeted with a landing page with login options on the top-right corner. By logging into accounts with the customer role, users will be able to scroll to "Tickets" and enter the ticket reservation page, allowing them to view their ticket reservations, cancel their reservations, and place new ones for future dates.
 
