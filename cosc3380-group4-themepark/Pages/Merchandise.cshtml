@@ -29,7 +29,15 @@
 <form method="post" asp-page-handler="Merchandise">
 
     <label for="type">Merchandise Type: </label><br>
-    <input type="text" class="form-control" name="type"><br>
+    @* <input type="text" class="form-control" name="type"><br> *@
+    <select class="form-control" name="type">
+        <option value="Clothing">Clothing</option>
+        <option value="Knickknack">Knickknack</option>
+        <option value="Food">Food</option>
+        <option value="Picture">Picture</option>
+        <option value="Memorabilia">Memorabilia</option>
+        <option value="Other">Other</option>
+    </select><br>
 
     <label for="starttime">Start Date: </label><br>
     <input type="date" class="form-control" name="starttime"><br>

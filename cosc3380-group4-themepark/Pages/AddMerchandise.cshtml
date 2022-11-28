@@ -37,7 +37,16 @@
         <input type="number" class="form-control" name="price">
         <br>
         <label for="itemType">Item Type: </label><br>
-        <input type="text" class="form-control" name="itemType"><br>
+        @* <input type="text" class="form-control" name="itemType"><br> *@
+        <select class="form-control" name="itemType">
+            <option value="Clothing">Clothing</option>
+            <option value="Knickknack">Knickknack</option>
+            <option value="Food">Food</option>
+            <option value="Picture">Picture</option>
+            <option value="Memorabilia">Memorabilia</option>
+            <option value="Other">Other</option>
+        </select><br>
+
 
 
         <input type="submit" value="Submit">
